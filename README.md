@@ -8,3 +8,7 @@ Catalog API test is a web app API allowing users to access information on variou
 
 ###The full documentation can be found here:
 https://docs.google.com/document/d/1y_Pyub3YOFrFQ0CYiEhIQdvlrPXRHliDVb-jiH84xM0/edit?usp=sharing
+
+###Dependencies
+Scraper:
+jsoup 1.8, tagsoup 1.2
