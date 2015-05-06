@@ -4,6 +4,8 @@ OSU Scraper Test
 Things I want to scrape: Course Name, Course Description, Instructor, CRN
 */
 
+package edu.oregonstate.mist.catalogApiTest;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +17,7 @@ public class Scrape{
 
     public static void main(String[] args) {
 
-        try {
+        try { //add config file for url
             Document doc = Jsoup.connect("http://catalog.oregonstate.edu/CourseList.aspx?subjectcode=CS&level=undergrad&campus=corvallis").get();
             org.jsoup.select.Elements links = doc.select("a");
             for(Element e: links){
