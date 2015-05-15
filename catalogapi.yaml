@@ -206,7 +206,8 @@ paths:
             title: arrayOfLocations
             type: array
             items:
-              type: string
+              $ref: "#/definitions/Location"
+
 
   /courses/location/{location}:
     get:
@@ -429,6 +430,15 @@ definitions:
     type: array
     items:
       $ref: "#/definitions/Course"
+
+  Location:
+    type: string
+
+  Locations:
+    title: ArrayOfLocations
+    type: array
+    items:
+      $ref: "#/defintions/Location"
 
   Error:
     type: string
