@@ -193,6 +193,20 @@ paths:
             $ref: "#/definitions/Courses"
         "404":
           description: Invalid course name"
+  /courses/location:
+    get:
+      tags:
+        - courses
+      description: Get all course locations
+
+      responses:
+        "200":
+          description: Succesful response
+          schema:
+            title: arrayOfLocations
+            type: array
+            items:
+              type: string
 
   /courses/location/{location}:
     get:
