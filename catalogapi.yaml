@@ -438,7 +438,7 @@ definitions:
     title: ArrayOfLocations
     type: array
     items:
-      $ref: "#/defintions/Location"
+      $ref: "#/definitions/Location"
 
   Error:
     type: string
