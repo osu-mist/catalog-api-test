@@ -203,10 +203,7 @@ paths:
         "200":
           description: Succesful response
           schema:
-            title: arrayOfLocations
-            type: array
-            items:
-              $ref: "#/definitions/Location"
+            $ref: "#/definitions/Locations"
 
 
   /courses/location/{location}:
