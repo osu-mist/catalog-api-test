@@ -404,6 +404,13 @@ paths:
         "500":
             description: "Internal Server Error"
 
+securityDefinitions:
+
+  catalog_api_key:
+    type: apiKey
+    name: catalog_api_ley
+    in: query
+
 definitions:
 
   Instructor:
