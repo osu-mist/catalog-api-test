@@ -17,43 +17,42 @@ paths:
       tags:
        - courses
       # Describe this verb here. Note: you can use markdown
-      description: |
-        Gets all `Course` objects. Can be filtered by parameters
+      description: "Gets all `Course` objects. Can be filtered by parameters."
       # This is array of GET operation parameters:
       parameters:
         - in: query
           name: coursename
-          description: Course name to filter list of courses by
+          description: "Course name to filter list of courses by"
           required: false
           type: string
 
         - in: query
           name: location
-          description: Location name to filter list of courses by
+          description: "Location name to filter list of courses by"
           required: false
           type: string
 
         - in: query
           name: timeStart
-          description: Specific course start time to filter list of courses by
+          description: "Specific course start time to filter list of courses by"
           required: false
           type: string
 
         - in: query
           name: timeEnd
-          description: Specific course end time to filter list of courses by
+          description: "Specific course end time to filter list of courses by"
           required: false
           type: string
 
         - in: query
           name: timeStartAfter
-          description: Filter list by Classes that start after this time
+          description: "Filter list by Classes that start after this time"
           required: false
           type: string
 
         - in: query
           name: timeEndBefore
-          description: Filter list by Classes that end before this time
+          description: "Filter list by Classes that end before this time"
           required: false
           type: string
 
@@ -63,7 +62,7 @@ paths:
       responses:
         # Response code
         "200":
-          description: Successful response
+          description: "Successful response"
           # A schema describing your response object.
           # Use JSON Schema format
           schema:
@@ -74,24 +73,24 @@ paths:
     post:
       tags:
         - courses
-      summary: Post a course representation to be appeneded
+      summary: "Post a course representation to be appeneded"
       operationId: updateCourse
       parameters:
         - name: body
           in: body
-          description: Course object that needs to be added to the catalog
+          description: "Course object that needs to be added to the catalog"
           required: true
           schema:
             $ref: "#/definitions/Course"
       responses:
         "200":
-          description: Successful responses
+          description: "Successful responses"
         "201":
-          description: Resource created
+          description: "Resource created"
         "202":
-          description: Representation accepted
+          description: "Representation accepted"
         "422":
-          description: Invalid Data
+          description: "Invalid Data"
           schema:
             $ref: "#/definitions/Errors"
 
@@ -100,59 +99,58 @@ paths:
       tags:
         - courses
       description: "Finds course by CRN"
-      operationId: findCourseByCRN
+      operationId: "findCourseByCRN"
 
       parameters:
         - name: crn
           in: path
-          description: CRN ID of course to be fetched
+          description: "CRN ID of course to be fetched"
           required: true
           type: integer
           format: int64
       responses:
         "200":
-          description: Succesful response
+          description: "Succesful response"
           schema:
             $ref: "#/definitions/Courses"
         "404":
-          description: Resource not found
-
+          description: "Resource not found"
     put:
       tags:
         - courses
-      summary: Puts a course resource to be updated or created.
+      summary: "Puts a course resource to be updated or created."
       operationId: updateCourseByCRN
       parameters:
         - name: crn
           in: path
-          description: Resource CRN ID to be updated
+          description: "Resource CRN ID to be updated"
           required: true
           type: integer
           format: int64
 
         - name: body
           in: body
-          description: Course object that needs to be added to the catalog
+          description: "Course object that needs to be added to the catalog"
           required: true
           schema:
             $ref: "#/definitions/Course"
       responses:
         "200":
-          description: Successful response
+          description: "Successful response"
         "202":
-          description: Representation accepted
+          description: "Representation accepted"
         "422":
-          description: Invalid Data
+          description: "Invalid Data"
           schema:
             $ref: "#/definitions/Errors"
     delete:
       tags:
         - courses
-      summary: Deletes a course resource
+      summary: "Deletes a course resource"
       parameters:
         - in: path
           name: crn
-          description: Course CRN ID to be deleted
+          description: "Course CRN ID to be deleted"
           required: true
           type: integer
           format: int64
@@ -164,44 +162,44 @@ paths:
     get:
       tags:
         - courses
-      summary: Gets all courses by coursename
+      summary: "Gets all courses by coursename"
       operationId: findCourseByName
       parameters:
         - in: path
           name: coursename
-          description: course name of course to be searched by
+          description: "Course name of course to be searched by"
           required: true
           type: string
 
         - in: query
           name: instructorid
-          description: InstructorID to filter by
+          description: "InstructorID to filter by"
           required: false
           type: integer
           format: int64
 
         - in: query
           name: instructorName
-          description: Instructor name to filter by
+          description: "Instructor name to filter by"
           required: false
           type: string
 
       responses:
         "200":
-          description: Succesful response
+          description: "Succesful response"
           schema:
             $ref: "#/definitions/Courses"
         "404":
-          description: Invalid course name"
+          description: "Invalid course name"
   /courses/location:
     get:
       tags:
         - courses
-      description: Get all course locations
+      description: "Get all course locations"
 
       responses:
         "200":
-          description: Succesful response
+          description: "Succesful response"
           schema:
             $ref: "#/definitions/Locations"
 
@@ -210,50 +208,50 @@ paths:
     get:
       tags:
         - courses
-      summary: Gets all courses at specified location
+      summary: "Gets all courses at specified location"
       operationId: findCourseByLocation
       parameters:
         - in: path
           name: location
-          description: Location of course to be searched by
+          description: "Location of course to be searched by"
           required: true
           type: string
 
         - in: query
           name: day
-          description: Day to filter by
+          description: "Day to filter by"
           required: false
           type: string
 
         - in: query
           name: time
-          description: Time to filter by
+          description: "Time to filter by"
           required: false
           type: string
       responses:
         "200":
-          description: Succesful response
+          description: "Succesful response"
           schema:
             $ref: "#/definitions/Course"
         "404":
-          description: Invalid Location
+          description: "Invalid Location"
 
 
   /courses/findCourseByInstructorID:
     get:
       tags:
         - courses
-      summary: Gets all courses by Instructor ID
+      summary: "Gets all courses by Instructor ID"
       parameters:
         - in: query
           name: instructorid
-          description: instructorid to serach by
+          description: "instructorid to search by"
           required: true
           type: integer
           format: int64
       responses:
           "200":
-            description: Succesful response
+            description: "Succesful response"
             schema:
               $ref: "#/definitions/Course"
 
@@ -268,19 +266,19 @@ paths:
       parameters:
         - in: query
           name: first_initial
-          description: First intial to filter list by
+          description: "First intial to filter list by"
           required: false
           type: string
 
         - in: query
           name: last_name
-          description: Last name to filter list by
+          description: "Last name to filter list by"
           required: false
           type: string
 
         - in: query
           name: number_of_courses
-          description: Filter instructors by number of courses taught
+          description: "Filter instructors by number of courses taught"
           required: false
           type: integer
           format: int64
@@ -293,24 +291,23 @@ paths:
     post:
       tags:
       - instructors
-      description:
-        Post an Instructor representation object to the resource
+      description: "Post an Instructor representation object to the resource"
       parameters:
         - in: body
           name: instructor_rep
-          description: instructor_representation to be posted
+          description: "instructor_representation to be posted"
           required: true
           schema:
             $ref: "#/definitions/Instructor"
       responses:
         "200":
-          description: Successful responses
+          description: "Successful responses"
         "201":
-          description: Resource created
+          description: "Resource created"
         "202":
-          description: Representation accepted
+          description: "Representation accepted"
         "422":
-          description: Invalid Data
+          description: "Invalid Data"
           schema:
             $ref: "#/definitions/Errors"
 
@@ -322,14 +319,14 @@ paths:
       parameters:
       - name: instructorID
         in: path
-        description: instructorID to search by
+        description: "instructorID to search by"
         required: true
         type: integer
         format: int64
 
       responses:
         "200":
-          description: Succesful response
+          description: "Succesful response"
     put:
       tags:
         - instructors
@@ -337,17 +334,17 @@ paths:
       parameters:
       - name: instructorID
         in: path
-        description: instructorID to put definitions
+        description: "instructorID to put definitions"
         required: true
         type: integer
         format: int64
       responses:
         "200":
-          description: Successful response
+          description: "Successful response"
         "201":
-          description: Resource created
+          description: "Resource created"
         "202":
-          description: Representation accepted
+          description: "Representation accepted"
         "422":
           description: "Invalid representation data"
           schema:
@@ -360,7 +357,7 @@ paths:
       parameters:
       - name: instructorID
         in: path
-        description: instructorID to be deleted
+        description: "instructorID to be deleted"
         required: true
         type: integer
         format: int64
