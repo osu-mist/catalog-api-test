@@ -67,9 +67,6 @@ paths:
           # Use JSON Schema format
           schema:
             $ref: "#/definitions/Courses"
-
-        "404":
-          description: Course not found
         "500":
           description: "Internal Server Error"
     post:
