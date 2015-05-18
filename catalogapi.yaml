@@ -20,6 +20,8 @@ paths:
       description: "Gets all `Course` objects. Can be filtered by parameters."
       operationId: getCourses
       # This is array of GET operation parameters:
+      produces:
+        - application/json
       parameters:
         - in: query
           name: coursename
@@ -77,6 +79,8 @@ paths:
         - courses
       summary: "Post a course representation to be appeneded"
       operationId: postCourse
+      consumes:
+        - application/json
       parameters:
         - name: body
           in: body
@@ -108,6 +112,8 @@ paths:
         - courses
       description: "Finds course by CRN"
       operationId: getCourseByCRN
+      produces:
+        - application/json
       parameters:
         - name: crn
           in: path
@@ -131,6 +137,8 @@ paths:
         - courses
       summary: "Puts a course resource to be updated or created."
       operationId: updateCourseByCRN
+      consumes:
+        - application/json
       parameters:
         - name: crn
           in: path
@@ -189,6 +197,8 @@ paths:
         - courses
       summary: "Gets all courses by coursename"
       operationId: findCourseByName
+      produces:
+        - application/json
       parameters:
         - in: path
           name: coursename
@@ -227,6 +237,8 @@ paths:
         - courses
       description: "Get all course locations"
       operationId: getCourseLocations
+      produces:
+        - application/json
       responses:
         "200":
           description: "Succesful response"
@@ -243,6 +255,8 @@ paths:
         - courses
       summary: "Gets all courses at specified location"
       operationId: findCourseByLocation
+      consumes:
+        - application/json
       parameters:
         - in: path
           name: location
@@ -279,6 +293,8 @@ paths:
         - courses
       operationId: findCourseByInstructorID
       summary: "Gets all courses by Instructor ID"
+      produces:
+        - application/json
       parameters:
         - in: query
           name: instructorid
@@ -303,6 +319,8 @@ paths:
       description: |
         Gets all `Instructor` object
       operationId: getInstructors
+      produces:
+        - application/json
       parameters:
         - in: query
           name: first_initial
@@ -337,6 +355,8 @@ paths:
       - instructors
       description: "Post an Instructor representation object to the resource"
       operationId: postInstructor
+      consumes:
+        - application/json
       parameters:
         - in: body
           name: instructor_rep
@@ -368,6 +388,8 @@ paths:
         - instructors
       description: "Gets instructor by id"
       operationId: getInstructorByID
+      produces:
+        - application/json
       parameters:
         - name: instructorID
           in: path
@@ -390,6 +412,8 @@ paths:
         - instructors
       description: "Puts to an instructor resource to be updated or created"
       operationId: updateInstructorByID
+      consumes:
+        - application/json
       parameters:
         - name: instructorID
           in: path
