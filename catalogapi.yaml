@@ -91,6 +91,8 @@ paths:
           description: "Resource created"
         "202":
           description: "Representation accepted"
+        "401":
+          description: "User is unauthorized to do this action"
         "422":
           description: "Invalid Data"
           schema:
@@ -148,6 +150,8 @@ paths:
           description: "Successful response"
         "202":
           description: "Representation accepted"
+        "401":
+          description: "User is unauthorized to do this action"
         "422":
           description: "Invalid Data"
           schema:
@@ -173,6 +177,8 @@ paths:
           description: "Succesful response"
         "202":
           description: "Delete request accepted"
+        "401":
+          description: "User isn't authorized to do this action"
         "500":
           description: "Internal Server Error"
       security:
@@ -345,6 +351,8 @@ paths:
           description: "Resource created"
         "202":
           description: "Representation accepted"
+        "401":
+          description: "User isn't authorized to do this action"
         "422":
           description: "Invalid Data"
           schema:
@@ -396,6 +404,8 @@ paths:
           description: "Resource created"
         "202":
           description: "Representation accepted"
+        "401":
+          description: "User isn't authorized to do this action"
         "422":
           description: "Invalid representation data"
           schema:
