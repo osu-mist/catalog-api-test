@@ -162,6 +162,8 @@ paths:
       responses:
         "200":
           description: "Succesful response"
+        "202":
+          description: "Delete request accepted"
         "500":
           description: "Internal Server Error"
 
