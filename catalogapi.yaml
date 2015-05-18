@@ -349,6 +349,8 @@ paths:
       responses:
         "200":
           description: "Succesful response"
+        "404":
+          description: "Resource not found"
         "500":
             description: "Internal Server Error"
     put:
