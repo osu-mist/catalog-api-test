@@ -70,6 +70,8 @@ paths:
 
         "404":
           description: Course not found
+        "500":
+          description: "Internal Server Error"
     post:
       tags:
         - courses
@@ -93,6 +95,8 @@ paths:
           description: "Invalid Data"
           schema:
             $ref: "#/definitions/Errors"
+        "500":
+          description: "Internal Server Error"
 
   /courses/{crn}:
     get:
@@ -115,6 +119,8 @@ paths:
             $ref: "#/definitions/Courses"
         "404":
           description: "Resource not found"
+        "500":
+          description: "Internal Server Error"
     put:
       tags:
         - courses
@@ -143,6 +149,8 @@ paths:
           description: "Invalid Data"
           schema:
             $ref: "#/definitions/Errors"
+        "500":
+          description: "Internal Server Error"
     delete:
       tags:
         - courses
@@ -157,6 +165,8 @@ paths:
       responses:
         "200":
           description: "Succesful response"
+        "500":
+          description: "Internal Server Error"
 
   /courses/name/{coursename}:
     get:
@@ -191,6 +201,9 @@ paths:
             $ref: "#/definitions/Courses"
         "404":
           description: "Invalid course name"
+        "500":
+          description: "Internal Server Error"
+
   /courses/location:
     get:
       tags:
@@ -202,7 +215,8 @@ paths:
           description: "Succesful response"
           schema:
             $ref: "#/definitions/Locations"
-
+        "500":
+            description: "Internal Server Error"
 
   /courses/location/{location}:
     get:
@@ -235,7 +249,8 @@ paths:
             $ref: "#/definitions/Course"
         "404":
           description: "Invalid Location"
-
+        "500":
+          description: "Internal Server Error"
 
   /courses/findCourseByInstructorID:
     get:
@@ -254,6 +269,8 @@ paths:
             description: "Succesful response"
             schema:
               $ref: "#/definitions/Course"
+          "500":
+            description: "Internal Server Error"
 
 
   /instructors:
@@ -288,6 +305,9 @@ paths:
           description: Successful response
           schema:
             $ref: "#/definitions/Instructors"
+        "500":
+            description: "Internal Server Error"
+
     post:
       tags:
       - instructors
@@ -310,6 +330,8 @@ paths:
           description: "Invalid Data"
           schema:
             $ref: "#/definitions/Errors"
+        "500":
+            description: "Internal Server Error"
 
   /instructors/{instructorID}:
     get:
@@ -327,6 +349,8 @@ paths:
       responses:
         "200":
           description: "Succesful response"
+        "500":
+            description: "Internal Server Error"
     put:
       tags:
         - instructors
@@ -349,6 +373,8 @@ paths:
           description: "Invalid representation data"
           schema:
             $ref: "#/definitions/Errors"
+        "500":
+            description: "Internal Server Error"
 
     delete:
       tags:
@@ -368,7 +394,8 @@ paths:
           description: "Request accepted"
         "401":
           description: "User isn't authorized to do this action"
-
+        "500":
+            description: "Internal Server Error"
 
 definitions:
 
