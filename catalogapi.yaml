@@ -369,12 +369,12 @@ paths:
       description: "Gets instructor by id"
       operationId: getInstructorByID
       parameters:
-      - name: instructorID
-        in: path
-        description: "instructorID to search by"
-        required: true
-        type: integer
-        format: int64
+        - name: instructorID
+          in: path
+          description: "instructorID to search by"
+          required: true
+          type: integer
+          format: int64
 
       responses:
         "200":
@@ -391,12 +391,12 @@ paths:
       description: "Puts to an instructor resource to be updated or created"
       operationId: updateInstructorByID
       parameters:
-      - name: instructorID
-        in: path
-        description: "instructorID to put definitions"
-        required: true
-        type: integer
-        format: int64
+        - name: instructorID
+          in: path
+          description: "instructorID to put definitions"
+          required: true
+          type: integer
+          format: int64
       responses:
         "200":
           description: "Successful response"
@@ -453,6 +453,7 @@ definitions:
       # instructor id is an internal identifier so user shouldn't be required to put that
       #- instructor_id
       - instructor_name
+
     properties:
       instructor_id:
         type: integer
@@ -477,6 +478,7 @@ definitions:
       - day
       - time
       - location
+
     properties:
       CRN:
         type: integer
