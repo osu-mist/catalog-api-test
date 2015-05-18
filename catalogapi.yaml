@@ -18,6 +18,7 @@ paths:
        - courses
       # Describe this verb here. Note: you can use markdown
       description: "Gets all `Course` objects. Can be filtered by parameters."
+      operationId: getCourses
       # This is array of GET operation parameters:
       parameters:
         - in: query
@@ -73,7 +74,7 @@ paths:
       tags:
         - courses
       summary: "Post a course representation to be appeneded"
-      operationId: updateCourse
+      operationId: postCourse
       parameters:
         - name: body
           in: body
@@ -100,8 +101,7 @@ paths:
       tags:
         - courses
       description: "Finds course by CRN"
-      operationId: "findCourseByCRN"
-
+      operationId: getCourseByCRN
       parameters:
         - name: crn
           in: path
@@ -152,6 +152,7 @@ paths:
       tags:
         - courses
       summary: "Deletes a course resource"
+      operationId: deleteCourseByCRN
       parameters:
         - in: path
           name: crn
@@ -208,7 +209,7 @@ paths:
       tags:
         - courses
       description: "Get all course locations"
-
+      operationId: getCourseLocations
       responses:
         "200":
           description: "Succesful response"
@@ -255,6 +256,7 @@ paths:
     get:
       tags:
         - courses
+      operationId: findCourseByInstructorID
       summary: "Gets all courses by Instructor ID"
       parameters:
         - in: query
@@ -278,7 +280,7 @@ paths:
        - instructors
       description: |
         Gets all `Instructor` object
-
+      operationId: getInstructors
       parameters:
         - in: query
           name: first_initial
@@ -311,6 +313,7 @@ paths:
       tags:
       - instructors
       description: "Post an Instructor representation object to the resource"
+      operationId: postInstructor
       parameters:
         - in: body
           name: instructor_rep
@@ -337,6 +340,7 @@ paths:
       tags:
         - instructors
       description: "Gets instructor by id"
+      operationId: getInstructorByID
       parameters:
       - name: instructorID
         in: path
@@ -356,6 +360,7 @@ paths:
       tags:
         - instructors
       description: "Puts to an instructor resource to be updated or created"
+      operationId: updateInstructorByID
       parameters:
       - name: instructorID
         in: path
@@ -381,6 +386,7 @@ paths:
       tags:
         - instructors
       description: "Deletes an instructor resource"
+      operationId: deleteInstructorByID
       parameters:
       - name: instructorID
         in: path
