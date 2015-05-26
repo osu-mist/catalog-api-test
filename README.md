@@ -137,6 +137,21 @@ Transfer-Encoding: chunked
 0
 ```
 
+###Instructor Resource and Mockup
+
+```
+PUT /api/v1/instructor     HTTP/1.1
+Host: localhost: 8080
+Content-Type: application/json
+Content-Length: …
+
+{
+“instructor”: “Brandon Lee”,
+     	“rateMyProfessorLink”: “http://www.ratemyprofessors.com/”,
+       “Courses taught”: “CS 160 … CS 161”
+}
+```
+
 ###Dependencies
 Scraper:
 jsoup 1.8, tagsoup 1.2
