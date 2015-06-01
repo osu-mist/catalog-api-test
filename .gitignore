@@ -1,1 +1,4 @@
-#This is test gitignore file
+#Intellij Idea
+*.iml
+.idea/*
+target/*

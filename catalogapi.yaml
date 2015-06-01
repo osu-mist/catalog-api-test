@@ -1,0 +1,546 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "0.0.1"
+  title: Catalog API Test
+
+# Describe your paths here
+paths:
+  # This is a path endpoint. Change it.
+  /courses:
+    # This is a HTTP operation
+    get:
+      tags:
+       - courses
+      # Describe this verb here. Note: you can use markdown
+      description: "Gets all `Course` objects. Can be filtered by parameters."
+      operationId: getCourses
+      # This is array of GET operation parameters:
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: coursename
+          description: "Course name to filter list of courses by"
+          required: false
+          type: string
+
+        - in: query
+          name: location
+          description: "Location name to filter list of courses by"
+          required: false
+          type: string
+
+        - in: query
+          name: timeStart
+          description: "Specific course start time to filter list of courses by"
+          required: false
+          type: string
+
+        - in: query
+          name: timeEnd
+          description: "Specific course end time to filter list of courses by"
+          required: false
+          type: string
+
+        - in: query
+          name: timeStartAfter
+          description: "Filter list by Classes that start after this time"
+          required: false
+          type: string
+
+        - in: query
+          name: timeEndBefore
+          description: "Filter list by Classes that end before this time"
+          required: false
+          type: string
+
+        # An example parameter that is in query and is required
+
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        "200":
+          description: "Successful response"
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            $ref: "#/definitions/Courses"
+        "500":
+          description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+    post:
+      tags:
+        - courses
+      summary: "Post a course representation to be appeneded"
+      operationId: postCourse
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: "Course object that needs to be added to the catalog"
+          required: true
+          schema:
+            $ref: "#/definitions/Course"
+      responses:
+        "200":
+          description: "Successful responses"
+        "201":
+          description: "Resource created"
+        "202":
+          description: "Representation accepted"
+        "401":
+          description: "User is unauthorized to do this action"
+        "422":
+          description: "Invalid Data"
+          schema:
+            $ref: "#/definitions/Errors"
+        "500":
+          description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+
+  /courses/{crn}:
+    get:
+      tags:
+        - courses
+      description: "Finds course by CRN"
+      operationId: getCourseByCRN
+      produces:
+        - application/json
+      parameters:
+        - name: crn
+          in: path
+          description: "CRN ID of course to be fetched"
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "Succesful response"
+          schema:
+            $ref: "#/definitions/Courses"
+        "404":
+          description: "Resource not found"
+        "500":
+          description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+    put:
+      tags:
+        - courses
+      summary: "Puts a course resource to be updated or created."
+      operationId: updateCourseByCRN
+      consumes:
+        - application/json
+      parameters:
+        - name: crn
+          in: path
+          description: "Resource CRN ID to be updated"
+          required: true
+          type: integer
+          format: int64
+
+        - name: body
+          in: body
+          description: "Course object that needs to be added to the catalog"
+          required: true
+          schema:
+            $ref: "#/definitions/Course"
+      responses:
+        "200":
+          description: "Successful response"
+        "202":
+          description: "Representation accepted"
+        "401":
+          description: "User is unauthorized to do this action"
+        "422":
+          description: "Invalid Data"
+          schema:
+            $ref: "#/definitions/Errors"
+        "500":
+          description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+    delete:
+      tags:
+        - courses
+      summary: "Deletes a course resource"
+      operationId: deleteCourseByCRN
+      parameters:
+        - in: path
+          name: crn
+          description: "Course CRN ID to be deleted"
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "Succesful response"
+        "202":
+          description: "Delete request accepted"
+        "401":
+          description: "User isn't authorized to do this action"
+        "500":
+          description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+  /courses/name/{coursename}:
+    get:
+      tags:
+        - courses
+      summary: "Gets all courses by coursename"
+      operationId: findCourseByName
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: coursename
+          description: "Course name of course to be searched by"
+          required: true
+          type: string
+
+        - in: query
+          name: instructorid
+          description: "InstructorID to filter by"
+          required: false
+          type: integer
+          format: int64
+
+        - in: query
+          name: instructorName
+          description: "Instructor name to filter by"
+          required: false
+          type: string
+
+      responses:
+        "200":
+          description: "Succesful response"
+          schema:
+            $ref: "#/definitions/Courses"
+        "404":
+          description: "Invalid course name"
+        "500":
+          description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+
+  /courses/location:
+    get:
+      tags:
+        - courses
+      description: "Get all course locations"
+      operationId: getCourseLocations
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: "Succesful response"
+          schema:
+            $ref: "#/definitions/Locations"
+        "500":
+            description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+
+  /courses/location/{location}:
+    get:
+      tags:
+        - courses
+      summary: "Gets all courses at specified location"
+      operationId: findCourseByLocation
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: location
+          description: "Location of course to be searched by"
+          required: true
+          type: string
+
+        - in: query
+          name: day
+          description: "Day to filter by"
+          required: false
+          type: string
+
+        - in: query
+          name: time
+          description: "Time to filter by"
+          required: false
+          type: string
+      responses:
+        "200":
+          description: "Succesful response"
+          schema:
+            $ref: "#/definitions/Course"
+        "404":
+          description: "Invalid Location"
+        "500":
+          description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+
+  /courses/findCourseByInstructorID:
+    get:
+      tags:
+        - courses
+      operationId: findCourseByInstructorID
+      summary: "Gets all courses by Instructor ID"
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: instructorid
+          description: "instructorid to search by"
+          required: true
+          type: integer
+          format: int64
+      responses:
+          "200":
+            description: "Succesful response"
+            schema:
+              $ref: "#/definitions/Course"
+          "500":
+            description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+
+  /instructors:
+    get:
+      tags:
+       - instructors
+      description: |
+        Gets all `Instructor` object
+      operationId: getInstructors
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: first_initial
+          description: "First intial to filter list by"
+          required: false
+          type: string
+
+        - in: query
+          name: last_name
+          description: "Last name to filter list by"
+          required: false
+          type: string
+
+        - in: query
+          name: number_of_courses
+          description: "Filter instructors by number of courses taught"
+          required: false
+          type: integer
+          format: int64
+
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            $ref: "#/definitions/Instructors"
+        "500":
+            description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+    post:
+      tags:
+      - instructors
+      description: "Post an Instructor representation object to the resource"
+      operationId: postInstructor
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: instructor_rep
+          description: "instructor_representation to be posted"
+          required: true
+          schema:
+            $ref: "#/definitions/Instructor"
+      responses:
+        "200":
+          description: "Successful responses"
+        "201":
+          description: "Resource created"
+        "202":
+          description: "Representation accepted"
+        "401":
+          description: "User isn't authorized to do this action"
+        "422":
+          description: "Invalid Data"
+          schema:
+            $ref: "#/definitions/Errors"
+        "500":
+            description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+
+  /instructors/{instructorID}:
+    get:
+      tags:
+        - instructors
+      description: "Gets instructor by id"
+      operationId: getInstructorByID
+      produces:
+        - application/json
+      parameters:
+        - name: instructorID
+          in: path
+          description: "instructorID to search by"
+          required: true
+          type: integer
+          format: int64
+
+      responses:
+        "200":
+          description: "Succesful response"
+        "404":
+          description: "Resource not found"
+        "500":
+            description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+    put:
+      tags:
+        - instructors
+      description: "Puts to an instructor resource to be updated or created"
+      operationId: updateInstructorByID
+      consumes:
+        - application/json
+      parameters:
+        - name: instructorID
+          in: path
+          description: "instructorID to put definitions"
+          required: true
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "Successful response"
+        "201":
+          description: "Resource created"
+        "202":
+          description: "Representation accepted"
+        "401":
+          description: "User isn't authorized to do this action"
+        "422":
+          description: "Invalid representation data"
+          schema:
+            $ref: "#/definitions/Errors"
+        "500":
+            description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+
+    delete:
+      tags:
+        - instructors
+      description: "Deletes an instructor resource"
+      operationId: deleteInstructorByID
+      parameters:
+      - name: instructorID
+        in: path
+        description: "instructorID to be deleted"
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: "Succesful response"
+        "202":
+          description: "Request accepted"
+        "401":
+          description: "User isn't authorized to do this action"
+        "500":
+            description: "Internal Server Error"
+      security:
+        - catalog_api_key: []
+
+securityDefinitions:
+
+  catalog_api_key:
+    type: apiKey
+    name: catalog_api_ley
+    in: query
+
+definitions:
+
+  Instructor:
+    required:
+      # instructor id is an internal identifier so user shouldn't be required to put that
+      #- instructor_id
+      - instructor_name
+
+    properties:
+      instructor_id:
+        type: integer
+        format: int64
+      instructor_name:
+        type: string
+      rate_my_professor_link:
+        type: string
+
+  Instructors:
+    title: ArrayOfInstructors
+    type: array
+    items:
+      $ref: "#/definitions/Instructor"
+
+  Course:
+    required:
+      - CRN
+      - course_name
+      - instructor_name
+      #- instructor_id INTERNAL ID
+      - day
+      - time
+      - location
+
+    properties:
+      CRN:
+        type: integer
+        format: int64
+      course_name:
+        type: string
+      instructor_name:
+        type: string
+      instructor_id:
+        type: integer
+        format: int64
+      day:
+        type: string
+      time:
+        type: string
+      location:
+        type: string
+
+  Courses:
+    title: ArrayOfCourses
+    type: array
+    items:
+      $ref: "#/definitions/Course"
+
+  Location:
+    type: string
+
+  Locations:
+    title: ArrayOfLocations
+    type: array
+    items:
+      $ref: "#/definitions/Location"
+
+  Error:
+    type: string
+
+  Errors:
+    title: ArrayOfErrors
+    type: array
+    items:
+      $ref: "#/definitions/Error"
