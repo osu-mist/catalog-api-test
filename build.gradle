@@ -1,0 +1,84 @@
+import com.github.jengelman.gradle.plugins.shadow.transformers.AppendingTransformer
+import com.github.jengelman.gradle.plugins.shadow.transformers.AppendingTransformer
+import com.github.jengelman.gradle.plugins.shadow.transformers.ManifestResourceTransformer
+import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
+
+apply plugin: 'codenarc'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'shadow'
+
+version=currentVersion
+group=currentGroup
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven { url 'http://repo.jfrog.org/artifactory/gradle-plugins' }
+    }
+
+    dependencies {
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:2.0.16'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:0.8'
+    }
+}
+
+/* maven repositories */
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+/* maven dependencies */
+dependencies {
+    testCompile "io.dropwizard:dropwizard-testing:${dropwizardVersion}"
+
+    testRuntime "cglib:cglib-nodep:2.2.2"        // mock classes
+    testRuntime "org.objenesis:objenesis:1.2"    // mock classes without default constructor
+
+    compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
+    compile "io.dropwizard:dropwizard-core:${dropwizardVersion}"
+    compile "io.dropwizard:dropwizard-testing:${dropwizardVersion}"
+    compile "io.dropwizard:dropwizard-hibernate:${dropwizardVersion}"
+    compile "io.dropwizard:dropwizard-auth:${dropwizardVersion}"
+    compile "io.dropwizard:dropwizard-jdbi:${dropwizardVersion}"
+    compile 'ch.qos.logback:logback-classic:1.0.7' // log hibernate validation tests
+    compile "org.slf4j:log4j-over-slf4j:1.7.2"
+    compile 'io.dropwizard.metrics:metrics-core:${metrics.version}'
+    compile 'com.palominolabs.metrics:metrics-new-relic:1.0.5'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': "${mainClass}"
+        attributes 'Built-Date': new Date() //now
+        attributes 'Built-By': System.getProperty('user.name')
+        attributes 'Build-Jdk': System.getProperty('java.version')
+        attributes 'Implementation-Title': project.name
+        attributes 'Implementation-Version': project.version
+        attributes 'Implementation-Vendor-Id': project.group
+    }
+}
+
+/* detect problems with code and style */
+codenarc {
+    configFile = rootProject.file('codenarcrule.groovy')
+    reportFormat = System.properties['codeNarcOutput'] ?: 'html'
+}
+
+/* build a single java archive */
+shadow {
+    baseName "${project.baseName}"
+    artifactAttached false
+    destinationDir "${project.buildDir}/distributions"
+
+    transformer(ServiceFileTransformer)
+    transformer(ManifestResourceTransformer) { attributes 'Main-Class': 'edu.oregonstate.mist.dropwizardtest.DropwizardTestApplication' }
+    transformer(AppendingTransformer) { resource = 'META-INF/spring.handlers' }
+    transformer(AppendingTransformer) { resource = 'META-INF/spring.schemas' }
+
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+}

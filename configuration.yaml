@@ -1,0 +1,34 @@
+server:
+    applicationConnectors:
+        - type: http
+          port: 8080
+          bindHost: localhost
+        - type: https
+          port: 8443
+          keyStorePath: example.keystore
+          keyStorePassword: example
+          validateCerts: false
+logging:
+    loggers:
+          org.hibernate.SQL: ALL
+    appenders:
+        - type: console
+          threshold: DEBUG
+          target: stdout
+        - type: file
+          currentLogFilename: logs/dropwizardtest.log
+          archivedLogFilenamePattern: logs/dropwizardtest-%d.log.gz
+          archivedFileCount: 5
+          threshold: ALL
+          timeZone: UTC
+database:
+    driverClass: oracle.jdbc.OracleDriver
+    user: PASSMISTY
+    password: iBcepo55wr
+    url: jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE = ON) (ADDRESS=(PROTOCOL=TCP)(Host=db4-oravip.ucsadm.oregonstate.edu)(Port=1521)) (ADDRESS=(PROTOCOL=TCP)(Host=db5-oravip.ucsadm.oregonstate.edu)(Port=1521)) (CONNECT_DATA=(SERVICE_NAME=OSdev2.OSUdb.osu)))
+    properties:
+        hibernate.dialect: org.hibernate.dialect.Oracle10gDialect
+    validationQuery: "SELECT 1 FROM dual"
+    initialSize: 2
+    minSize: 1
+    maxSize: 5

@@ -1,4 +1,11 @@
-#Intellij Idea
+.classpath
+.project
+.settings
+bin/
+target/
+logs/
+.idea/
 *.iml
-.idea/*
-target/*
+build/
+.gradle/
+newrelic/
