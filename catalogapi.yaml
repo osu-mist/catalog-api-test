@@ -77,7 +77,7 @@ paths:
     post:
       tags:
         - courses
-      summary: "Post a course representation to be appeneded"
+      summary: "Post a course representation to be appended"
       operationId: postCourse
       consumes:
         - application/json
@@ -123,7 +123,7 @@ paths:
           format: int64
       responses:
         "200":
-          description: "Succesful response"
+          description: "Successful response"
           schema:
             $ref: "#/definitions/Courses"
         "404":
@@ -182,7 +182,7 @@ paths:
           format: int64
       responses:
         "200":
-          description: "Succesful response"
+          description: "Successful response"
         "202":
           description: "Delete request accepted"
         "401":
@@ -221,7 +221,7 @@ paths:
 
       responses:
         "200":
-          description: "Succesful response"
+          description: "Successful response"
           schema:
             $ref: "#/definitions/Courses"
         "404":
@@ -241,7 +241,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: "Succesful response"
+          description: "Successful response"
           schema:
             $ref: "#/definitions/Locations"
         "500":
@@ -277,7 +277,7 @@ paths:
           type: string
       responses:
         "200":
-          description: "Succesful response"
+          description: "Successful response"
           schema:
             $ref: "#/definitions/Course"
         "404":
@@ -287,7 +287,7 @@ paths:
       security:
         - catalog_api_key: []
 
-  /courses/findCourseByInstructorID:
+  /courses/taughtByInstructor/{instructorID}:
     get:
       tags:
         - courses
@@ -296,15 +296,15 @@ paths:
       produces:
         - application/json
       parameters:
-        - in: query
-          name: instructorid
+        - in: path
+          name: instructorID
           description: "instructorid to search by"
           required: true
           type: integer
           format: int64
       responses:
           "200":
-            description: "Succesful response"
+            description: "Successful response"
             schema:
               $ref: "#/definitions/Course"
           "500":
@@ -324,7 +324,7 @@ paths:
       parameters:
         - in: query
           name: first_initial
-          description: "First intial to filter list by"
+          description: "First initial to filter list by"
           required: false
           type: string
 
@@ -400,7 +400,7 @@ paths:
 
       responses:
         "200":
-          description: "Succesful response"
+          description: "Successful response"
         "404":
           description: "Resource not found"
         "500":
@@ -453,7 +453,7 @@ paths:
         format: int64
       responses:
         "200":
-          description: "Succesful response"
+          description: "Successful response"
         "202":
           description: "Request accepted"
         "401":
@@ -544,3 +544,4 @@ definitions:
     type: array
     items:
       $ref: "#/definitions/Error"
+
