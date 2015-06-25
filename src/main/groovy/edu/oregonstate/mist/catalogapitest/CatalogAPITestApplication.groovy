@@ -22,7 +22,7 @@ public class CatalogAPITestApplication extends Application<CatalogAPITestApplica
     /* create managed database connection pool
        per http://dropwizard.io/manual/hibernate.html#configuration */
     private final HibernateBundle<CatalogAPITestApplicationConfiguration> hibernate =
-        new HibernateBundle<CatalogAPITestApplicationConfiguration>(Employee) {
+        new HibernateBundle<CatalogAPITestApplicationConfiguration>(Course) {
             @Override
             public DataSourceFactory getDataSourceFactory(CatalogAPITestApplicationConfiguration configuration) {
                 return configuration.dataSourceFactory
@@ -39,15 +39,15 @@ public class CatalogAPITestApplication extends Application<CatalogAPITestApplica
     public void run(CatalogAPITestApplicationConfiguration configuration, Environment environment) {
 
         /* create new Hibernate SessionFactory instance */
-        final EmployeeDAO edao = new EmployeeDAO(hibernate.sessionFactory)
-        environment.jersey().register(new EmployeeResource(edao))
+        final CourseDAO edao = new CourseDAO(hibernate.sessionFactory)
+        environment.jersey().register(new CourseResource(edao))
 
         /* create managed database connection pool and a new DBI instance
            per http://dropwizard.io/manual/jdbi.html#configuration */
         final DBIFactory factory = new DBIFactory()
         final DBI jdbi = factory.build(environment, configuration.dataSourceFactory, 'jdbi')
-        final JobDAO jdao = jdbi.onDemand(JobDAO)
-        environment.jersey().register(new JobResource(jdao))
+        final InstructorDAO idao = jdbi.onDemand(InstructorDAO)
+        environment.jersey().register(new JobResource(idao))
 
         /* hard code root API URL */
         environment.jersey().setUrlPattern('/api/v1/*')
