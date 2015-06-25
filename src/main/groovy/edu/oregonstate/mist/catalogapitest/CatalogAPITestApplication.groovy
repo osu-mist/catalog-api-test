@@ -47,7 +47,7 @@ public class CatalogAPITestApplication extends Application<CatalogAPITestApplica
         final DBIFactory factory = new DBIFactory()
         final DBI jdbi = factory.build(environment, configuration.dataSourceFactory, 'jdbi')
         final InstructorDAO idao = jdbi.onDemand(InstructorDAO)
-        environment.jersey().register(new JobResource(idao))
+        environment.jersey().register(new InstructorResource(idao))
 
         /* hard code root API URL */
         environment.jersey().setUrlPattern('/api/v1/*')
