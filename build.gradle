@@ -65,8 +65,7 @@ jar {
 
 /* detect problems with code and style */
 codenarc {
-    configFile = rootProject.file('codenarcrule.groovy')
-    reportFormat = System.properties['codeNarcOutput'] ?: 'html'
+    configFile = new File("config/codenarc/codenarc.groovy")
 }
 
 /* build a single java archive */

@@ -1,4 +1,4 @@
-package edu.oregonstate.mist.courseapitest.core
+package edu.oregonstate.mist.catalogapitest.core
 
 import javax.persistence.Entity
 import javax.persistence.Id

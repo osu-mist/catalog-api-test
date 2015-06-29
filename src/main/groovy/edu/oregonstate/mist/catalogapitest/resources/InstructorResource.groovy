@@ -6,8 +6,8 @@ import io.dropwizard.jersey.params.LongParam
 
 import edu.oregonstate.mist.catalogapitest.*
 import edu.oregonstate.mist.catalogapitest.auth.AuthenticatedUser
-import edu.oregonstate.mist.catalogapitest.core.Course
-import edu.oregonstate.mist.catalogapitest.db.CourseDAO
+import edu.oregonstate.mist.catalogapitest.core.Instructor
+import edu.oregonstate.mist.catalogapitest.db.InstructorDAO
 
 import javax.ws.rs.OPTIONS
 import javax.ws.rs.GET
@@ -45,7 +45,7 @@ class InstructorResource {
         return ['OPTIONS', 'GET', 'POST']
     }
 
-    // Gets all instuctors
+    // Gets all instructors
     @GET
     @UnitOfWork
     public Instructor getAllInstructors() {
@@ -86,9 +86,7 @@ class InstructorResource {
     @PUT
     @Path('/{name: \\d+}')
     @UnitOfWork
-    public Instructor putByName(@PathParam('instructor') LongParam name, @Valid Instructor instuctor) {
-        final Optional<Instructor> instuctor = instructorDAO.findByName(name.get())
-
+    public Instructor putByName(@Valid Instructor instructor) {
         if (!instructor.isPresent()) {
             throw new WebApplicationException(Response.Status.NOT_FOUND)
         }
