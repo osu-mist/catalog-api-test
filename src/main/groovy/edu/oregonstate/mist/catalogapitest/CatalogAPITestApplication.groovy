@@ -54,11 +54,11 @@ public class CatalogAPITestApplication extends Application<CatalogAPITestApplica
 
         /* enable HTTP basic authentication
            per http://dropwizard.io/manual/auth.html#basic-authentication */
-        environment.jersey().register(new BasicAuthProvider<AuthenticatedUser>(new SimpleAuthenticator(),'DropwizardTestApplication'))
+        environment.jersey().register(new BasicAuthProvider<AuthenticatedUser>(new SimpleAuthenticator(),'CatalogAPITestApplication'))
     }
 
     /* main method */
     public static void main(String[] args) throws Exception {
-        new DropwizardTestApplication().run(args)
+        new CatalogAPITestApplication().run(args)
     }
 }

@@ -1,5 +1,6 @@
 package edu.oregonstate.mist.catalogapitest.resources
 
+import edu.oregonstate.mist.catalogapitest.core.Course
 import io.dropwizard.auth.Auth
 import io.dropwizard.hibernate.UnitOfWork
 import io.dropwizard.jersey.params.LongParam
@@ -86,13 +87,10 @@ public class CourseResource {
     @PUT
     @Path('/{crn: \\d+}')
     @UnitOfWork
-    public Course putByCRN(@PathParam('crn') LongParam crn, @Valid Course course) {
-        final Optional<Course> course = courseDAO.findByCRN(crn.get())
-
+    public Course putByCRN(@Valid Course course) {
         if (!course.isPresent()) {
             throw new WebApplicationException(Response.Status.NOT_FOUND)
         }
-
         return courseDAO.set(course)
     }
 
