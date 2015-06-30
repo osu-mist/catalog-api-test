@@ -10,4 +10,4 @@ build/
 *.iws
 
 # Hide User Auth Info
-# /configuration.yaml
+/configuration.yaml
