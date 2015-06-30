@@ -25,7 +25,7 @@ database:
     driverClass: oracle.jdbc.OracleDriver
     user: DB_USER
     password: DB_PASS
-    url: Test Test test
+    url: DB_URL
     properties:
         hibernate.dialect: org.hibernate.dialect.Oracle10gDialect
     validationQuery: "SELECT 1 FROM dual"
