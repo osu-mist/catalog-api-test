@@ -176,7 +176,7 @@ public class CourseResource {
     // HTTP methods allowed on courses/findCourseByInstructor
     @OPTIONS
     @Path('/findCourseByInstructor')
-    public List InstructorOptions() {
+    public List optionsByInstructor() {
         return ['OPTIONS', 'GET']
     }
 

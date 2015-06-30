@@ -64,10 +64,11 @@ jar {
 }
 
 /* detect problems with code and style */
+
 codenarc {
-    //configFile = new File("config/codenarc/codenarc.groovy")
-    configFile = rootProject.file('codenarcrule.groovy')
-    reportFormat = System.properties['codeNarcOutput'] ?: 'html'
+    configFile = new File("config/codenarc/codenarc.groovy")
+    //configFile = rootProject.file('codenarcrule.groovy')
+    //reportFormat = System.properties['codeNarcOutput'] ?: 'html'
 }
 
 /* build a single java archive */
