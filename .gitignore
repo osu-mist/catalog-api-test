@@ -1,11 +1,13 @@
-.classpath
-.project
-.settings
-bin/
-target/
-logs/
-.idea/
-*.iml
-build/
+# Gradle
 .gradle/
-newrelic/
+
+# Dropwizard
+build/
+
+# IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+
+# Hide User Auth Info
+*.yaml
