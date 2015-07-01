@@ -5,9 +5,9 @@ import io.dropwizard.hibernate.UnitOfWork
 import io.dropwizard.jersey.params.LongParam
 
 import edu.oregonstate.mist.catalogapitest.*
-import edu.oregonstate.mist.catalogapitest.auth.AuthenticatedUser
-import edu.oregonstate.mist.catalogapitest.core.Instructor
-import edu.oregonstate.mist.catalogapitest.db.InstructorDAO
+import AuthenticatedUser
+import Instructor
+import InstructorDAO
 
 import javax.ws.rs.OPTIONS
 import javax.ws.rs.GET
