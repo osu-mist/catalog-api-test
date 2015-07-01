@@ -6,8 +6,9 @@ import javax.persistence.Table
 import javax.persistence.Column
 
 import org.hibernate.validator.constraints.NotEmpty
+import org.hibernate.validator.constraints.Email
 
-// Classes in the core folder files are java beans, or classes with a few attributes,
+// Classes in the core folder files are java beans, or classes with a few attributes, 
 // a no-argument constructor, getters and setters for those attributes
 
 // Define Hibernate object-relational mapping to Instructor Table

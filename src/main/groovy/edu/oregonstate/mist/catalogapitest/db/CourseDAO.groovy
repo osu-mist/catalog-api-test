@@ -1,6 +1,6 @@
 package edu.oregonstate.mist.catalogapitest.db
 
-import Course
+import edu.oregonstate.mist.catalogapitest.core.Course
 
 import io.dropwizard.hibernate.AbstractDAO
 import com.google.common.base.Optional

@@ -14,6 +14,7 @@ import io.dropwizard.hibernate.HibernateBundle
 import io.dropwizard.db.DataSourceFactory
 import io.dropwizard.jdbi.DBIFactory
 import org.skife.jdbi.v2.DBI
+import java.util.concurrent.TimeUnit
 
 /* application class */
 public class CatalogAPITestApplication extends Application<CatalogAPITestApplicationConfiguration> {

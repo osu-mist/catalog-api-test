@@ -1,14 +1,14 @@
 package edu.oregonstate.mist.catalogapitest.resources
 
-import Course
+import edu.oregonstate.mist.catalogapitest.core.Course
 import io.dropwizard.auth.Auth
 import io.dropwizard.hibernate.UnitOfWork
 import io.dropwizard.jersey.params.LongParam
 
 import edu.oregonstate.mist.catalogapitest.*
-import AuthenticatedUser
-import Course
-import CourseDAO
+import edu.oregonstate.mist.catalogapitest.auth.AuthenticatedUser
+import edu.oregonstate.mist.catalogapitest.core.Course
+import edu.oregonstate.mist.catalogapitest.db.CourseDAO
 
 import javax.ws.rs.OPTIONS
 import javax.ws.rs.GET
