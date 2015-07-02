@@ -6,8 +6,11 @@ import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransf
 apply plugin: 'codenarc'
 apply plugin: 'groovy'
 apply plugin: 'maven'
-apply plugin: 'shadow'
 apply plugin: 'idea'
+
+//apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'shadow'
+
 
 version=currentVersion
 group=currentGroup
@@ -84,4 +87,24 @@ shadow {
 
     exclude 'META-INF/*.DSA'
     exclude 'META-INF/*.RSA'
+}
+
+
+// https://github.com/johnrengelman/shadow
+/*
+shadowJar {
+    manifest {
+        attributes 'Main-Class': "${mainClass}"
+    }
+    mergeServiceFiles()
+}
+*/
+
+build.dependsOn shadowJar
+
+// FIXME: use ShadowJar (java -jar build/libs/catalog-api-test-0.1.jar server configuration.yaml)
+task run(type: JavaExec, dependsOn: build) {
+    main = "${mainClass}"
+    classpath = sourceSets.main.runtimeClasspath
+    args = ['server', 'configuration.yaml']
 }
