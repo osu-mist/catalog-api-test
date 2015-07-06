@@ -14,7 +14,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 buildscript {
     repositories {
         maven {
-            url 'https://plugins.gradle.org/m2/'
+	    url 'https://plugins.gradle.org/m2/'
         }
     }
     dependencies {
@@ -32,9 +32,12 @@ dependencies {
     compile "org.codehaus.groovy:groovy:${groovyVersion}"
     compile "io.dropwizard:dropwizard-core:${dropwizardVersion}"
 
+    //My dependencies
+    compile "io.dropwizard:dropwizard-testing:${dropwizardVersion}"
     compile "io.dropwizard:dropwizard-hibernate:${dropwizardVersion}"
     compile "io.dropwizard:dropwizard-auth:${dropwizardVersion}"
     compile "io.dropwizard:dropwizard-jdbi:${dropwizardVersion}"
+    compile "io.dropwizard:dropwizard-db:${dropwizardVersion}"
 }
 
 codenarc {
