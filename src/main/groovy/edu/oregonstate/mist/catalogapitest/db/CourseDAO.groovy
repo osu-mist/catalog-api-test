@@ -16,8 +16,14 @@ public interface CourseDAO extends Closeable {
             FROM COURSES
             WHERE CRN = :crn
             """)
-    List<Course> findByCRN(@Bind("crn") int cid)
+    List<Course> findByCrn(@Bind("crn") Integer crn)
+
+    @SqlQuery("""
+            SELECT *
+            FROM COURSES
+            WHERE COURSENAME = :courseName
+            """)
+    List<Course> findByCourseName(@Bind("courseName") String courseName)
 
     void close()
 }
-

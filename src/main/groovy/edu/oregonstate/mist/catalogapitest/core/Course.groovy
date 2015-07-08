@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlRootElement
 @XmlRootElement
 class Course {
 
-    private int cid
-    private int crn
+    private Integer cid
+    private Integer crn
     private String courseName
     private String instructor
     private String day
@@ -20,7 +20,7 @@ class Course {
         // Jackson Deserialization
     }
 
-    public Course(int cid, int crn, String courseName, String instructor, String day, String time, String location) {
+    public Course(Integer cid, Integer crn, String courseName, String instructor, String day, String time, String location) {
         this.cid = cid
         this.crn = crn
         this.courseName = courseName
@@ -32,12 +32,12 @@ class Course {
 
     // Getters
     @JsonProperty
-    int getCid() {
+    Integer getCid() {
         return cid
     }
 
     @JsonProperty
-    int getCrn () {
+    Integer getCrn () {
         return crn
     }
 

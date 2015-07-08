@@ -26,7 +26,9 @@ Courses will be accessible by search through the course’s CRN.  For example CR
 Open terminal, navigate to your cloned local directory, and enter the following line
 
 ```
-java -classpath bin/ojdbc6_g.jar:build/libs/28-CAT-Initial-Resource-all.jar edu.oregonstate.mist.catalogapitest.CatalogAPITestApplication server configuration.yaml
+
+java -classpath bin/ojdbc6_g.jar:build/libs/catalog-api-test-all.jar edu.oregonstate.mist.catalogapitest.CatalogAPITestApplication server configuration.yaml
+
 ```
 
 ##Mockup

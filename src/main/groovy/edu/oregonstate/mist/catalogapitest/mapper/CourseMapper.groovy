@@ -8,8 +8,8 @@ import org.skife.jdbi.v2.tweak.ResultSetMapper
 import java.sql.ResultSet
 import java.sql.SQLException
 
-public class CourseMapper implements ResultSetMapper<Course>{
-    public Course map(int i, ResultSet rs, StatementContext sc) throws SQLException{
+public class CourseMapper implements ResultSetMapper<Course> {
+    public Course map(int i, ResultSet rs, StatementContext sc) throws SQLException {
         Course course = new Course()
 
         course.with {
@@ -23,6 +23,6 @@ public class CourseMapper implements ResultSetMapper<Course>{
             location      = rs.getString  'LOCATION'
         }
 
-        return course;
+        return course
     }
 }

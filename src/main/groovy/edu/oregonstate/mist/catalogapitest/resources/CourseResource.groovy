@@ -3,6 +3,8 @@ package edu.oregonstate.mist.catalogapitest.resources
 import edu.oregonstate.mist.catalogapitest.core.Course
 import edu.oregonstate.mist.catalogapitest.db.CourseDAO
 
+import io.dropwizard.jersey.params.IntParam
+
 import com.google.common.base.Optional
 import javassist.NotFoundException
 import org.eclipse.jetty.server.Response
@@ -28,15 +30,31 @@ class CourseResource {
         this.courseDAO = courseDAO
     }
 
-    @Path("/{crn}")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Course findCourseByCRN(@PathParam("crn") int crn){
-        Course returnCourse = CourseDAO.findByCRN(crn)
+    @Path('{crn}')
+    public List<Course> getByCrn(@PathParam('crn') IntParam crn) {
+        println(crn.get())
 
-        if(returnCourse == null){
+        final List<Course> courses = CourseDAO.findByCrn(crn.get())
+
+        if (courses.isEmpty()) {
             throw new WebApplicationException(404)
         }
-        return returnUser;
+
+        return courses
+    }
+
+    @GET
+    @Path('/name/{courseName}')
+    public List<Course> getByCourseName(@PathParam('courseName') String courseName) {
+        println(courseName)
+
+        final List<Course> courses = CourseDAO.findByCourseName(courseName)
+
+        if (courses.isEmpty()) {
+            throw new WebApplicationException(404)
+        }
+
+        return courses
     }
 }
