@@ -31,10 +31,14 @@ class CourseResource {
     }
 
     @GET
+    @Path('/all')
+    public List<Course> getByCrn() {
+        return courseDAO.allCourses
+    }
+
+    @GET
     @Path('{crn}')
     public List<Course> getByCrn(@PathParam('crn') IntParam crn) {
-        println(crn.get())
-
         final List<Course> courses = courseDAO.findByCrn(crn.get())
 
         if (courses.isEmpty()) {
@@ -47,8 +51,6 @@ class CourseResource {
     @GET
     @Path('/name/{courseName}')
     public List<Course> getByCourseName(@PathParam('courseName') String courseName) {
-        println(courseName)
-
         final List<Course> courses = courseDAO.findByCourseName(courseName)
 
         if (courses.isEmpty()) {

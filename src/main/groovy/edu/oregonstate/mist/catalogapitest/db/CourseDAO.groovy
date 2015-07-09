@@ -11,6 +11,13 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper
 
 @RegisterMapper(CourseMapper)
 public interface CourseDAO extends Closeable {
+
+    @SqlQuery("""
+            SELECT *
+            FROM COURSES
+            """)
+    List<Course> getAllCourses()
+
     @SqlQuery("""
             SELECT *
             FROM COURSES
