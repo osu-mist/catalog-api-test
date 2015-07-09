@@ -35,7 +35,7 @@ class CourseResource {
     public List<Course> getByCrn(@PathParam('crn') IntParam crn) {
         println(crn.get())
 
-        final List<Course> courses = CourseDAO.findByCrn(crn.get())
+        final List<Course> courses = courseDAO.findByCrn(crn.get())
 
         if (courses.isEmpty()) {
             throw new WebApplicationException(404)
@@ -49,7 +49,7 @@ class CourseResource {
     public List<Course> getByCourseName(@PathParam('courseName') String courseName) {
         println(courseName)
 
-        final List<Course> courses = CourseDAO.findByCourseName(courseName)
+        final List<Course> courses = courseDAO.findByCourseName(courseName)
 
         if (courses.isEmpty()) {
             throw new WebApplicationException(404)
