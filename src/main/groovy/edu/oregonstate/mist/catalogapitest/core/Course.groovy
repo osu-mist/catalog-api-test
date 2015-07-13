@@ -30,14 +30,14 @@ class Course {
         this.location = location
     }
 
-    // Getters
+    // Getters ------------------------------------------------------------------------------------------------
     @JsonProperty
     Integer getCid() {
         return cid
     }
 
     @JsonProperty
-    Integer getCrn () {
+    Integer getCrn() {
         return crn
     }
 
@@ -66,7 +66,7 @@ class Course {
         return location
     }
 
-    // Setters
+    // Setters ------------------------------------------------------------------------------------------------
     @JsonProperty
     void setCid(cid) {
         this.cid = cid
