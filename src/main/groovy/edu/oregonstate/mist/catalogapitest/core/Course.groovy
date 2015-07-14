@@ -96,4 +96,9 @@ class Course {
     void setTime(time) {
         this.time = time
     }
+
+    @JsonProperty
+    void setLocation(location) {
+        this.location = location
+    }
 }
