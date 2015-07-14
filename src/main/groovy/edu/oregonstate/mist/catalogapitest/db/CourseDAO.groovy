@@ -33,7 +33,7 @@ public interface CourseDAO extends Closeable {
 
     // PUT
     @SqlUpdate( """
-              UPDATE COURSE
+              UPDATE COURSES
               SET COURSENAME = :courseName, INSTRUCTOR = :instructor, DAY = :day, TIME = :time, LOCATION = :location
               WHERE CRN = :crn
               """)
