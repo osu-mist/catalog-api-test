@@ -35,6 +35,49 @@ class CourseResource {
         this.courseDAO = courseDAO
     }
 
+    // POST to /course ------------------------------------------------------------------------------------------------
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response postUser(@NotNull Course newCourse) {
+
+        Response returnResponse;
+
+        def createdURI
+
+        try {
+            courseDAO.postUser(newCourse.getUserLogin() , newUser.getDisplayName())
+            //createdURI = URI.create("/"+userDAO)
+
+            //201 CREATED
+            //TODO add in the URI of newly created resource
+            returnResponse = Response.created().build()
+
+        } catch (org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException e) {
+
+            def constraintError = e.cause.toString()
+            def returnError;
+
+            if(constraintError.contains("PR_USER_U_USER_LOGIN")){//USER LOGIN IS NOT UNIQUE
+
+                returnError = new ErrorPOJO("User login is not unique", Response.Status.CONFLICT.getStatusCode())
+            }else if(constraintError.contains("PR_USER_U_DISPLAY_NAME")){//DISPLAY NAME IS NOT UNIQUE
+
+                returnError = new ErrorPOJO("Display name is not unique", Response.Status.CONFLICT.getStatusCode())
+
+            }else{//Some other error, should be logged
+                //System.out.println(e.localizedMessage)
+                returnError = new ErrorPOJO("Unknown error.", Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+            }
+
+            return Response.status(Response.Status.CONFLICT).entity(returnError).build()
+
+            //System.out.println(returnError.getErrorMessage())
+        }
+
+        return returnResponse;
+    }
+
     // List all courses ------------------------------------------------------------------------------------------------
     @GET
     @Path('/all')
