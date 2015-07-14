@@ -29,7 +29,7 @@ public interface CourseDAO extends Closeable {
             FROM COURSES
             WHERE CRN = :crn
             """)
-    List<Course> getByCrn(@Bind("crn") Integer crn)
+    Course getByCrn(@Bind("crn") Integer crn)
 
     // PUT
     @SqlUpdate( """
@@ -37,7 +37,7 @@ public interface CourseDAO extends Closeable {
               SET COURSENAME = :courseName, INSTRUCTOR = :instructor, DAY = :day, TIME = :time, LOCATION = :location
               WHERE CRN = :crn
               """)
-    void putByCrn(@Bind("courseName") String courseName, @Bind("instructor") String instructor, @Bind("day") String day,
+    void putByCrn(@Bind("crn") Integer crn, @Bind("courseName") String courseName, @Bind("instructor") String instructor, @Bind("day") String day,
                   @Bind("time") String time, @Bind("location") String location)
 
     // POST
