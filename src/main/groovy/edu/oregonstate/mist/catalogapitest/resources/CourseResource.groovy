@@ -1,5 +1,6 @@
 package edu.oregonstate.mist.catalogapitest.resources
 
+import edu.oregonstate.mist.catalogapitest.core.ErrorPOJO
 import edu.oregonstate.mist.catalogapitest.core.Course
 import edu.oregonstate.mist.catalogapitest.db.CourseDAO
 
@@ -10,6 +11,7 @@ import javassist.NotFoundException
 import org.eclipse.jetty.server.Response
 
 import javax.validation.constraints.NotNull
+
 import javax.ws.rs.Consumes
 import javax.ws.rs.GET
 import javax.ws.rs.POST
@@ -20,6 +22,7 @@ import javax.ws.rs.Produces
 import javax.ws.rs.QueryParam
 import javax.ws.rs.WebApplicationException
 import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.Response
 
 @Path("/course")
 @Produces(MediaType.APPLICATION_JSON)
@@ -44,14 +47,20 @@ class CourseResource {
     @GET
     @Path('{crn}')
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Course> getByCrn(@PathParam('crn') IntParam crn) {
-        final List<Course> courses = courseDAO.getByCrn(crn.get())
+    public Response getByCrn(@PathParam('crn') IntParam crn) {
 
-        if (courses.isEmpty()) {
-            throw new WebApplicationException(404)
+        Course courses = courseDAO.getByCrn(crn.get())
+
+        def returnResponse
+
+        if (courses == null) {
+            def returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
+            returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
+        } else {
+            returnResponse = Response.ok(courses).build()
         }
 
-        return courses
+        return returnResponse
     }
 
     @Path("{crn}")
@@ -62,7 +71,7 @@ class CourseResource {
 
         def returnResponse
 
-        List<Course> checkForCourseCrn = courseDAO.getByCrn(crn)
+        Course checkForCourseCrn = courseDAO.getByCrn(crn)
 
         // If course does not already exist - POST it!
         if (checkForCourseCrn == null) {
