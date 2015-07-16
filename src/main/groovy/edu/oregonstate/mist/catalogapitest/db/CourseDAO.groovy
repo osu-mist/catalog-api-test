@@ -37,6 +37,12 @@ public interface CourseDAO extends Closeable {
             """)
     Course getByCrn(@Bind("crn") Integer crn)
 
+    // Get specific instance number
+    @SqlQuery("""
+            SELECT COURSES_SEQ.CURRVAL FROM DUAL
+            """)
+    Integer getLatestCidNumber()
+
     // PUT
     @SqlUpdate( """
               UPDATE COURSES
