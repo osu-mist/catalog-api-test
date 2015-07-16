@@ -54,7 +54,7 @@ class CourseResource {
             courseDAO.postCourse(newCourse.getCrn(), newCourse.getCourseName(), newCourse.getInstructor(),
             newCourse.getDay(), newCourse.getTime(), newCourse.getLocation())
 
-            //TODO add in the URI of newly created resource
+            // TODO add in the URI of newly created resource
             createdURI = URI.create(uriInfo.getPath() + "/" + courseDAO.getLatestCidNumber())
             returnResponse = Response.created(createdURI).build()
 
