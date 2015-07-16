@@ -14,6 +14,7 @@ import javax.validation.Valid
 import javax.validation.constraints.NotNull
 
 import javax.ws.rs.Consumes
+import javax.ws.rs.DELETE
 import javax.ws.rs.GET
 import javax.ws.rs.POST
 import javax.ws.rs.PUT
@@ -137,9 +138,22 @@ class CourseResource {
                     newInstructor.or(checkForCourseCrn.getInstructor()), newDay.or(checkForCourseCrn.getDay()),
                     newTime.or(checkForCourseCrn.getTime()), newLocation.or(checkForCourseCrn.getLocation())
             )
+
             returnResponse = Response.ok().build()
         }
 
+
+        return returnResponse
+    }
+
+    @Path("{crn}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteByCrn(@PathParam("crn") Integer crn){
+
+        //TODO add authentication for this method
+        courseDAO.deleteByCrn(crn)
+        def returnResponse = Response.ok().build()
 
         return returnResponse
     }

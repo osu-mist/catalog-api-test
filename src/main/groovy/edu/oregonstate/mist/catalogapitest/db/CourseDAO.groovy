@@ -58,6 +58,13 @@ public interface CourseDAO extends Closeable {
     void postByCrn(@Bind("crn") Integer crn , @Bind("courseName") String courseName , @Bind("instructor") String instructor,
                    @Bind("day") String day, @Bind("time") String time, @Bind("location") String location)
 
+    // DELETE
+    @SqlUpdate( """
+              DELETE FROM COURSES
+              WHERE CRN = :crn
+              """)
+    void deleteByCrn(@Bind("crn") Integer crn)
+
     // Name specific requests -------------------------------------------------------------------------------------------------
 
     // GET
