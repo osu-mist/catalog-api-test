@@ -34,6 +34,9 @@ class CourseResource {
     // Instantiate DAO -------------------------------------------------------------------------------------------------
     private final CourseDAO courseDAO
 
+    @Context
+    UriInfo uriInfo
+
     public CourseResource(CourseDAO courseDAO) {
         this.courseDAO = courseDAO
     }
