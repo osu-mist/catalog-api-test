@@ -21,6 +21,12 @@ public interface CourseDAO extends Closeable {
             """)
     List<Course> getAllCourses()
 
+    // POST
+    @SqlUpdate("""INSERT INTO COURSES (CID, CRN, COURSENAME, INSTRUCTOR, DAY, TIME, LOCATION)
+                  values (COURSES_SEQ.NEXTVAL, :crn, :courseName, :instructor, :day, :time, :location)""")
+    void postCourse(@Bind("crn") Integer crn , @Bind("courseName") String courseName , @Bind("instructor") String instructor,
+                   @Bind("day") String day, @Bind("time") String time, @Bind("location") String location)
+
     // CRN specific requests -------------------------------------------------------------------------------------------------
 
     // GET
