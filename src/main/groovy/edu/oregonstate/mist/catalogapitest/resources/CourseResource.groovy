@@ -61,7 +61,7 @@ class CourseResource {
         } catch (org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException e) {
 
             def constraintError = e.cause.toString()
-            def returnError;
+            def returnError
 
             if(constraintError.contains("COURSES_UK_CRN")) {
                 //CRN number is not unique
@@ -72,7 +72,7 @@ class CourseResource {
                 returnError = new ErrorPOJO("Unknown error.", Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
             }
 
-            return Response.status(Response.Status.CONFLICT).entity(returnError).build()
+            //return Response.status(Response.Status.CONFLICT).entity(returnError).build()
 
             System.out.println(returnError.getErrorMessage())
         }
