@@ -58,12 +58,12 @@ HTTP/1.1 200 OK
 …
 
 {
-“CRN”: 11933,
-“courseName”: “CS 160. COMPUTER SCIENCE ORIENTATION”,
-“instructor”: “Parham Mocello, J.”,
-        “day”: “MW”,
-       “time”: “1400-1450”,
-        “location”: “GLFN AUD”
+"CRN": 11933,
+"courseName": "CS 160. COMPUTER SCIENCE ORIENTATION",
+"instructor": "Parham Mocello, J.",
+        "day": "MW",
+       "time": "1400-1450",
+        "location": "GLFN AUD"
 }
 ```
 
@@ -90,12 +90,12 @@ Content-Type: application/json
 Content-Length: …
 
 {
-“CRN”: 11111,
-“courseName”: “CS 111. COMPUTER SCIENCE: THE CLASS”,
-“instructor”: “Brandon Lee”,
-        “day”: “MW”,
-       “time”: “1400-1450”,
-        “location”: “KEC 1005”
+"CRN": 11111,
+"courseName": "CS 111. COMPUTER SCIENCE: THE CLASS",
+"instructor": "Brandon Lee",
+        "day": "MW",
+       "time": "1400-1450",
+        "location": "KEC 1005"
 }
 
 HTTP/1.1 200 OK
@@ -104,12 +104,12 @@ Content-Type: application/json
 Transfer-Encoding: chunked
 
 {
-“CRN”: 11111,
-“courseName”: “CS 111. COMPUTER SCIENCE: THE CLASS”,
-“instructor”: “Brandon Lee”,
-        “day”: “MW”,
-       “time”: “1400-1450”,
-        “location”: “KEC 1005”
+"CRN": 11111,
+"courseName": "CS 111. COMPUTER SCIENCE: THE CLASS",
+"instructor": "Brandon Lee",
+        "day": "MW",
+       "time": "1400-1450",
+        "location": "KEC 1005"
 }
 ```
 
@@ -122,12 +122,12 @@ Content-Type: application/json
 Content-Length: ...
 
 {
-“CRN”: 11111,
-“courseName”: “”,
-“instructor”: “”,
-        “day”: “”,
-       “time”: “”,
-        “location”: “”
+"CRN": 11111,
+"courseName": "",
+"instructor": "",
+        "day": "",
+       "time": "",
+        "location": ""
 }
 
 HTTP/1.1 422
@@ -136,11 +136,11 @@ Content-Type: application/json
 Transfer-Encoding: chunked
 
 {
-“errors”: [“courseName may not be empty (was )”,
-        “instructor may not be empty (was )”,
-        “day may not be empty (was )”,
-           “time may not be empty (was )”,
-        “location may not be empty (was )”
+"errors": ["courseName may not be empty (was )",
+        "instructor may not be empty (was )",
+        "day may not be empty (was )",
+           "time may not be empty (was )",
+        "location may not be empty (was )"
    ]
 }
 
@@ -156,9 +156,9 @@ Content-Type: application/json
 Content-Length: …
 
 {
-“instructor”: “Brandon Lee”,
-        “rateMyProfessorLink”: “http://www.ratemyprofessors.com/”,
-       “Courses taught”: “CS 160 … CS 161”
+"instructor": "Brandon Lee",
+        "rateMyProfessorLink": "http://www.ratemyprofessors.com/",
+       "Courses taught": "CS 160 … CS 161"
 }
 ```
 
