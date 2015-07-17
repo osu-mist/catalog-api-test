@@ -28,6 +28,6 @@ class CatalogAPITestApplication extends Application<CatalogAPITestApplicationCon
     }
 
     public static void main(String[] arguments) throws Exception {
-        new CatalogAPITestApplication().run(arguments);
+        new CatalogAPITestApplication().run(arguments)
     }
 }
