@@ -162,9 +162,7 @@ Content-Length: …
 }
 ```
 
-###Dependencies
-Scraper:
-jsoup 1.8, tagsoup 1.2
-
 ###Google Docs Version:
+* Currently not as updated
 https://docs.google.com/document/d/1y_Pyub3YOFrFQ0CYiEhIQdvlrPXRHliDVb-jiH84xM0/edit?usp=sharing
+
