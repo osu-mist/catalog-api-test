@@ -2,13 +2,7 @@ package edu.oregonstate.mist.catalogapitest.resources
 
 import edu.oregonstate.mist.catalogapitest.core.Course
 import edu.oregonstate.mist.catalogapitest.db.CourseDAO
-
 import io.dropwizard.jersey.params.IntParam
-
-import com.google.common.base.Optional
-import javassist.NotFoundException
-import org.eclipse.jetty.server.Response
-
 import javax.validation.constraints.NotNull
 import javax.ws.rs.Consumes
 import javax.ws.rs.GET
@@ -19,6 +13,9 @@ import javax.ws.rs.Produces
 import javax.ws.rs.QueryParam
 import javax.ws.rs.WebApplicationException
 import javax.ws.rs.core.MediaType
+import com.google.common.base.Optional
+import javassist.NotFoundException
+import org.eclipse.jetty.server.Response
 
 @Path("/course")
 @Produces(MediaType.APPLICATION_JSON)
