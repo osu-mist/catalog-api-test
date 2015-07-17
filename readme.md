@@ -23,7 +23,7 @@ Courses will be accessible by search through the course’s CRN.  For example CR
 
 ### Setup Instructions
 
-Open terminal, navigate to your cloned local directory, and enter the following line
+First off, you'll need to enter in your credentials into the ```configuration.yaml``` file.  Once that has been done, Open terminal, navigate to your cloned local directory, and enter the following line
 
 ```
 gradle build
@@ -43,7 +43,7 @@ You can also create and use a bash script to do this for you.  Mine is included 
 
 To run it, type: ```./javaCall.sh``` or ```sh javaCall.sh```
 
-*Note that my bash script may not work on your machine depending on your setup.
+*Note that my bash script may not work on your machine depending on your setup/project structure.
 
 ##Mockup
 
