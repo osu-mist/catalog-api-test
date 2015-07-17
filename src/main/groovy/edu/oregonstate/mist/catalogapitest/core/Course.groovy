@@ -97,4 +97,3 @@ class Course {
         this.time = time
     }
 }
-
