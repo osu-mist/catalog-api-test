@@ -20,16 +20,6 @@ class Course {
         // Jackson Deserialization
     }
 
-    public Course(Integer cid, Integer crn, String courseName, String instructor, String day, String time, String location) {
-        this.cid = cid
-        this.crn = crn
-        this.courseName = courseName
-        this.instructor = instructor
-        this.day = day
-        this.time = time
-        this.location = location
-    }
-
     // Getters
     @JsonProperty
     Integer getCid() {
