@@ -35,7 +35,6 @@ public interface CourseDAO extends Closeable {
             WHERE CRN = :crn
             """)
     Course getByCrn(@Bind("crn") Integer crn)
-<<<<<<< HEAD
 
     // Get specific instance number
     @SqlQuery("""

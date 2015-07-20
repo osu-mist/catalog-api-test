@@ -11,7 +11,7 @@ class ErrorPOJO {
     public ErrorPOJO() {
         // Jackson deserialization
     }
-\
+
     public ErrorPOJO(String errorMessage, Integer errorCode) {
         this.errorMessage = errorMessage
         this.errorCode = errorCode
@@ -19,7 +19,7 @@ class ErrorPOJO {
 
     @JsonProperty
     public String getErrorMessage() {
-        return errorMessage;
+        return errorMessage
     }
     @JsonProperty
     public void setErrorMessage(String errorMessage) {
@@ -28,12 +28,12 @@ class ErrorPOJO {
 
     @JsonProperty
     public Integer getErrorCode() {
-        return errorCode;
+        return errorCode
     }
 
     @JsonProperty
     public void setErrorCode(Integer errorCode) {
-        this.errorCode = errorCode;
+        this.errorCode = errorCode
     }
 
 }

@@ -74,7 +74,7 @@ class CourseResource {
             System.out.println(returnError.getErrorMessage())
         }
 
-        return returnResponse;
+        return returnResponse
     }
 
     // List all courses ------------------------------------------------------------------------------------------------
