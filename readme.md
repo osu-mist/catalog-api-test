@@ -23,7 +23,11 @@ Courses will be accessible by search through the course’s CRN.  For example CR
 
 ### Setup Instructions
 
-First off, you'll need to enter in your credentials into the ```configuration.yaml``` file.  Once that has been done, Open terminal, navigate to your cloned local directory, and enter the following line
+First off, you'll need to enter in your credentials into the ```configuration.yaml``` file.
+
+Next you will need to download the ```ojdbc6_g.jar``` file from [Oracle](http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html) and move it into your bin directory.
+
+Once that has been done, Open terminal, navigate to your cloned local directory, and enter the following line
 
 ```
 gradle build
@@ -31,7 +35,7 @@ gradle build
 
 This builds the project into a single deployable jar file.
 
-Next you'll want to run the jar file along with your credentials in your config file.  To do so, enter the followwing line:
+Next you'll want to run the jar file along with your credentials in your config file.  To do so, enter the following line:
 
 ```
 
