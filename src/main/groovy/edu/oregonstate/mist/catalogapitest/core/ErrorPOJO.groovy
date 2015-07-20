@@ -1,9 +1,7 @@
 package edu.oregonstate.mist.catalogapitest.core
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import javax.xml.bind.annotation.XmlRootElement
 
-@XmlRootElement(name = "errorpojo")
 class ErrorPOJO {
     private String errorMessage
     private Integer errorCode
