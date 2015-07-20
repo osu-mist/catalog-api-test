@@ -9,3 +9,4 @@ class Course {
     String time
     String location
 }
+
