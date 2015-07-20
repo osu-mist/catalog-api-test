@@ -116,7 +116,7 @@ Content-Length: 112
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/name/CS 121 HTTP/1.0
+> GET /course/name/CS%20121 HTTP/1.0
 > 
 > HERE
 
