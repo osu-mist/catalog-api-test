@@ -35,6 +35,8 @@ gradle build
 
 This builds the project into a single deployable jar file.
 
+**Side note** - If you want to see a full list of commands you can enter ```gradle tasks```, which lists all possible commands associated with the project, including ```gradle idea``` which may be helpful if using IntelliJ...
+
 Next you'll want to run the jar file along with your credentials in your config file.  To do so, enter the following line:
 
 ```
