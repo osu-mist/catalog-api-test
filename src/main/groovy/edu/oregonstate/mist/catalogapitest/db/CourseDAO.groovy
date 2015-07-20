@@ -8,7 +8,6 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery
 import org.skife.jdbi.v2.sqlobject.Bind
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper
 
-
 @RegisterMapper(CourseMapper)
 public interface CourseDAO extends Closeable {
 
@@ -36,6 +35,7 @@ public interface CourseDAO extends Closeable {
             WHERE CRN = :crn
             """)
     Course getByCrn(@Bind("crn") Integer crn)
+<<<<<<< HEAD
 
     // Get specific instance number
     @SqlQuery("""
@@ -51,7 +51,7 @@ public interface CourseDAO extends Closeable {
               """)
     void putByCrn(@Bind("crn") Integer crn, @Bind("courseName") String courseName, @Bind("instructor") String instructor, @Bind("day") String day,
                   @Bind("time") String time, @Bind("location") String location)
-
+    
     // POST
     @SqlUpdate("""INSERT INTO COURSES (CRN, COURSENAME, INSTRUCTOR, DAY, TIME, LOCATION)
                   values (:crn, :courseName, :instructor, :day, :time, :location)""")

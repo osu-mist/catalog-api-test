@@ -3,16 +3,12 @@ package edu.oregonstate.mist.catalogapitest.resources
 import edu.oregonstate.mist.catalogapitest.core.ErrorPOJO
 import edu.oregonstate.mist.catalogapitest.core.Course
 import edu.oregonstate.mist.catalogapitest.db.CourseDAO
-
 import io.dropwizard.jersey.params.IntParam
-
 import com.google.common.base.Optional
 import javassist.NotFoundException
 import org.eclipse.jetty.server.Response
-
 import javax.validation.Valid
 import javax.validation.constraints.NotNull
-
 import javax.ws.rs.Consumes
 import javax.ws.rs.DELETE
 import javax.ws.rs.GET
@@ -187,3 +183,4 @@ class CourseResource {
         return courses
     }
 }
+

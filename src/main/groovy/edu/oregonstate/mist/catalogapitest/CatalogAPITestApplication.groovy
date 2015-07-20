@@ -1,12 +1,8 @@
 package edu.oregonstate.mist.catalogapitest
 
-import com.fasterxml.jackson.databind.SerializationFeature
-
 import edu.oregonstate.mist.catalogapitest.db.CourseDAO
 import edu.oregonstate.mist.catalogapitest.resources.CourseResource
-
 import edu.oregonstate.mist.catalogapitest.resources.SampleResource
-
 import io.dropwizard.Application
 import io.dropwizard.Configuration
 import io.dropwizard.jdbi.DBIFactory
@@ -32,6 +28,6 @@ class CatalogAPITestApplication extends Application<CatalogAPITestApplicationCon
     }
 
     public static void main(String[] arguments) throws Exception {
-        new CatalogAPITestApplication().run(arguments);
+        new CatalogAPITestApplication().run(arguments)
     }
 }

@@ -1,10 +1,8 @@
 package edu.oregonstate.mist.catalogapitest.mapper
 
 import edu.oregonstate.mist.catalogapitest.core.Course
-
 import org.skife.jdbi.v2.StatementContext
 import org.skife.jdbi.v2.tweak.ResultSetMapper
-
 import java.sql.ResultSet
 import java.sql.SQLException
 
@@ -13,7 +11,6 @@ public class CourseMapper implements ResultSetMapper<Course> {
         Course course = new Course()
 
         course.with {
-
             cid           = rs.getInt     'CID'
             crn           = rs.getInt     'CRN'
             courseName    = rs.getString  'COURSENAME'

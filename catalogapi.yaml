@@ -467,7 +467,7 @@ securityDefinitions:
 
   catalog_api_key:
     type: apiKey
-    name: catalog_api_ley
+    name: catalog_api_key
     in: query
 
 definitions:
