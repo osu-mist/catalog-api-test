@@ -37,6 +37,7 @@ public interface CourseDAO extends Closeable {
     Course getByCrn(@Bind("crn") Integer crn)
 
     // Get specific instance number
+    // FIXME: possible race condition
     @SqlQuery("""
             SELECT COURSES_SEQ.CURRVAL FROM DUAL
             """)
