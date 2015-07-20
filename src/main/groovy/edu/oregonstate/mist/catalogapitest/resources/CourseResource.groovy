@@ -44,7 +44,7 @@ class CourseResource {
     public Response postUser(@Valid Course newCourse) {
 
         Response returnResponse
-        def createdURI
+        URI createdURI
 
         try {
             courseDAO.postCourse(newCourse.getCrn(), newCourse.getCourseName(), newCourse.getInstructor(),
@@ -56,8 +56,8 @@ class CourseResource {
 
         } catch (org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException e) {
 
-            def constraintError = e.cause.toString()
-            def returnError
+            Error constraintError = e.cause.toString()
+            Error returnError
 
             if(constraintError.contains("COURSES_UK_CRN")) {
                 //CRN number is not unique
@@ -67,8 +67,6 @@ class CourseResource {
                 System.out.println(e.localizedMessage)
                 returnError = new ErrorPOJO("Unknown error.", Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
             }
-
-            //return Response.status(Response.Status.CONFLICT).entity(returnError).build()
 
             System.out.println(returnError.getErrorMessage())
         }
@@ -92,10 +90,10 @@ class CourseResource {
 
         Course courses = courseDAO.getByCrn(crn.get())
 
-        def returnResponse
+        Response returnResponse
 
         if (courses == null) {
-            def returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
+            Error returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
             returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
         } else {
             returnResponse = Response.ok(courses).build()
@@ -110,7 +108,7 @@ class CourseResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response putByCrn(@PathParam("crn") Integer crn , Course newCourse) {
 
-        def returnResponse
+        Response returnResponse
 
         Course checkForCourseCrn = courseDAO.getByCrn(crn)
 
@@ -148,7 +146,7 @@ class CourseResource {
 
         //TODO add authentication for this method
         courseDAO.deleteByCrn(crn)
-        def returnResponse = Response.ok().build()
+        Response returnResponse = Response.ok().build()
 
         return returnResponse
     }
