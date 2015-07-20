@@ -157,7 +157,7 @@ Content-Length: 112
 ]  
 ```
 
-If the data is invalid:
+#####If the data is invalid:
 
 ```
 $ nc localhost 8008 << HERE
@@ -186,7 +186,7 @@ Content-Length: 295
 ###POST
 Create course
 
-If data is valid:
+#####If data is valid:
 
 ```
 $ nc localhost 8008 << HERE
@@ -223,7 +223,7 @@ Content-Length: 112
 ]
 ```
 
-####If the course doesn’t exist:
+#####If data is invalid:
 
 ```
 $ nc localhost 8008 << HERE
@@ -254,7 +254,7 @@ Content-Length: 295
 ###DELETE
 Remove course
 
-If data is valid:
+#####If data is valid:
 
 ```
 $ nc localhost 8008 << HERE
@@ -268,7 +268,7 @@ Content-Type: application/json
 Content-Length: 112
 ```
 
-If data is invalid
+#####If data is invalid
 
 ```
 $ nc localhost 8008 << HERE
@@ -285,11 +285,8 @@ Content-Length: 295
 
 ###Instructor Resource and Mockup
 
-*** Coming later... ***
-
 ####*More Examples To Come!
 
-###Google Docs Version:
-* Currently not as updated
-https://docs.google.com/document/d/1y_Pyub3YOFrFQ0CYiEhIQdvlrPXRHliDVb-jiH84xM0/edit?usp=sharing
+###[Google Docs Version](https://docs.google.com/document/d/1y_Pyub3YOFrFQ0CYiEhIQdvlrPXRHliDVb-jiH84xM0/edit?usp=sharing)
 
+(Currently not as updated)
