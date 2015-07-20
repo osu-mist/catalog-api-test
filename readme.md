@@ -35,6 +35,8 @@ gradle build
 
 This builds the project into a single deployable jar file.
 
+**Side note** - If you want to see a full list of commands you can enter ```gradle tasks```, which lists all possible commands associated with the project, including ```gradle idea``` which may be helpful if using IntelliJ...
+
 Next you'll want to run the jar file along with your credentials in your config file.  To do so, enter the following line:
 
 ```
@@ -45,7 +47,7 @@ java -classpath bin/ojdbc6_g.jar:build/libs/catalog-api-test-all.jar edu.oregons
 
 You can also create and use a bash script to do this for you.  Mine is included and is called ```javaCall.sh```
 
-To run it, type: ```./javaCall.sh``` or ```sh javaCall.sh```
+To run it, type: ```./javaCall.sh```
 
 *Note that my bash script may not work on your machine depending on your setup/project structure.
 
@@ -157,7 +159,7 @@ Content-Length: 112
 ]  
 ```
 
-If the data is invalid:
+#####If the data is invalid:
 
 ```
 $ nc localhost 8008 << HERE
@@ -186,7 +188,7 @@ Content-Length: 295
 ###POST
 Create course
 
-If data is valid:
+#####If data is valid:
 
 ```
 $ nc localhost 8008 << HERE
@@ -223,7 +225,7 @@ Content-Length: 112
 ]
 ```
 
-####If the course doesn’t exist:
+#####If data is invalid:
 
 ```
 $ nc localhost 8008 << HERE
@@ -254,7 +256,7 @@ Content-Length: 295
 ###DELETE
 Remove course
 
-If data is valid:
+#####If data is valid:
 
 ```
 $ nc localhost 8008 << HERE
@@ -268,7 +270,7 @@ Content-Type: application/json
 Content-Length: 112
 ```
 
-If data is invalid
+#####If data is invalid
 
 ```
 $ nc localhost 8008 << HERE
@@ -285,11 +287,8 @@ Content-Length: 295
 
 ###Instructor Resource and Mockup
 
-*** Coming later... ***
-
 ####*More Examples To Come!
 
-###Google Docs Version:
-* Currently not as updated
-https://docs.google.com/document/d/1y_Pyub3YOFrFQ0CYiEhIQdvlrPXRHliDVb-jiH84xM0/edit?usp=sharing
+###[Google Docs Version](https://docs.google.com/document/d/1y_Pyub3YOFrFQ0CYiEhIQdvlrPXRHliDVb-jiH84xM0/edit?usp=sharing)
 
+(Currently not as updated)
