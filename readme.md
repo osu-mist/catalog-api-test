@@ -60,8 +60,35 @@ HERE
 ###GET
 Request data from resource.
 
-If the course actually exists:
+####If the course actually exists:
 
+#####Get All
+```
+$ nc localhost 8008 << HERE
+>
+> GET /course/all HTTP/1.0
+> 
+> HERE
+
+HTTP/1.1 200 OK
+Date: Mon, 20 Jul 2015 17:30:41 GMT
+Content-Type: application/json
+Content-Length: 112
+
+[
+        {
+        "cid": 5,
+        "crn": 11111,
+        "courseName": "CS 121",
+        "instructor": "Mr. TEST",
+        "day":"MWF",
+        "time":"12-1",
+        "location":"KEC"
+        }
+]
+```
+
+#####Get by CRN:
 ```
 $ nc localhost 8008 << HERE
 >
@@ -87,42 +114,12 @@ Content-Length: 112
 ]
 ```
 
-If the course doesn’t exist:
-
+#####Get by Name
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/1117 HTTP/1.0
->
-> HERE
-
-HTTP/1.1 404 Not Found
-Date: Mon, 20 Jul 2015 17:36:56 GMT
-Content-Type: text/html; charset=ISO-8859-1
-Cache-Control: must-revalidate,no-cache,no-store
-Content-Length: 295
-```
-
-###PUT
-Create/update course with specified course id.
-
-If data is valid:
-
-```
-$ nc localhost 8008 << HERE
-> PUT /course/11111 HTTP/1.0
-> [
->         {
->         "cid": 5,
->         "crn": 11111,
->         "courseName": "CS 121",
->         "instructor": "Mr. BOB",
->         "day":"MWF",
->         "time":"12-1",
->         "location":"KEC"
->         }
-> ]
->
+> GET /course/name/CS 121 HTTP/1.0
+> 
 > HERE
 
 HTTP/1.1 200 OK
@@ -139,112 +136,16 @@ Content-Length: 112
         "day":"MWF",
         "time":"12-1",
         "location":"KEC"
-        }               
-]  
+        }
+]
 ```
 
-If the data is invalid:
+####If the course doesn’t exist:
 
 ```
 $ nc localhost 8008 << HERE
-> PUT /course/33333 HTTP/1.0
-> [
->         {
->         "cid": 5,
->         "crn": 11111,
->         "courseName": "CS 121",
->         "instructor": "Mr. BOB",
->         "day":"MWF",
->         "time":"12-1",
->         "location":"KEC"
->         }
-> ]
 >
-> HERE
-
-HTTP/1.1 404 Not Found
-Date: Mon, 20 Jul 2015 17:36:56 GMT
-Content-Type: text/html; charset=ISO-8859-1
-Cache-Control: must-revalidate,no-cache,no-store
-Content-Length: 295
-```
-
-###POST
-Create course
-
-If data is valid:
-
-```
-$ nc localhost 8008 << HERE
-> POST /course HTTP/1.0
-> [
->         {
->         "cid": 66,
->         "crn": 12546,
->         "courseName": "CS 111",
->         "instructor": "Mr. 123",
->         "day":"MWF",
->         "time":"12-1",
->         "location":"KEC"
->         }
-> ]
->
-> HERE
-
-HTTP/1.1 200 OK
-Date: Mon, 20 Jul 2015 17:30:41 GMT
-Content-Type: application/json
-Content-Length: 112
-```
-
-If the data is invalid:
-
-```
-$ nc localhost 8008 << HERE
-> POST /course HTTP/1.0
-> [
->         {
->         "cid": 66,
->         "crn": gfdsfds,
->         "courseName": "CS 111",
->         "instructor": "Mr. 123",
->         "day":"MWF",
->         "time":"12-1",
->         "location":"KEC"
->         }
-> ]
->
-> HERE
-
-HTTP/1.1 500 Internal Server Error
-Date: Mon, 20 Jul 2015 17:36:56 GMT
-Content-Type: text/html; charset=ISO-8859-1
-Cache-Control: must-revalidate,no-cache,no-store
-Content-Length: 295
-```
-
-###DELETE
-Remove course
-
-If data is valid:
-
-```
-$ nc localhost 8008 << HERE
-> DELETE /course/11111 HTTP/1.0
->
-> HERE
-
-HTTP/1.1 200 OK
-Date: Mon, 20 Jul 2015 17:30:41 GMT
-Content-Type: application/json
-Content-Length: 112
-```
-
-If data is invalid
-
-```
-$ nc localhost 8008 << HERE
-> DELETE /course/88888 HTTP/1.0
+> GET /course/1117 HTTP/1.0
 >
 > HERE
 
