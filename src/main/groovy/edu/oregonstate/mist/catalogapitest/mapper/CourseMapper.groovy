@@ -11,7 +11,6 @@ public class CourseMapper implements ResultSetMapper<Course> {
         Course course = new Course()
 
         course.with {
-
             cid           = rs.getInt     'CID'
             crn           = rs.getInt     'CRN'
             courseName    = rs.getString  'COURSENAME'
