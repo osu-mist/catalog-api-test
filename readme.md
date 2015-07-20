@@ -48,13 +48,13 @@ To run it, type: ```./javaCall.sh``` or ```sh javaCall.sh```
 ##Mockup
 
 ###Connecting
-The following HTTP requests will be done over telnet for the purposes of example:
+The following HTTP requests will be done over netcat for the purposes of example:
 
 ```
-$ telnet localhost 8008
+$ nc localhost 8008 << HERE
 …
 …
-Connected to localhost.
+HERE
 ```
 
 ###GET
@@ -63,33 +63,44 @@ Request data from resource.
 If the course actually exists:
 
 ```
-GET /api/v1/courses/11933  HTTP/1.1
-Host: localhost:8008
+$ nc localhost 8008 << HERE
+>
+> GET /course/11111 HTTP/1.0
+> 
+> HERE
 
 HTTP/1.1 200 OK
-…
-…
-…
+Date: Mon, 20 Jul 2015 17:30:41 GMT
+Content-Type: application/json
+Content-Length: 112
 
-{
-"CRN": 11933,
-"courseName": "CS 160. COMPUTER SCIENCE ORIENTATION",
-"instructor": "Parham Mocello, J.",
-        "day": "MW",
-       "time": "1400-1450",
-        "location": "GLFN AUD"
-}
+[
+        {
+        "cid": 5,
+        "crn": 11111,
+        "courseName": "CS 121",
+        "instructor": "Mr. TEST",
+        "day":"MWF",
+        "time":"12-1",
+        "location":"KEC"
+        }
+]
 ```
 
 If the course doesn’t exist:
 
 ```
-GET /api/v1/courses/11111  HTTP/1.1
-Host: localhost:8008
+$ nc localhost 8008 << HERE
+>
+> GET /course/1117 HTTP/1.0
+>
+> HERE
 
 HTTP/1.1 404 Not Found
-Date: ...
-Content-Length: 0
+Date: Mon, 20 Jul 2015 17:36:56 GMT
+Content-Type: text/html; charset=ISO-8859-1
+Cache-Control: must-revalidate,no-cache,no-store
+Content-Length: 295
 ```
 
 ###PUT
@@ -98,83 +109,155 @@ Create/update course with specified course id.
 If data is valid:
 
 ```
-PUT /api/v1/courses     HTTP/1.1
-Host: localhost: 8008
-Content-Type: application/json
-Content-Length: …
-
-{
-"CRN": 11111,
-"courseName": "CS 111. COMPUTER SCIENCE: THE CLASS",
-"instructor": "Brandon Lee",
-        "day": "MW",
-       "time": "1400-1450",
-        "location": "KEC 1005"
-}
+$ nc localhost 8008 << HERE
+> PUT /course/11111 HTTP/1.0
+> [
+>         {
+>         "cid": 5,
+>         "crn": 11111,
+>         "courseName": "CS 121",
+>         "instructor": "Mr. BOB",
+>         "day":"MWF",
+>         "time":"12-1",
+>         "location":"KEC"
+>         }
+> ]
+>
+> HERE
 
 HTTP/1.1 200 OK
-Date: ...
+Date: Mon, 20 Jul 2015 17:30:41 GMT
 Content-Type: application/json
-Transfer-Encoding: chunked
+Content-Length: 112
 
-{
-"CRN": 11111,
-"courseName": "CS 111. COMPUTER SCIENCE: THE CLASS",
-"instructor": "Brandon Lee",
-        "day": "MW",
-       "time": "1400-1450",
-        "location": "KEC 1005"
-}
+[
+        {
+        "cid": 5,
+        "crn": 11111,
+        "courseName": "CS 121",
+        "instructor": "Mr. TEST",
+        "day":"MWF",
+        "time":"12-1",
+        "location":"KEC"
+        }               
+]  
 ```
 
 If the data is invalid:
 
 ```
-PUT /api/v1/courses HTTP/1.1
-Host: localhost:8008
+$ nc localhost 8008 << HERE
+> PUT /course/33333 HTTP/1.0
+> [
+>         {
+>         "cid": 5,
+>         "crn": 11111,
+>         "courseName": "CS 121",
+>         "instructor": "Mr. BOB",
+>         "day":"MWF",
+>         "time":"12-1",
+>         "location":"KEC"
+>         }
+> ]
+>
+> HERE
+
+HTTP/1.1 404 Not Found
+Date: Mon, 20 Jul 2015 17:36:56 GMT
+Content-Type: text/html; charset=ISO-8859-1
+Cache-Control: must-revalidate,no-cache,no-store
+Content-Length: 295
+```
+
+###POST
+Create course
+
+If data is valid:
+
+```
+$ nc localhost 8008 << HERE
+> POST /course HTTP/1.0
+> [
+>         {
+>         "cid": 66,
+>         "crn": 12546,
+>         "courseName": "CS 111",
+>         "instructor": "Mr. 123",
+>         "day":"MWF",
+>         "time":"12-1",
+>         "location":"KEC"
+>         }
+> ]
+>
+> HERE
+
+HTTP/1.1 200 OK
+Date: Mon, 20 Jul 2015 17:30:41 GMT
 Content-Type: application/json
-Content-Length: ...
+Content-Length: 112
+```
 
-{
-"CRN": 11111,
-"courseName": "",
-"instructor": "",
-        "day": "",
-       "time": "",
-        "location": ""
-}
+If the data is invalid:
 
-HTTP/1.1 422
-Date: ...
+```
+$ nc localhost 8008 << HERE
+> POST /course HTTP/1.0
+> [
+>         {
+>         "cid": 66,
+>         "crn": gfdsfds,
+>         "courseName": "CS 111",
+>         "instructor": "Mr. 123",
+>         "day":"MWF",
+>         "time":"12-1",
+>         "location":"KEC"
+>         }
+> ]
+>
+> HERE
+
+HTTP/1.1 500 Internal Server Error
+Date: Mon, 20 Jul 2015 17:36:56 GMT
+Content-Type: text/html; charset=ISO-8859-1
+Cache-Control: must-revalidate,no-cache,no-store
+Content-Length: 295
+```
+
+###DELETE
+Remove course
+
+If data is valid:
+
+```
+$ nc localhost 8008 << HERE
+> DELETE /course/11111 HTTP/1.0
+>
+> HERE
+
+HTTP/1.1 200 OK
+Date: Mon, 20 Jul 2015 17:30:41 GMT
 Content-Type: application/json
-Transfer-Encoding: chunked
+Content-Length: 112
+```
 
-{
-"errors": ["courseName may not be empty (was )",
-        "instructor may not be empty (was )",
-        "day may not be empty (was )",
-           "time may not be empty (was )",
-        "location may not be empty (was )"
-   ]
-}
+If data is invalid
 
-0
+```
+$ nc localhost 8008 << HERE
+> DELETE /course/88888 HTTP/1.0
+>
+> HERE
+
+HTTP/1.1 404 Not Found
+Date: Mon, 20 Jul 2015 17:36:56 GMT
+Content-Type: text/html; charset=ISO-8859-1
+Cache-Control: must-revalidate,no-cache,no-store
+Content-Length: 295
 ```
 
 ###Instructor Resource and Mockup
 
-```
-PUT /api/v1/instructor     HTTP/1.1
-Host: localhost: 8008
-Content-Type: application/json
-Content-Length: …
-
-{
-"instructor": "Brandon Lee",
-        "rateMyProfessorLink": "http://www.ratemyprofessors.com/",
-       "Courses taught": "CS 160 … CS 161"
-}
-```
+*** Coming later... ***
 
 ####*More Examples To Come!
 
