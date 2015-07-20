@@ -39,12 +39,6 @@ java -classpath bin/ojdbc6_g.jar:build/libs/catalog-api-test-all.jar edu.oregons
 
 ```
 
-You can also create and use a bash script to do this for you.  Mine is included and is called ```javaCall.sh```
-
-To run it, type: ```./javaCall.sh``` or ```sh javaCall.sh```
-
-*Note that my bash script may not work on your machine depending on your setup/project structure.
-
 ##Mockup
 
 ###Connecting
