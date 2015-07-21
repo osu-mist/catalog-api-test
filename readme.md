@@ -90,6 +90,15 @@ Content-Length: 112
         "day":"MWF",
         "time":"12-1",
         "location":"KEC"
+        },
+        {
+        "cid": 6,
+        "crn": 11112,
+        "courseName": "CS 122",
+        "instructor": "Mr. Test2",
+        "day":"MWF",
+        "time":"12-1",
+        "location":"KEC"
         }
 ]
 ```
