@@ -49,7 +49,7 @@ class CourseResource {
 
         try {
             courseDAO.postCourse(newCourse.getCrn(), newCourse.getCourseName(), newCourse.getInstructor(),
-            newCourse.getDay(), newCourse.getTime(), newCourse.getLocation())
+                    newCourse.getDay(), newCourse.getTime(), newCourse.getLocation())
 
             // TODO add in the URI of newly created resource
             createdURI = URI.create(uriInfo.getPath() + "/" + courseDAO.getLatestCidNumber())
@@ -57,8 +57,8 @@ class CourseResource {
 
         } catch (org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException e) {
 
-            Error constraintError = e.cause.toString()
-            Error returnError
+            ErrorPOJO constraintError = e.cause.toString()
+            ErrorPOJO returnError
 
             if(constraintError.contains("COURSES_UK_CRN")) {
                 //CRN number is not unique
@@ -94,7 +94,7 @@ class CourseResource {
         Response returnResponse
 
         if (courses == null) {
-            Error returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
+            ErrorPOJO returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
             returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
         } else {
             returnResponse = Response.ok(courses).build()
