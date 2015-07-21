@@ -3,13 +3,14 @@ package edu.oregonstate.mist.catalogapitest.core
 import com.fasterxml.jackson.annotation.JsonProperty
 
 class ErrorPOJO {
-    private String errorMessage
-    private Integer errorCode
+    String errorMessage
+    Integer errorCode
 
     public ErrorPOJO() {
         // Jackson deserialization
     }
-
+}
+/*
     public ErrorPOJO(String errorMessage, Integer errorCode) {
         this.errorMessage = errorMessage
         this.errorCode = errorCode
@@ -35,3 +36,4 @@ class ErrorPOJO {
     }
 
 }
+*/
