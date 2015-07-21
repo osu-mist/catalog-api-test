@@ -1,7 +1,7 @@
 #Catalog API Test
 
 ##Overview
-A test implementation of a RESTful API with courses scraped from the online catalog.
+A test implementation of a RESTful API service with courses scraped from the online catalog.
 
 ##Description
 Catalog API test is a web app API allowing users to access information on various computer science courses at Oregon State University.  There are two main components to this API, the scraper and the actual API.
@@ -125,19 +125,6 @@ Content-Length: 112
 $ nc localhost 8008 << HERE
 >
 > GET /course/name/CS%20121 HTTP/1.0
-> 
-> PUT /course/11111 HTTP/1.0
-> [
->         {
->         "cid": 5,
->         "crn": 11111,
->         "courseName": "CS 121",
->         "instructor": "Mr. BOB",
->         "day":"MWF",
->         "time":"12-1",
->         "location":"KEC"
->         }
-> ]
 >
 > HERE
 
@@ -163,7 +150,24 @@ Content-Length: 112
 
 ```
 $ nc localhost 8008 << HERE
-> PUT /course/33333 HTTP/1.0
+>
+> GET /course/name/NotARealName HTTP/1.0
+>
+> HERE
+
+HTTP/1.1 404 Not Found
+Date: Mon, 20 Jul 2015 17:36:56 GMT
+Content-Type: text/html; charset=ISO-8859-1
+Cache-Control: must-revalidate,no-cache,no-store
+Content-Length: 295
+```
+
+###PUT
+Creates or modifies an existing resource.
+
+#####If data is valid:
+```
+> PUT /course/11111 HTTP/1.0
 > [
 >         {
 >         "cid": 5,
@@ -178,7 +182,30 @@ $ nc localhost 8008 << HERE
 >
 > HERE
 
-HTTP/1.1 404 Not Found
+HTTP/1.1 200 OK
+Date: Mon, 20 Jul 2015 17:30:41 GMT
+Content-Type: application/json
+Content-Length: 112
+```
+
+#####If data is invalid:
+```
+> PUT /course/11111 HTTP/1.0
+> [
+>         {
+>         "cid": ABCDEFG,
+>         "crn": 11111,
+>         "courseName": "CS 121",
+>         "instructor": "Mr. BOB",
+>         "day":"MWF",
+>         "time":"12-1",
+>         "location":"KEC"
+>         }
+> ]
+>
+> HERE
+
+HTTP/1.1 500 Internal Server Error
 Date: Mon, 20 Jul 2015 17:36:56 GMT
 Content-Type: text/html; charset=ISO-8859-1
 Cache-Control: must-revalidate,no-cache,no-store
@@ -186,7 +213,7 @@ Content-Length: 295
 ```
 
 ###POST
-Create course
+Create course.
 
 #####If data is valid:
 
@@ -230,7 +257,6 @@ Content-Length: 112
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/1117 HTTP/1.0
 > POST /course HTTP/1.0
 > [
 >         {
@@ -254,7 +280,7 @@ Content-Length: 295
 ```
 
 ###DELETE
-Remove course
+Remove course.
 
 #####If data is valid:
 
