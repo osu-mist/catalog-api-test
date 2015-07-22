@@ -165,10 +165,22 @@ $ nc localhost 8008 << HERE
 > HERE
 
 HTTP/1.1 404 Not Found
-Date: Mon, 20 Jul 2015 17:36:56 GMT
+Date: Wed, 22 Jul 2015 16:41:31 GMT
 Content-Type: text/html; charset=ISO-8859-1
 Cache-Control: must-revalidate,no-cache,no-store
-Content-Length: 295
+Content-Length: 301
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Error 404 Not Found</title>
+</head>
+<body><h2>HTTP ERROR 404</h2>
+<p>Problem accessing /course/name/NotARealName. Reason:
+<pre>    Not Found</pre></p><hr><i><small>Powered by Jetty://</small></i><hr/>
+
+</body>
+</html>
 ```
 
 ###PUT
@@ -309,15 +321,27 @@ Content-Length: 112
 
 ```
 $ nc localhost 8008 << HERE
-> DELETE /course/88888 HTTP/1.0
+> DELETE /course/NotARealCourse HTTP/1.0
 >
 > HERE
 
 HTTP/1.1 404 Not Found
-Date: Mon, 20 Jul 2015 17:36:56 GMT
+Date: Wed, 22 Jul 2015 16:41:31 GMT
 Content-Type: text/html; charset=ISO-8859-1
 Cache-Control: must-revalidate,no-cache,no-store
-Content-Length: 295
+Content-Length: 301
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Error 404 Not Found</title>
+</head>
+<body><h2>HTTP ERROR 404</h2>
+<p>Problem accessing /course/name/NotARealCourse. Reason:
+<pre>    Not Found</pre></p><hr><i><small>Powered by Jetty://</small></i><hr/>
+
+</body>
+</html>
 ```
 
 ###Instructor Resource and Mockup
