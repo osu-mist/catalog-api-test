@@ -188,49 +188,52 @@ Creates or modifies an existing resource.
 
 #####If data is valid:
 ```
-> PUT /course/11111 HTTP/1.0
-> [
->         {
->         "cid": 5,
->         "crn": 11111,
->         "courseName": "CS 121",
->         "instructor": "Mr. BOB",
->         "day":"MWF",
->         "time":"12-1",
->         "location":"KEC"
->         }
-> ]
+$ nc localhost 8008 << HERE
 >
+> PUT /course/11111 HTTP/1.0
+> Content-Length: 158
+> Content-Type: application/json
+> 
+>   {
+>     "cid": 5,
+>     "crn": 11111,
+>     "courseName": "CS NEW",
+>     "instructor": "Mr. TEST",
+>     "day": "MWF",
+>     "time": "12-1",
+>     "location": "KEC"
+>   }
+> 
 > HERE
 
 HTTP/1.1 200 OK
-Date: Mon, 20 Jul 2015 17:30:41 GMT
-Content-Type: application/json
-Content-Length: 112
+Date: Wed, 22 Jul 2015 17:18:06 GMT
+Content-Length: 0
 ```
 
 #####If data is invalid:
 ```
+$ nc localhost 8008 << HERE
+>
 > PUT /course/11111 HTTP/1.0
-> [
->         {
->         "cid": ABCDEFG,
->         "crn": 11111,
->         "courseName": "CS 121",
->         "instructor": "Mr. BOB",
->         "day":"MWF",
->         "time":"12-1",
->         "location":"KEC"
->         }
-> ]
+> Content-Length: 158
+> Content-Type: application/json
+>  {
+>    "cid": 5,
+>    "crn": AAAAA,
+>    "courseName": "CS NEW",
+>    "instructor": "Mr. TEST",
+>    "day": "MWF",
+>    "time": "12-1",
+>    "location": "KEC"
+>  }
 >
 > HERE
 
-HTTP/1.1 500 Internal Server Error
-Date: Mon, 20 Jul 2015 17:36:56 GMT
-Content-Type: text/html; charset=ISO-8859-1
-Cache-Control: must-revalidate,no-cache,no-store
-Content-Length: 295
+HTTP/1.1 400 Bad Request
+Date: Wed, 22 Jul 2015 17:19:55 GMT
+Content-Length: 0
+
 ```
 
 ###POST
@@ -240,6 +243,7 @@ Create course.
 
 ```
 $ nc localhost 8008 << HERE
+>
 > POST /course HTTP/1.0
 > Content-Length: 158
 > Content-Type: application/json
@@ -297,6 +301,7 @@ Remove course.
 
 ```
 $ nc localhost 8008 << HERE
+>
 > DELETE /course/11111 HTTP/1.0
 >
 > HERE
@@ -311,6 +316,7 @@ Content-Length: 112
 
 ```
 $ nc localhost 8008 << HERE
+>
 > DELETE /course/NotARealCourse HTTP/1.0
 >
 > HERE
