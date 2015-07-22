@@ -241,36 +241,25 @@ Create course.
 ```
 $ nc localhost 8008 << HERE
 > POST /course HTTP/1.0
-> [
+> Content-Length: 158
+> Content-Type: application/json
+>
 >         {
->         "cid": 66,
->         "crn": 12546,
->         "courseName": "CS 111",
->         "instructor": "Mr. 123",
+>         "cid": 9,
+>         "crn": 97225,
+>         "courseName": "CS 678",
+>         "instructor": "Mr. TEST",
 >         "day":"MWF",
 >         "time":"12-1",
 >         "location":"KEC"
 >         }
-> ]
 >
 > HERE
 
-HTTP/1.1 200 OK
-Date: Mon, 20 Jul 2015 17:30:41 GMT
-Content-Type: application/json
-Content-Length: 112
-
-[
-        {
-        "cid": 5,
-        "crn": 11111,
-        "courseName": "CS 121",
-        "instructor": "Mr. TEST",
-        "day":"MWF",
-        "time":"12-1",
-        "location":"KEC"
-        }
-]
+HTTP/1.1 201 Created
+Date: Wed, 22 Jul 2015 17:00:55 GMT
+Location: http://127.0.0.1:8008/course/29
+Content-Length: 0
 ```
 
 #####If data is invalid:
@@ -278,11 +267,13 @@ Content-Length: 112
 ```
 $ nc localhost 8008 << HERE
 >
-> POST /course HTTP/1.0
-> [
+> POST /course/ HTTP/1.0
+> Content-Length: 158
+> Content-Type: application/json
+>
 >         {
 >         "cid": 66,
->         "crn": gfdsfds,
+>         "crn": aaaaa,
 >         "courseName": "CS 111",
 >         "instructor": "Mr. 123",
 >         "day":"MWF",
@@ -293,11 +284,10 @@ $ nc localhost 8008 << HERE
 >
 > HERE
 
-HTTP/1.1 500 Internal Server Error
-Date: Mon, 20 Jul 2015 17:36:56 GMT
-Content-Type: text/html; charset=ISO-8859-1
-Cache-Control: must-revalidate,no-cache,no-store
-Content-Length: 295
+HTTP/1.1 400 Bad Request
+Date: Wed, 22 Jul 2015 17:04:34 GMT
+Content-Type: application/json
+Content-Length: 47
 ```
 
 ###DELETE
