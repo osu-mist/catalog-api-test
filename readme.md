@@ -1,7 +1,7 @@
 #Catalog API Test
 
 ##Overview
-A test implementation of a RESTful API with courses scraped from the online catalog.
+A test implementation of a RESTful API service with courses scraped from the online catalog.
 
 ##Description
 Catalog API test is a web app API allowing users to access information on various computer science courses at Oregon State University.  There are two main components to this API, the scraper and the actual API.
@@ -35,6 +35,8 @@ gradle build
 
 This builds the project into a single deployable jar file.
 
+**Side note** - If you want to see a full list of commands you can enter ```gradle tasks```, which lists all possible commands associated with the project, including ```gradle idea``` which may be helpful if using IntelliJ...
+
 Next you'll want to run the jar file along with your credentials in your config file.  To do so, enter the following line:
 
 ```
@@ -43,9 +45,18 @@ java -classpath bin/ojdbc6_g.jar:build/libs/catalog-api-test-all.jar edu.oregons
 
 ```
 
+You can also create and use a bash script to do this for you.  Mine is included and is called ```javaCall.sh```
+
+To run it, type: ```./javaCall.sh```
+
+*Note that my bash script may not work on your machine depending on your setup/project structure.
+
 ##Mockup
 
+*Please note that the following responses are pretty-printed for easier viewing, your actual responses may not be as elegant.  Also, the current readme responses (header content-lengths and body JSON) may not be as current in this readme as they are currently as much testing has been in development.
+
 ###Connecting
+
 The following HTTP requests will be done over netcat for the purposes of example:
 
 ```
@@ -79,6 +90,15 @@ Content-Length: 112
         "crn": 11111,
         "courseName": "CS 121",
         "instructor": "Mr. TEST",
+        "day":"MWF",
+        "time":"12-1",
+        "location":"KEC"
+        },
+        {
+        "cid": 6,
+        "crn": 11112,
+        "courseName": "CS 122",
+        "instructor": "Mr. Test2",
         "day":"MWF",
         "time":"12-1",
         "location":"KEC"
@@ -117,7 +137,7 @@ Content-Length: 112
 $ nc localhost 8008 << HERE
 >
 > GET /course/name/CS%20121 HTTP/1.0
-> 
+>
 > HERE
 
 HTTP/1.1 200 OK
@@ -134,32 +154,199 @@ Content-Length: 112
         "day":"MWF",
         "time":"12-1",
         "location":"KEC"
-        }
-]
+        }               
+]  
 ```
 
-####If the course doesn’t exist:
+#####If the data is invalid:
 
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/1117 HTTP/1.0
+> GET /course/name/NotARealName HTTP/1.0
 >
 > HERE
 
 HTTP/1.1 404 Not Found
-Date: Mon, 20 Jul 2015 17:36:56 GMT
+Date: Wed, 22 Jul 2015 16:41:31 GMT
 Content-Type: text/html; charset=ISO-8859-1
 Cache-Control: must-revalidate,no-cache,no-store
-Content-Length: 295
+Content-Length: 301
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Error 404 Not Found</title>
+</head>
+<body><h2>HTTP ERROR 404</h2>
+<p>Problem accessing /course/name/NotARealName. Reason:
+<pre>    Not Found</pre></p><hr><i><small>Powered by Jetty://</small></i><hr/>
+
+</body>
+</html>
+```
+
+###PUT
+Creates or modifies an existing resource.
+
+#####If data is valid:
+```
+$ nc localhost 8008 << HERE
+>
+> PUT /course/11111 HTTP/1.0
+> Content-Length: 158
+> Content-Type: application/json
+> 
+>   {
+>     "cid": 5,
+>     "crn": 11111,
+>     "courseName": "CS NEW",
+>     "instructor": "Mr. TEST",
+>     "day": "MWF",
+>     "time": "12-1",
+>     "location": "KEC"
+>   }
+> 
+> HERE
+
+HTTP/1.1 200 OK
+Date: Wed, 22 Jul 2015 17:18:06 GMT
+Content-Length: 0
+```
+
+#####If data is invalid:
+```
+$ nc localhost 8008 << HERE
+>
+> PUT /course/11111 HTTP/1.0
+> Content-Length: 158
+> Content-Type: application/json
+>  {
+>    "cid": 5,
+>    "crn": AAAAA,
+>    "courseName": "CS NEW",
+>    "instructor": "Mr. TEST",
+>    "day": "MWF",
+>    "time": "12-1",
+>    "location": "KEC"
+>  }
+>
+> HERE
+
+HTTP/1.1 400 Bad Request
+Date: Wed, 22 Jul 2015 17:19:55 GMT
+Content-Length: 0
+
+```
+
+###POST
+Create course.
+
+#####If data is valid:
+
+```
+$ nc localhost 8008 << HERE
+>
+> POST /course HTTP/1.0
+> Content-Length: 158
+> Content-Type: application/json
+>
+>         {
+>         "cid": 9,
+>         "crn": 97225,
+>         "courseName": "CS 678",
+>         "instructor": "Mr. TEST",
+>         "day":"MWF",
+>         "time":"12-1",
+>         "location":"KEC"
+>         }
+>
+> HERE
+
+HTTP/1.1 201 Created
+Date: Wed, 22 Jul 2015 17:00:55 GMT
+Location: http://127.0.0.1:8008/course/29
+Content-Length: 0
+```
+
+#####If data is invalid:
+
+```
+$ nc localhost 8008 << HERE
+>
+> POST /course/ HTTP/1.0
+> Content-Length: 158
+> Content-Type: application/json
+>
+>         {
+>         "cid": 66,
+>         "crn": aaaaa,
+>         "courseName": "CS 111",
+>         "instructor": "Mr. 123",
+>         "day":"MWF",
+>         "time":"12-1",
+>         "location":"KEC"
+>         }
+> ]
+>
+> HERE
+
+HTTP/1.1 400 Bad Request
+Date: Wed, 22 Jul 2015 17:04:34 GMT
+Content-Type: application/json
+Content-Length: 47
+```
+
+###DELETE
+Remove course.
+
+#####If data is valid:
+
+```
+$ nc localhost 8008 << HERE
+>
+> DELETE /course/11111 HTTP/1.0
+>
+> HERE
+
+HTTP/1.1 200 OK
+Date: Mon, 20 Jul 2015 17:30:41 GMT
+Content-Type: application/json
+Content-Length: 112
+```
+
+#####If data is invalid
+
+```
+$ nc localhost 8008 << HERE
+>
+> DELETE /course/NotARealCourse HTTP/1.0
+>
+> HERE
+
+HTTP/1.1 404 Not Found
+Date: Wed, 22 Jul 2015 16:41:31 GMT
+Content-Type: text/html; charset=ISO-8859-1
+Cache-Control: must-revalidate,no-cache,no-store
+Content-Length: 301
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Error 404 Not Found</title>
+</head>
+<body><h2>HTTP ERROR 404</h2>
+<p>Problem accessing /course/name/NotARealCourse. Reason:
+<pre>    Not Found</pre></p><hr><i><small>Powered by Jetty://</small></i><hr/>
+
+</body>
+</html>
 ```
 
 ###Instructor Resource and Mockup
 
-*** Coming later... ***
-
 ####*More Examples To Come!
 
-###Google Docs Version:
-* Currently not as updated
-https://docs.google.com/document/d/1y_Pyub3YOFrFQ0CYiEhIQdvlrPXRHliDVb-jiH84xM0/edit?usp=sharing
+###[Google Docs Version](https://docs.google.com/document/d/1y_Pyub3YOFrFQ0CYiEhIQdvlrPXRHliDVb-jiH84xM0/edit?usp=sharing)
+
+(Currently not as updated)
