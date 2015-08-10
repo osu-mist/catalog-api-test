@@ -10,7 +10,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper
 @RegisterMapper(CourseMapper)
 public interface CourseDAO extends Closeable {
 
-    // Get all courses -------------------------------------------------------------------------------------------------
+    // /course ---------------------------------------------------------------------------------------------------------
 
     // GET
     @SqlQuery("""
@@ -25,7 +25,7 @@ public interface CourseDAO extends Closeable {
     void postCourse(@Bind("crn") Integer crn , @Bind("courseName") String courseName , @Bind("instructor") String instructor,
                    @Bind("day") String day, @Bind("time") String time, @Bind("location") String location)
 
-    // CRN specific requests -------------------------------------------------------------------------------------------------
+    // /course/crn -----------------------------------------------------------------------------------------------------
 
     // GET
     @SqlQuery("""
@@ -47,8 +47,8 @@ public interface CourseDAO extends Closeable {
               SET COURSENAME = :courseName, INSTRUCTOR = :instructor, DAY = :day, TIME = :time, LOCATION = :location
               WHERE CRN = :crn
               """)
-    void putByCrn(@Bind("crn") Integer crn, @Bind("courseName") String courseName, @Bind("instructor") String instructor, @Bind("day") String day,
-                  @Bind("time") String time, @Bind("location") String location)
+    void putByCrn(@Bind("crn") Integer crn, @Bind("courseName") String courseName, @Bind("instructor") String instructor,
+                  @Bind("day") String day,  @Bind("time") String time, @Bind("location") String location)
     
     // POST
     @SqlUpdate("""INSERT INTO COURSES (CRN, COURSENAME, INSTRUCTOR, DAY, TIME, LOCATION)
@@ -63,7 +63,7 @@ public interface CourseDAO extends Closeable {
               """)
     void deleteByCrn(@Bind("crn") Integer crn)
 
-    // Name specific requests -------------------------------------------------------------------------------------------------
+    // course/name/ ----------------------------------------------------------------------------------------------------
 
     // GET
     @SqlQuery("""
@@ -73,7 +73,9 @@ public interface CourseDAO extends Closeable {
             """)
     List<Course> getByName(@Bind("courseName") String courseName)
 
-    // Location specific requests -------------------------------------------------------------------------------------------------
+
+    //TODO: Actually implement this to work properly
+    // Location specific requests --------------------------------------------------------------------------------------
 
     // GET
     @SqlQuery("""
