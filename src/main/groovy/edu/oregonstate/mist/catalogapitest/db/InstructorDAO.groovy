@@ -1,0 +1,28 @@
+package edu.oregonstate.mist.catalogapitest.db
+
+import edu.oregonstate.mist.catalogapitest.core.Instructor
+import edu.oregonstate.mist.catalogapitest.mapper.InstructorMapper
+import org.skife.jdbi.v2.sqlobject.SqlUpdate
+import org.skife.jdbi.v2.sqlobject.SqlQuery
+import org.skife.jdbi.v2.sqlobject.Bind
+import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper
+
+@RegisterMapper(InstructorMapper)
+public interface InstructorDAO extends Closeable {
+
+    // /instructor -----------------------------------------------------------------------------------------------------
+
+    // GET
+    @SqlQuery("""
+            SELECT *
+            FROM INSTRUCTORS
+    """)
+    List<Instructor> getAllInstructors()
+
+    // POST
+    @SqlUpdate("""INSERT INTO INSTRUCTORS (CID, FIRST_INITIAL, LAST_NAME, NUMBER_OF_COURSES)
+                  values (INSTRUCTORS_SEQ.NEXTVAL, :crn, :first_initial, :last_name, :number_of_courses)""")
+    void postInstructor(@Bind("crn") Integer crn , @Bind("first_initial") String first_initial,
+                        @Bind("last_name") String last_name , @Bind("number_of_courses") Integer number_of_courses)
+
+}
