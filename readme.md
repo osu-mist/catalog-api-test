@@ -53,7 +53,10 @@ To run it, type: ```./javaCall.sh```
 
 ##Mockup
 
+*Please note that the following responses are pretty-printed for easier viewing, your actual responses may not be as elegant.  Also, the current readme responses (header content-lengths and body JSON) may not be as current in this readme as they are currently as much testing has been in development.
+
 ###Connecting
+
 The following HTTP requests will be done over netcat for the purposes of example:
 
 ```
