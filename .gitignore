@@ -11,3 +11,6 @@ build/
 
 # Mac OS X
 .DS_Store
+
+# Oracle Driver
+bin/ojdbc6_g.jar

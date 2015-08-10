@@ -31,12 +31,14 @@ repositories {
 dependencies {
     compile "org.codehaus.groovy:groovy:${groovyVersion}"
     compile "io.dropwizard:dropwizard-core:${dropwizardVersion}"
+    compile "io.dropwizard:dropwizard-jdbi:${dropwizardVersion}"
 }
 
 codenarc {
     configFile = new File("config/codenarc/codenarc.groovy")
 }
 
+// TODO: version jars by commit
 // https://github.com/johnrengelman/shadow
 shadowJar {
     manifest {
