@@ -32,7 +32,7 @@ public interface InstructorDAO extends Closeable {
         SELECT *
         FROM INSTRUCTORS
         WHERE CID = :cid
-    """)
+             """)
     Instructor getByCid(@Bind("cid") Integer cid)
 
     // PUT
@@ -40,7 +40,7 @@ public interface InstructorDAO extends Closeable {
         UPDATE INSTRUCTORS
         SET FIRST_INITIAL = :first_initial, LAST_NAME = :last_name, NUMBER_OF_COURSES = :number_of_courses
         WHERE CID = :cid
-    """)
+              """)
     void putByCid(@Bind("cid") Integer cid, @Bind("first_initial") String first_initial,
                   @Bind("last_name") String last_name, @Bind("number_of_courses") Integer number_of_courses)
 
@@ -48,7 +48,7 @@ public interface InstructorDAO extends Closeable {
     @SqlUpdate("""
         INSERT INTO INSTRUCTORS (CID, FIRST_INITIAL, LAST_NAME, NUMBER_OF_COURSES)
         VALUES (:cid, :first_initial, :last_name, :number_of_courses)
-               """)
+              """)
     void postByCid(@Bind("cid") Integer cid, @Bind("first_initial") String first_initial,
                    @Bind("last_name") String last_name, @Bind("number_of_courses") Integer number_of_courses)
 
