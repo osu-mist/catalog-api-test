@@ -51,13 +51,15 @@ public interface CourseDAO extends Closeable {
                   @Bind("day") String day,  @Bind("time") String time, @Bind("location") String location)
     
     // POST
-    @SqlUpdate("""INSERT INTO COURSES (CRN, COURSENAME, INSTRUCTOR, DAY, TIME, LOCATION)
-                  values (:crn, :courseName, :instructor, :day, :time, :location)""")
+    @SqlUpdate("""
+        INSERT INTO COURSES (CRN, COURSENAME, INSTRUCTOR, DAY, TIME, LOCATION)
+        values (:crn, :courseName, :instructor, :day, :time, :location)
+              """)
     void postByCrn(@Bind("crn") Integer crn , @Bind("courseName") String courseName , @Bind("instructor") String instructor,
                    @Bind("day") String day, @Bind("time") String time, @Bind("location") String location)
 
     // DELETE
-    @SqlUpdate( """
+    @SqlUpdate("""
               DELETE FROM COURSES
               WHERE CRN = :crn
               """)
