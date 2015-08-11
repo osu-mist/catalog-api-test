@@ -44,4 +44,12 @@ public interface InstructorDAO extends Closeable {
     void putByCid(@Bind("cid") Integer cid, @Bind("first_initial") String first_initial,
                   @Bind("last_name") String last_name, @Bind("number_of_courses") Integer number_of_courses)
 
+    // POST
+    @SqlUpdate("""
+        INSERT INTO INSTRUCTORS (CID, FIRST_INITIAL, LAST_NAME, NUMBER_OF_COURSES)
+        VALUES (:cid, :first_initial, :last_name, :number_of_courses)
+               """)
+    void postByCid(@Bind("cid") Integer cid, @Bind("first_initial") String first_initial,
+                   @Bind("last_name") String last_name, @Bind("number_of_courses") Integer number_of_courses)
+
 }
