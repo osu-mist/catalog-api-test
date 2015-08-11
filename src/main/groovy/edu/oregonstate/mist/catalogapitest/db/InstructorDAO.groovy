@@ -25,4 +25,14 @@ public interface InstructorDAO extends Closeable {
     void postInstructor(@Bind("crn") Integer crn , @Bind("first_initial") String first_initial,
                         @Bind("last_name") String last_name , @Bind("number_of_courses") Integer number_of_courses)
 
+    // instructor/cid/ -------------------------------------------------------------------------------------------------
+
+    // GET
+    @SqlQuery("""
+        SELECT *
+        FROM INSTRUCTORS
+        WHERE CID = :cid
+    """)
+    Instructor getByCid(@Bind("cid") Integer cid)
+
 }
