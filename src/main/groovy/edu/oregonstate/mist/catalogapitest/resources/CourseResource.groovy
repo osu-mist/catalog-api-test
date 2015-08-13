@@ -64,7 +64,7 @@ class CourseResource {
 
                 // Some other error, should be logged
                 System.out.println(e.localizedMessage)
-                returnError = new ErrorPOJO("Unknown error.", Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                returnError = new ErrorPOJO("Unknown Error", Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
             }
 
             System.out.println(returnError.getErrorMessage())
