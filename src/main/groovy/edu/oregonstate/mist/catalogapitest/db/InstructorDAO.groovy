@@ -58,4 +58,15 @@ public interface InstructorDAO extends Closeable {
         WHERE CID = :cid
               """)
     void deleteByCid(@Bind("cid") Integer cid)
+
+    // instructor/last_name/ -------------------------------------------------------------------------------------------
+
+    // GET
+    @SqlQuery("""
+        SELECT *
+        FROM INSTRUCTORS
+        WHERE LAST_NAME = :last_name
+            """)
+    List<Instructor> getByLastName(@Bind("last_name") String last_name)
+
 }
