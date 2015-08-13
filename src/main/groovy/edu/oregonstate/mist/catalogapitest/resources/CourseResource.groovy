@@ -56,7 +56,7 @@ class CourseResource {
             ErrorPOJO constraintError = e.cause.toString()
             ErrorPOJO returnError
 
-            if(constraintError.contains("COURSES_UK_CRN")) {
+            if (constraintError.contains("COURSES_UK_CRN")) {
                 //CRN number is not unique
                 returnError = new ErrorPOJO("CRN is not unique", Response.Status.CONFLICT.getStatusCode())
             } else {
