@@ -34,7 +34,7 @@ class CourseResource {
         this.courseDAO = courseDAO
     }
 
-    // POST to /course ------------------------------------------------------------------------------------------------
+    // POST to /course -------------------------------------------------------------------------------------------------
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
