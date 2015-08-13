@@ -35,6 +35,7 @@ public interface InstructorDAO extends Closeable {
              """)
     Instructor getByCid(@Bind("cid") Integer cid)
 
+    // TODO Configure it on SQLDeveloper to make sure it works!
     // Get specific instance number
     @SqlQuery("""
             SELECT INSTRUCTORS_SEQ.CURRVAL FROM DUAL
