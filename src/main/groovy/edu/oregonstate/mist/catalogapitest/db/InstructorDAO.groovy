@@ -52,4 +52,10 @@ public interface InstructorDAO extends Closeable {
     void postByCid(@Bind("cid") Integer cid, @Bind("first_initial") String first_initial,
                    @Bind("last_name") String last_name, @Bind("number_of_courses") Integer number_of_courses)
 
+    // DELETE
+    @SqlUpdate("""
+        DELETE FROM INSTRUCTORS
+        WHERE CID = :cid
+              """)
+    void deleteByCid(@Bind("cid") Integer cid)
 }
