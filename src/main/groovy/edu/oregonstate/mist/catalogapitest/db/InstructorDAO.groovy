@@ -76,4 +76,5 @@ public interface InstructorDAO extends Closeable {
             """)
     List<Instructor> getByLastName(@Bind("last_name") String last_name)
 
+    void close()
 }
