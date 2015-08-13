@@ -35,6 +35,12 @@ public interface InstructorDAO extends Closeable {
              """)
     Instructor getByCid(@Bind("cid") Integer cid)
 
+    // Get specific instance number
+    @SqlQuery("""
+            SELECT INSTRUCTORS_SEQ.CURRVAL FROM DUAL
+            """)
+    Integer getLatestCidNumber()
+
     // PUT
     @SqlUpdate("""
         UPDATE INSTRUCTORS
