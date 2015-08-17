@@ -85,7 +85,7 @@ class InstructorResource {
     @GET
     @Path('{cid}')
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByCrn(@PathParam('cid') IntParam cid) {
+    public Response getByCid(@PathParam('cid') IntParam cid) {
         Instructor instructors = instructorDAO.getByCid(cid.get())
 
         Response returnResponse
