@@ -99,4 +99,29 @@ class InstructorResource {
 
         return returnResponse
     }
+
+    @PUT
+    @Path('{cid}')
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response putByCid(@PathParam("cid") Integer cid, Instructor newInstructor) {
+
+        Response returnResponse
+
+        Instructor checkForInstructorCid = instructorDAO.getByCid(cid)
+
+        // If instructor does not already exist - POST it!
+        if (checkForInstructorCid == null) {
+            instructorDAO.postByCid(cid, newInstructor.getFirst_initial(), newInstructor.getLast_name(), newInstructor.getNumber_of_courses())
+            returnResponse = Response.created().build()
+        } else {
+
+            // Otherwise PUT it!
+            Optional<String> newFirstInitial = Optional.of( newInstructor.getFirst_initial() )
+            Optional<String> newLastName = Optional.of( newInstructor.getLast_name() )
+            Optional<Integer> newNumberOfCourses = Optional.of( newInstructor.getNumber_of_courses() )
+        }
+
+        return returnResponse
+    }
 }
