@@ -124,4 +124,16 @@ class InstructorResource {
 
         return returnResponse
     }
+
+    @DELETE
+    @Path('{cid}')
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteByCid(@PathParam('cid') Integer cid) {
+
+        //TODO add authentication for this method
+        instructorDAO.deleteByCid(cid)
+        Response returnResponse = Response.ok().build()
+
+        return returnResponse
+    }
 }
