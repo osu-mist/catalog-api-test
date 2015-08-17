@@ -141,7 +141,7 @@ class CourseResource {
     @Path("{crn}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteByCrn(@PathParam("crn") Integer crn){
+    public Response deleteByCrn(@PathParam("crn") Integer crn) {
 
         //TODO add authentication for this method
         courseDAO.deleteByCrn(crn)
