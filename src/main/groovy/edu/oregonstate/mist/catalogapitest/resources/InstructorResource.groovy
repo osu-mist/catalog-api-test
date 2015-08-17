@@ -80,4 +80,23 @@ class InstructorResource {
     public List<Instructor> getByCid() {
         return instructorDAO.allInstructors
     }
+
+    // CID specific requests -------------------------------------------------------------------------------------------
+    @GET
+    @Path('{cid}')
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByCrn(@PathParam('cid') IntParam cid) {
+        Instructor instructors = instructorDAO.getByCid(cid.get())
+
+        Response returnResponse
+
+        if (instructors == null) {
+            ErrorPOJO returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
+            returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
+        } else {
+            returnResponse = Response.ok(instructors).build()
+        }
+
+        return returnResponse
+    }
 }
