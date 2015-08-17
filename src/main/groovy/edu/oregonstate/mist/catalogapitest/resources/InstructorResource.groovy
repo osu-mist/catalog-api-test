@@ -72,4 +72,13 @@ class InstructorResource {
 
         return returnResponse
     }
+
+
+    // Lists all instructors -------------------------------------------------------------------------------------------
+    @GET
+    @Path('/all')
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Instructor> getByCid() {
+        return instructorDAO.allInstructors
+    }
 }
