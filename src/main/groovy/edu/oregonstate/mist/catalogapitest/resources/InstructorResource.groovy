@@ -73,7 +73,6 @@ class InstructorResource {
         return returnResponse
     }
 
-
     // Lists all instructors -------------------------------------------------------------------------------------------
     @GET
     @Path('/all')

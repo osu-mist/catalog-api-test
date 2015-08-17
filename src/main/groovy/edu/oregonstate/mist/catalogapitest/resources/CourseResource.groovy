@@ -101,8 +101,8 @@ class CourseResource {
         return returnResponse
     }
 
-    @Path("{crn}")
     @PUT
+    @Path("{crn}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response putByCrn(@PathParam("crn") Integer crn , Course newCourse) {
