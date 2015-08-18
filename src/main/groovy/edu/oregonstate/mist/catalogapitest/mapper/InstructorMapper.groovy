@@ -13,9 +13,9 @@ public class InstructorMapper implements ResultSetMapper<Instructor> {
 
         instructor.with {
             cid               = rs.getInt     'CID'
-            first_initial     = rs.getString  'FIRST_INITIAL'
-            last_name         = rs.getString  'LAST_NAME'
-            number_of_courses = rs.getInt     'NUMBER_OF_COURSES'
+            firstInitial      = rs.getString  'FIRST_INITIAL'
+            lastName          = rs.getString  'LAST_NAME'
+            numberOfCourses   = rs.getInt     'NUMBER_OF_COURSES'
         }
     }
 }

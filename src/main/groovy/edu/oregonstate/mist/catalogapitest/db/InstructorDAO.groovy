@@ -21,9 +21,9 @@ public interface InstructorDAO extends Closeable {
 
     // POST
     @SqlUpdate("""INSERT INTO INSTRUCTORS (CID, FIRST_INITIAL, LAST_NAME, NUMBER_OF_COURSES)
-                  values (INSTRUCTORS_SEQ.NEXTVAL, :crn, :first_initial, :last_name, :number_of_courses)""")
-    void postInstructor(@Bind("crn") Integer crn , @Bind("first_initial") String first_initial,
-                        @Bind("last_name") String last_name , @Bind("number_of_courses") Integer number_of_courses)
+                  values (INSTRUCTORS_SEQ.NEXTVAL, :crn, :firstInitial, :lastName, :numberOfCourses)""")
+    void postInstructor(@Bind("crn") Integer crn , @Bind("firstInitial") String firstInitial,
+                        @Bind("lastName") String lastName , @Bind("numberOfCourses") Integer numberOfCourses)
 
     // instructor/cid/ -------------------------------------------------------------------------------------------------
 
@@ -45,19 +45,19 @@ public interface InstructorDAO extends Closeable {
     // PUT
     @SqlUpdate("""
         UPDATE INSTRUCTORS
-        SET FIRST_INITIAL = :first_initial, LAST_NAME = :last_name, NUMBER_OF_COURSES = :number_of_courses
+        SET FIRST_INITIAL = :firstInitial, LAST_NAME = :lastName, NUMBER_OF_COURSES = :numberOfCourses
         WHERE CID = :cid
               """)
-    void putByCid(@Bind("cid") Integer cid, @Bind("first_initial") String first_initial,
-                  @Bind("last_name") String last_name, @Bind("number_of_courses") Integer number_of_courses)
+    void putByCid(@Bind("cid") Integer cid, @Bind("firstInitial") String firstInitial,
+                  @Bind("lastName") String lastName, @Bind("numberOfCourses") Integer numberOfCourses)
 
     // POST
     @SqlUpdate("""
         INSERT INTO INSTRUCTORS (CID, FIRST_INITIAL, LAST_NAME, NUMBER_OF_COURSES)
-        VALUES (:cid, :first_initial, :last_name, :number_of_courses)
+        VALUES (:cid, :firstInitial, :lastName, :numberOfCourses)
               """)
-    void postByCid(@Bind("cid") Integer cid, @Bind("first_initial") String first_initial,
-                   @Bind("last_name") String last_name, @Bind("number_of_courses") Integer number_of_courses)
+    void postByCid(@Bind("cid") Integer cid, @Bind("firstInitial") String firstInitial,
+                   @Bind("lastName") String lastName, @Bind("numberOfCourses") Integer numberOfCourses)
 
     // DELETE
     @SqlUpdate("""
@@ -66,15 +66,15 @@ public interface InstructorDAO extends Closeable {
               """)
     void deleteByCid(@Bind("cid") Integer cid)
 
-    // instructor/last_name/ -------------------------------------------------------------------------------------------
+    // instructor/lastName/ --------------------------------------------------------------------------------------------
 
     // GET
     @SqlQuery("""
         SELECT *
         FROM INSTRUCTORS
-        WHERE LAST_NAME = :last_name
+        WHERE LAST_NAME = :lastName
             """)
-    List<Instructor> getByLastName(@Bind("last_name") String last_name)
+    List<Instructor> getByLastName(@Bind("lastName") String lastName)
 
     void close()
 }

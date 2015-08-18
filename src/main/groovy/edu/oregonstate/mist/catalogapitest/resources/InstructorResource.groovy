@@ -43,8 +43,8 @@ class InstructorResource {
         URI createdURI
 
         try {
-            instructorDAO.postInstructor(newInstructor.getCid(), newInstructor.getFirst_initial(),
-                    newInstructor.getLast_name(), newInstructor.getNumber_of_courses())
+            instructorDAO.postInstructor(newInstructor.getCid(), newInstructor.getFirstInitial(),
+                    newInstructor.getLastName(), newInstructor.getNumberOfCourses())
 
             //TODO Add in the URI of newly created resource
             createdURI = URI.create(uriInfo.getPath() + "/" + instructorDAO.getLatestCidNumber())
@@ -112,14 +112,14 @@ class InstructorResource {
 
         // If instructor does not already exist - POST it!
         if (checkForInstructorCid == null) {
-            instructorDAO.postByCid(cid, newInstructor.getFirst_initial(), newInstructor.getLast_name(), newInstructor.getNumber_of_courses())
+            instructorDAO.postByCid(cid, newInstructor.getFirstInitial(), newInstructor.getLastName(), newInstructor.getNumberOfCourses())
             returnResponse = Response.created().build()
         } else {
 
             // Otherwise PUT it!
-            Optional<String> newFirstInitial = Optional.of( newInstructor.getFirst_initial() )
-            Optional<String> newLastName = Optional.of( newInstructor.getLast_name() )
-            Optional<Integer> newNumberOfCourses = Optional.of( newInstructor.getNumber_of_courses() )
+            Optional<String> newFirstInitial = Optional.of( newInstructor.getFirstInitial() )
+            Optional<String> newLastName = Optional.of( newInstructor.getLastName() )
+            Optional<Integer> newNumberOfCourses = Optional.of( newInstructor.getNumberOfCourses() )
         }
 
         return returnResponse
@@ -141,8 +141,8 @@ class InstructorResource {
     @GET
     @Path('{cid}')
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Instructor> getInstructorByLastName(@PathParam('last_name') String last_name) {
-        final List<Instructor> instructors = instructorDAO.getByLastName(last_name)
+    public List<Instructor> getInstructorByLastName(@PathParam('lastName') String lastName) {
+        final List<Instructor> instructors = instructorDAO.getByLastName(lastName)
 
         if (instructors.isEmpty()) {
             throw new WebApplicationException(404)
