@@ -136,4 +136,18 @@ class InstructorResource {
 
         return returnResponse
     }
+
+    // Name specific requests ------------------------------------------------------------------------------------------
+    @GET
+    @Path('{cid}')
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Instructor> getInstructorByLastName(@PathParam('last_name') String last_name) {
+        final List<Instructor> instructors = instructorDAO.getByLastName(last_name)
+
+        if (instructors.isEmpty()) {
+            throw new WebApplicationException(404)
+        }
+
+        return instructors
+    }
 }
