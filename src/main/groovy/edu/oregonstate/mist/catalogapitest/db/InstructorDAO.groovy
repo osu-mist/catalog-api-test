@@ -21,8 +21,8 @@ public interface InstructorDAO extends Closeable {
 
     // POST
     @SqlUpdate("""INSERT INTO INSTRUCTORS (CID, FIRST_INITIAL, LAST_NAME, NUMBER_OF_COURSES)
-                  values (INSTRUCTORS_SEQ.NEXTVAL, :crn, :firstInitial, :lastName, :numberOfCourses)""")
-    void postInstructor(@Bind("crn") Integer crn , @Bind("firstInitial") String firstInitial,
+                  values (INSTRUCTORS_SEQ.NEXTVAL, :cid, :firstInitial, :lastName, :numberOfCourses)""")
+    void postInstructor(@Bind("cid") Integer cid , @Bind("firstInitial") String firstInitial,
                         @Bind("lastName") String lastName , @Bind("numberOfCourses") Integer numberOfCourses)
 
     // instructor/cid/ -------------------------------------------------------------------------------------------------
