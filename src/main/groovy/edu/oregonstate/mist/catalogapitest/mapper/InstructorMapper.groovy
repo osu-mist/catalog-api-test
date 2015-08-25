@@ -17,5 +17,7 @@ public class InstructorMapper implements ResultSetMapper<Instructor> {
             lastName          = rs.getString  'LAST_NAME'
             numberOfCourses   = rs.getInt     'NUMBER_OF_COURSES'
         }
+
+        return instructor
     }
 }
