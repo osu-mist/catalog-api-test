@@ -138,9 +138,8 @@ class InstructorResource {
     }
 
     // Name specific requests ------------------------------------------------------------------------------------------
-    /*
     @GET
-    @Path('{lastName}')
+    @Path('/lastName/{lastName}')
     @Produces(MediaType.APPLICATION_JSON)
     public List<Instructor> getInstructorByLastName(@PathParam('lastName') String lastName) {
         final List<Instructor> instructors = instructorDAO.getByLastName(lastName)
@@ -151,5 +150,4 @@ class InstructorResource {
 
         return instructors
     }
-    */
 }
