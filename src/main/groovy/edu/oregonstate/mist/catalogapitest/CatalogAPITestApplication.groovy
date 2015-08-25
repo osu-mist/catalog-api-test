@@ -1,8 +1,9 @@
 package edu.oregonstate.mist.catalogapitest
 
 import edu.oregonstate.mist.catalogapitest.db.CourseDAO
+import edu.oregonstate.mist.catalogapitest.db.InstructorDAO
 import edu.oregonstate.mist.catalogapitest.resources.CourseResource
-import edu.oregonstate.mist.catalogapitest.resources.SampleResource
+import edu.oregonstate.mist.catalogapitest.resources.InstructorResource
 import io.dropwizard.Application
 import io.dropwizard.Configuration
 import io.dropwizard.jdbi.DBIFactory
@@ -21,10 +22,12 @@ class CatalogAPITestApplication extends Application<CatalogAPITestApplicationCon
     public void run(CatalogAPITestApplicationConfiguration configuration, Environment environment) {
         final DBIFactory factory = new DBIFactory()
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(),"jdbi")
-        final CourseDAO theDAO = jdbi.onDemand(CourseDAO.class)
 
-        environment.jersey().register(new SampleResource())
-        environment.jersey().register(new CourseResource(theDAO) {})
+        final CourseDAO courseDAO = jdbi.onDemand(CourseDAO.class)
+        final InstructorDAO instructorDAO = jdbi.onDemand(InstructorDAO.class)
+
+        environment.jersey().register(new CourseResource(courseDAO))
+        environment.jersey().register(new InstructorResource(instructorDAO))
     }
 
     public static void main(String[] arguments) throws Exception {
