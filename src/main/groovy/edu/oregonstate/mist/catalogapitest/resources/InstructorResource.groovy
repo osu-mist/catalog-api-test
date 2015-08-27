@@ -39,6 +39,7 @@ class InstructorResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response postInstructor(@Valid Instructor newInstructor) {
+
         Response returnResponse
         URI createdURI
 
@@ -120,6 +121,13 @@ class InstructorResource {
             Optional<String> newFirstInitial = Optional.of( newInstructor.getFirstInitial() )
             Optional<String> newLastName = Optional.of( newInstructor.getLastName() )
             Optional<Integer> newNumberOfCourses = Optional.of( newInstructor.getNumberOfCourses() )
+
+            instructorDAO.putByCid(cid, newFirstInitial.or(checkForInstructorCid.getFirstInitial()),
+                                        newLastName.or(checkForInstructorCid.getLastName()),
+                                        newNumberOfCourses.or(checkForInstructorCid.getNumberOfCourses())
+            )
+
+            returnResponse = Response.ok().build()
         }
 
         return returnResponse
