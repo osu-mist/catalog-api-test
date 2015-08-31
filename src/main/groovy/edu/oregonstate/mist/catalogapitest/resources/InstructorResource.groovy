@@ -19,6 +19,7 @@ import javax.ws.rs.core.Context
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.UriInfo
+import org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException
 
 @Path("/instructor")
 @Produces(MediaType.APPLICATION_JSON)
@@ -44,16 +45,16 @@ class InstructorResource {
         URI createdURI
 
         try {
-            instructorDAO.postInstructor(newInstructor.getCid(), newInstructor.getFirstInitial(),
+            instructorDAO.postInstructor(newInstructor.getFirstInitial(),
                     newInstructor.getLastName(), newInstructor.getNumberOfCourses())
 
             //TODO Add in the URI of newly created resource
             createdURI = URI.create(uriInfo.getPath() + "/" + instructorDAO.getLatestCidNumber())
             returnResponse = Response.created(createdURI).build()
 
-        } catch (org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException e) {
+        } catch (UnableToExecuteStatementException e) {
 
-            ErrorPOJO constraintError = e.cause.toString()
+            String constraintError = e.getMessage()
             ErrorPOJO returnError
 
             if (constraintError.contains("INSTRUCTORS_UK_CID")) {

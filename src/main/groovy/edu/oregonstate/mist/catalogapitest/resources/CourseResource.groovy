@@ -19,6 +19,7 @@ import javax.ws.rs.core.Context
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.UriInfo
+import org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException
 
 @Path("/course")
 @Produces(MediaType.APPLICATION_JSON)
@@ -51,9 +52,9 @@ class CourseResource {
             createdURI = URI.create(uriInfo.getPath() + "/" + courseDAO.getLatestCidNumber())
             returnResponse = Response.created(createdURI).build()
 
-        } catch (org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException e) {
+        } catch (UnableToExecuteStatementException e) {
 
-            ErrorPOJO constraintError = e.cause.toString()
+            String constraintError = e.getMessage()
             ErrorPOJO returnError
 
             if (constraintError.contains("COURSES_UK_CRN")) {

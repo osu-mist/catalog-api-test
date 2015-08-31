@@ -21,9 +21,9 @@ public interface InstructorDAO extends Closeable {
 
     // POST
     @SqlUpdate("""INSERT INTO INSTRUCTORS (CID, FIRST_INITIAL, LAST_NAME, NUMBER_OF_COURSES)
-                  values (INSTRUCTORS_SEQ.NEXTVAL, :cid, :firstInitial, :lastName, :numberOfCourses)""")
-    void postInstructor(@Bind("cid") Integer cid , @Bind("firstInitial") String firstInitial,
-                        @Bind("lastName") String lastName , @Bind("numberOfCourses") Integer numberOfCourses)
+                  values (INSTRUCTORS_SEQ.NEXTVAL, :firstInitial, :lastName, :numberOfCourses)""")
+    void postInstructor(@Bind("firstInitial") String firstInitial, @Bind("lastName") String lastName,
+                        @Bind("numberOfCourses") Integer numberOfCourses)
 
     // instructor/cid/ -------------------------------------------------------------------------------------------------
 
@@ -35,7 +35,6 @@ public interface InstructorDAO extends Closeable {
              """)
     Instructor getByCid(@Bind("cid") Integer cid)
 
-    // TODO Configure it on SQLDeveloper to make sure it works!
     // Get specific instance number
     @SqlQuery("""
             SELECT INSTRUCTORS_SEQ.CURRVAL FROM DUAL
