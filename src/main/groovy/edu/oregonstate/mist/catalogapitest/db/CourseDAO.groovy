@@ -7,27 +7,48 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery
 import org.skife.jdbi.v2.sqlobject.Bind
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper
 
+/**
+ * Course database access object class.
+ */
 @RegisterMapper(CourseMapper)
 public interface CourseDAO extends Closeable {
 
     // /course ---------------------------------------------------------------------------------------------------------
 
-    // GET
+    /**
+     * GETs all course objects.
+     *
+     * @return List of all courses found, otherwise empty
+     */
     @SqlQuery("""
             SELECT *
             FROM COURSES
             """)
     List<Course> getAllCourses()
 
-    // POST
+    /**
+     * POSTs a course object.
+     *
+     * @param crn
+     * @param courseName
+     * @param instructor
+     * @param day
+     * @param time
+     * @param location
+     */
     @SqlUpdate("""INSERT INTO COURSES (CID, CRN, COURSENAME, INSTRUCTOR, DAY, TIME, LOCATION)
                   values (COURSES_SEQ.NEXTVAL, :crn, :courseName, :instructor, :day, :time, :location)""")
     void postCourse(@Bind("crn") Integer crn , @Bind("courseName") String courseName , @Bind("instructor") String instructor,
                    @Bind("day") String day, @Bind("time") String time, @Bind("location") String location)
 
-    // /course/crn -----------------------------------------------------------------------------------------------------
+    // /course/{crn} ---------------------------------------------------------------------------------------------------
 
-    // GET
+    /**
+     * GETs a course by the crn number.
+     *
+     * @param crn
+     * @return Course object
+     */
     @SqlQuery("""
             SELECT *
             FROM COURSES
@@ -35,13 +56,26 @@ public interface CourseDAO extends Closeable {
             """)
     Course getByCrn(@Bind("crn") Integer crn)
 
-    // Get specific instance number
+    /**
+     * GETs specific course object instance number using Oracle sequences.
+     *
+     * @return Updated sequence number
+     */
     @SqlQuery("""
             SELECT COURSES_SEQ.CURRVAL FROM DUAL
             """)
     Integer getLatestCidNumber()
 
-    // PUT
+    /**
+     * PUTs a course object.
+     *
+     * @param crn
+     * @param courseName
+     * @param instructor
+     * @param day
+     * @param time
+     * @param location
+     */
     @SqlUpdate( """
               UPDATE COURSES
               SET COURSENAME = :courseName, INSTRUCTOR = :instructor, DAY = :day, TIME = :time, LOCATION = :location
@@ -49,8 +83,17 @@ public interface CourseDAO extends Closeable {
               """)
     void putByCrn(@Bind("crn") Integer crn, @Bind("courseName") String courseName, @Bind("instructor") String instructor,
                   @Bind("day") String day,  @Bind("time") String time, @Bind("location") String location)
-    
-    // POST
+
+    /**
+     * POSTs a course object.
+     *
+     * @param crn
+     * @param courseName
+     * @param instructor
+     * @param day
+     * @param time
+     * @param location
+     */
     @SqlUpdate("""
         INSERT INTO COURSES (CRN, COURSENAME, INSTRUCTOR, DAY, TIME, LOCATION)
         values (:crn, :courseName, :instructor, :day, :time, :location)
@@ -58,16 +101,25 @@ public interface CourseDAO extends Closeable {
     void postByCrn(@Bind("crn") Integer crn , @Bind("courseName") String courseName , @Bind("instructor") String instructor,
                    @Bind("day") String day, @Bind("time") String time, @Bind("location") String location)
 
-    // DELETE
+    /**
+     * DELETEs a course object.
+     *
+     * @param crn
+     */
     @SqlUpdate("""
               DELETE FROM COURSES
               WHERE CRN = :crn
               """)
     void deleteByCrn(@Bind("crn") Integer crn)
 
-    // course/name/ ----------------------------------------------------------------------------------------------------
+    // course/name/{courseName} ----------------------------------------------------------------------------------------
 
-    // GET
+    /**
+     * GETs a course object through query with name.
+     *
+     * @param courseName
+     * @return list of courses found, otherwise empty.
+     */
     @SqlQuery("""
             SELECT *
             FROM COURSES
@@ -75,11 +127,14 @@ public interface CourseDAO extends Closeable {
             """)
     List<Course> getByName(@Bind("courseName") String courseName)
 
+    // course/location/{location} --------------------------------------------------------------------------------------
 
-    //TODO: Actually implement this to work properly
-    // Location specific requests --------------------------------------------------------------------------------------
-
-    // GET
+    /**
+     * GETs a course object through query with its location.
+     *
+     * @param location
+     * @return list of courses found, otherwise empty.
+     */
     @SqlQuery("""
             SELECT *
             FROM COURSES

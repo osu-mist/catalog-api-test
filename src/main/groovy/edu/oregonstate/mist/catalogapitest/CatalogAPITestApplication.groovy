@@ -11,13 +11,27 @@ import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 import org.skife.jdbi.v2.DBI
 
+/**
+ * Main application class.
+ */
 class CatalogAPITestApplication extends Application<CatalogAPITestApplicationConfiguration>{
 
+    /**
+     * Initializes the application bootstrap.
+     *
+     * @param bootstrap
+     */
     @Override
     public void initialize(Bootstrap<Configuration> bootstrap) {
         //bootstrap.getObjectMapper().enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
     }
 
+    /**
+     * Parses command-line arguments and runs the application.
+     *
+     * @param configuration
+     * @param environment
+     */
     @Override
     public void run(CatalogAPITestApplicationConfiguration configuration, Environment environment) {
         final DBIFactory factory = new DBIFactory()
@@ -30,6 +44,12 @@ class CatalogAPITestApplication extends Application<CatalogAPITestApplicationCon
         environment.jersey().register(new InstructorResource(instructorDAO))
     }
 
+    /**
+     * Instantiates the application class with command-line arguments.
+     *
+     * @param arguments
+     * @throws Exception
+     */
     public static void main(String[] arguments) throws Exception {
         new CatalogAPITestApplication().run(arguments)
     }

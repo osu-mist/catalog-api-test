@@ -21,6 +21,9 @@ import javax.ws.rs.core.Response
 import javax.ws.rs.core.UriInfo
 import org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException
 
+/**
+ * Instructor resource class.
+ */
 @Path("/instructor")
 @Produces(MediaType.APPLICATION_JSON)
 class InstructorResource {
@@ -31,11 +34,23 @@ class InstructorResource {
     @Context
     UriInfo uriInfo
 
+    /**
+     * Constructs the object after receiving and storing instructorDAO instance.
+     *
+     * @param instructorDAO
+     */
     public InstructorResource(InstructorDAO instructorDAO) {
         this.instructorDAO = instructorDAO
     }
 
-    // POST to /instructor ---------------------------------------------------------------------------------------------
+    // /instructor -----------------------------------------------------------------------------------------------------
+
+    /**
+     * Responds to POST requests by creating and returning an instructor.
+     *
+     * @param newInstructor
+     * @return response containing the result or error message
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -75,7 +90,11 @@ class InstructorResource {
         return returnResponse
     }
 
-    // Lists all instructors -------------------------------------------------------------------------------------------
+    /**
+     * Responds to GET requests and retrieves all instructor objects
+     *
+     * @return list of all instructors, otherwise empty
+     */
     @GET
     @Path('/all')
     @Produces(MediaType.APPLICATION_JSON)
@@ -84,6 +103,13 @@ class InstructorResource {
     }
 
     // CID specific requests -------------------------------------------------------------------------------------------
+
+    /**
+     * Responds to GET requests and retrieves instructor with a specific cid.
+     *
+     * @param cid
+     * @return response containing the result or error message
+     */
     @GET
     @Path('{cid}')
     @Produces(MediaType.APPLICATION_JSON)
@@ -102,6 +128,15 @@ class InstructorResource {
         return returnResponse
     }
 
+    /**
+     * Responds to PUT requests depending on the state of the instructor object,
+     * either through updating existing object with PUT request or creating with
+     * POST request if not already existing.
+     *
+     * @param cid
+     * @param newInstructor
+     * @return response containing the result or error message
+     */
     @PUT
     @Path('{cid}')
     @Produces(MediaType.APPLICATION_JSON)
@@ -134,6 +169,12 @@ class InstructorResource {
         return returnResponse
     }
 
+    /**
+     * Responds to DELETE requests and removes an instructor object.
+     *
+     * @param cid
+     * @return response containing the result or error messages
+     */
     @DELETE
     @Path('{cid}')
     @Produces(MediaType.APPLICATION_JSON)
@@ -147,6 +188,13 @@ class InstructorResource {
     }
 
     // Name specific requests ------------------------------------------------------------------------------------------
+
+    /**
+     * Responds to GET requests and retrieves all instructors of a specific lastName.
+     *
+     * @param lastName
+     * @return response containing the result or error message
+     */
     @GET
     @Path('/lastName/{lastName}')
     @Produces(MediaType.APPLICATION_JSON)

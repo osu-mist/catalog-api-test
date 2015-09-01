@@ -6,6 +6,9 @@ import org.skife.jdbi.v2.tweak.ResultSetMapper
 import java.sql.ResultSet
 import java.sql.SQLException
 
+/**
+ * Mapper for Course object properties and database columns.
+ */
 public class CourseMapper implements ResultSetMapper<Course> {
     public Course map(int i, ResultSet rs, StatementContext sc) throws SQLException {
         Course course = new Course()

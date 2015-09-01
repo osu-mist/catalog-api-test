@@ -6,7 +6,9 @@ import org.skife.jdbi.v2.tweak.ResultSetMapper
 import java.sql.ResultSet
 import java.sql.SQLException
 
-
+/**
+ * Mapper for Instructor object properties and database columns.
+ */
 public class InstructorMapper implements ResultSetMapper<Instructor> {
     public Instructor map(int i, ResultSet rs, StatementContext sc) throws SQLException {
         Instructor instructor = new Instructor()

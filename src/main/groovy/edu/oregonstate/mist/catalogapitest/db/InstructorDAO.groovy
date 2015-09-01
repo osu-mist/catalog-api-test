@@ -7,27 +7,46 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery
 import org.skife.jdbi.v2.sqlobject.Bind
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper
 
+
+/**
+ * Instructor database access object class.
+ */
 @RegisterMapper(InstructorMapper)
 public interface InstructorDAO extends Closeable {
 
     // /instructor -----------------------------------------------------------------------------------------------------
 
-    // GET
+    /**
+     * GETs all instructor objects.
+     *
+     * @return List of all instructors found, otherwise empty
+     */
     @SqlQuery("""
             SELECT *
             FROM INSTRUCTORS
     """)
     List<Instructor> getAllInstructors()
 
-    // POST
+    /**
+     * POSTs an instructor object.
+     *
+     * @param firstInitial
+     * @param lastName
+     * @param numberOfCourses
+     */
     @SqlUpdate("""INSERT INTO INSTRUCTORS (CID, FIRST_INITIAL, LAST_NAME, NUMBER_OF_COURSES)
                   values (INSTRUCTORS_SEQ.NEXTVAL, :firstInitial, :lastName, :numberOfCourses)""")
     void postInstructor(@Bind("firstInitial") String firstInitial, @Bind("lastName") String lastName,
                         @Bind("numberOfCourses") Integer numberOfCourses)
 
-    // instructor/cid/ -------------------------------------------------------------------------------------------------
+    // instructor/{cid} ------------------------------------------------------------------------------------------------
 
-    // GET
+    /**
+     * GETs an instructor by the cid number
+     *
+     * @param cid
+     * @return Instructor object
+     */
     @SqlQuery("""
         SELECT *
         FROM INSTRUCTORS
@@ -35,13 +54,24 @@ public interface InstructorDAO extends Closeable {
              """)
     Instructor getByCid(@Bind("cid") Integer cid)
 
-    // Get specific instance number
+    /**
+     * GETs specific instructor object instance number using Oracle sequences.
+     *
+     * @return Updated sequence number
+     */
     @SqlQuery("""
             SELECT INSTRUCTORS_SEQ.CURRVAL FROM DUAL
             """)
     Integer getLatestCidNumber()
 
-    // PUT
+    /**
+     * PUTs an instructor object.
+     *
+     * @param cid
+     * @param firstInitial
+     * @param lastName
+     * @param numberOfCourses
+     */
     @SqlUpdate("""
         UPDATE INSTRUCTORS
         SET FIRST_INITIAL = :firstInitial, LAST_NAME = :lastName, NUMBER_OF_COURSES = :numberOfCourses
@@ -50,7 +80,14 @@ public interface InstructorDAO extends Closeable {
     void putByCid(@Bind("cid") Integer cid, @Bind("firstInitial") String firstInitial,
                   @Bind("lastName") String lastName, @Bind("numberOfCourses") Integer numberOfCourses)
 
-    // POST
+    /**
+     * POSTs an instructor object.
+     *
+     * @param cid
+     * @param firstInitial
+     * @param lastName
+     * @param numberOfCourses
+     */
     @SqlUpdate("""
         INSERT INTO INSTRUCTORS (CID, FIRST_INITIAL, LAST_NAME, NUMBER_OF_COURSES)
         VALUES (:cid, :firstInitial, :lastName, :numberOfCourses)
@@ -58,16 +95,25 @@ public interface InstructorDAO extends Closeable {
     void postByCid(@Bind("cid") Integer cid, @Bind("firstInitial") String firstInitial,
                    @Bind("lastName") String lastName, @Bind("numberOfCourses") Integer numberOfCourses)
 
-    // DELETE
+    /**
+     * DELETEs an instructor object.
+     *
+     * @param cid
+     */
     @SqlUpdate("""
         DELETE FROM INSTRUCTORS
         WHERE CID = :cid
               """)
     void deleteByCid(@Bind("cid") Integer cid)
 
-    // instructor/lastName/ --------------------------------------------------------------------------------------------
+    // instructor/lastName/{lastName} ----------------------------------------------------------------------------------
 
-    // GET
+    /**
+     * GETs an instructor object through query with lastName
+     *
+     * @param lastName
+     * @return List of all instructors found, otherwise empty
+     */
     @SqlQuery("""
         SELECT *
         FROM INSTRUCTORS

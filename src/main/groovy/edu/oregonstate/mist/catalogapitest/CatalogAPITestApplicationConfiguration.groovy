@@ -6,7 +6,9 @@ import javax.validation.Valid
 import javax.validation.constraints.NotNull
 import com.fasterxml.jackson.annotation.JsonProperty
 
-/* configuration class */
+/**
+ * Application configuration class.
+ */
 public class CatalogAPITestApplicationConfiguration extends Configuration {
     @Valid
     @NotNull

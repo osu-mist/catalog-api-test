@@ -21,6 +21,9 @@ import javax.ws.rs.core.Response
 import javax.ws.rs.core.UriInfo
 import org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException
 
+/**
+ * Course resource class.
+ */
 @Path("/course")
 @Produces(MediaType.APPLICATION_JSON)
 class CourseResource {
@@ -31,11 +34,23 @@ class CourseResource {
     @Context
     UriInfo uriInfo
 
+    /**
+     * Constructs the object after receiving and storing courseDAO instance.
+     *
+     * @param courseDAO
+     */
     public CourseResource(CourseDAO courseDAO) {
         this.courseDAO = courseDAO
     }
 
-    // POST to /course -------------------------------------------------------------------------------------------------
+    // /course ---------------------------------------------------------------------------------------------------------
+
+    /**
+     * Responds to POST requests by creating and returning a course.
+     *
+     * @param newCourse
+     * @return response containing the result or error message
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -48,7 +63,6 @@ class CourseResource {
             courseDAO.postCourse(newCourse.getCrn(), newCourse.getCourseName(), newCourse.getInstructor(),
                     newCourse.getDay(), newCourse.getTime(), newCourse.getLocation())
 
-            // TODO add in the URI of newly created resource
             createdURI = URI.create(uriInfo.getPath() + "/" + courseDAO.getLatestCidNumber())
             returnResponse = Response.created(createdURI).build()
 
@@ -74,7 +88,11 @@ class CourseResource {
         return returnResponse
     }
 
-    // List all courses ------------------------------------------------------------------------------------------------
+    /**
+     * Responds to GET requests and retrieves all course objects
+     *
+     * @return list of all courses, otherwise empty
+     */
     @GET
     @Path('/all')
     @Produces(MediaType.APPLICATION_JSON)
@@ -83,6 +101,13 @@ class CourseResource {
     }
 
     // CRN specific requests -------------------------------------------------------------------------------------------
+
+    /**
+     * Responds to GET requests and retrieves course with a specific crn.
+     *
+     * @param crn
+     * @return response containing the result or error message
+     */
     @GET
     @Path('{crn}')
     @Produces(MediaType.APPLICATION_JSON)
@@ -102,6 +127,15 @@ class CourseResource {
         return returnResponse
     }
 
+    /**
+     * Responds to PUT requests depending on the state of the course object,
+     * either through updating existing object with PUT request or
+     * creating with POST request if not already existing.
+     *
+     * @param crn
+     * @param newCourse
+     * @return response containing the result or error message
+     */
     @PUT
     @Path("{crn}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -139,12 +173,16 @@ class CourseResource {
         return returnResponse
     }
 
+    /**
+     * Responds to DELETE requests and removes a course object.
+     *
+     * @param crn
+     * @return response containing the result or error message
+     */
     @Path("{crn}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteByCrn(@PathParam("crn") Integer crn) {
-
-        //TODO add authentication for this method
         courseDAO.deleteByCrn(crn)
         Response returnResponse = Response.ok().build()
 
@@ -153,6 +191,13 @@ class CourseResource {
 
 
     // Name specific requests ------------------------------------------------------------------------------------------
+
+    /**
+     * Responds to GET requests and retrieves all courses of a specific name.
+     *
+     * @param courseName
+     * @return list of courses of specific name, otherwise empty
+     */
     @GET
     @Path('/name/{courseName}')
     @Produces(MediaType.APPLICATION_JSON)
@@ -167,6 +212,13 @@ class CourseResource {
     }
 
     // Location specific requests --------------------------------------------------------------------------------------
+
+    /**
+     * Responds to GET requests and retrieves all courses of a specific location.
+     *
+     * @param location
+     * @return list of courses of specific location, otherwise empty
+     */
     @GET
     @Path('/location/{location}')
     @Produces(MediaType.APPLICATION_JSON)
