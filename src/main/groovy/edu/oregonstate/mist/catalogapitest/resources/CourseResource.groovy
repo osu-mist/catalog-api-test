@@ -183,9 +183,7 @@ class CourseResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteByCrn(@PathParam("crn") Integer crn) {
         courseDAO.deleteByCrn(crn)
-        Response returnResponse = Response.ok().build()
-
-        return returnResponse
+        return Response.ok().build()
     }
 
 
