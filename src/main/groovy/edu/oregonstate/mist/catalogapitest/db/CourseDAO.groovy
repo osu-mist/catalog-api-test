@@ -11,7 +11,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper
  * Course database access object class.
  */
 @RegisterMapper(CourseMapper)
-public interface CourseDAO extends Closeable {
+public interface CourseDAO {
 
     /**
      * GETs all course objects.
@@ -145,6 +145,4 @@ public interface CourseDAO extends Closeable {
             WHERE LOCATION = :location
             """)
     List<Course> getByLocation(@Bind("location") String location)
-
-    void close()
 }

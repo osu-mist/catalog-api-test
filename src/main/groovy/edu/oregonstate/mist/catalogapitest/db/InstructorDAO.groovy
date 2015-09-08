@@ -12,7 +12,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper
  * Instructor database access object class.
  */
 @RegisterMapper(InstructorMapper)
-public interface InstructorDAO extends Closeable {
+public interface InstructorDAO {
 
     /**
      * GETs all instructor objects.
@@ -119,6 +119,4 @@ public interface InstructorDAO extends Closeable {
         WHERE LAST_NAME = :lastName
             """)
     List<Instructor> getByLastName(@Bind("lastName") String lastName)
-
-    void close()
 }
