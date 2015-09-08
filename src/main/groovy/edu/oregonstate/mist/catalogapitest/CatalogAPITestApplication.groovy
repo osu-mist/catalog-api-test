@@ -35,7 +35,7 @@ class CatalogAPITestApplication extends Application<CatalogAPITestApplicationCon
     @Override
     public void run(CatalogAPITestApplicationConfiguration configuration, Environment environment) {
         final DBIFactory factory = new DBIFactory()
-        final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(),"jdbi")
+        final DBI jdbi = factory.build(environment, configuration.getDatabase(), "jdbi")
 
         final CourseDAO courseDAO = jdbi.onDemand(CourseDAO.class)
         final InstructorDAO instructorDAO = jdbi.onDemand(InstructorDAO.class)
