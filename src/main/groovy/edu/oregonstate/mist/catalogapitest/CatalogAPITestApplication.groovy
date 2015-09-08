@@ -22,9 +22,7 @@ class CatalogAPITestApplication extends Application<CatalogAPITestApplicationCon
      * @param bootstrap
      */
     @Override
-    public void initialize(Bootstrap<Configuration> bootstrap) {
-        //bootstrap.getObjectMapper().enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
-    }
+    public void initialize(Bootstrap<Configuration> bootstrap) {}
 
     /**
      * Parses command-line arguments and runs the application.
