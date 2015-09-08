@@ -38,8 +38,12 @@ public interface CourseDAO extends Closeable {
      */
     @SqlUpdate("""INSERT INTO COURSES (CID, CRN, COURSENAME, INSTRUCTOR, DAY, TIME, LOCATION)
                   values (COURSES_SEQ.NEXTVAL, :crn, :courseName, :instructor, :day, :time, :location)""")
-    void postCourse(@Bind("crn") Integer crn , @Bind("courseName") String courseName , @Bind("instructor") String instructor,
-                   @Bind("day") String day, @Bind("time") String time, @Bind("location") String location)
+    void postCourse(@Bind("crn") Integer crn,
+                    @Bind("courseName") String courseName,
+                    @Bind("instructor") String instructor,
+                    @Bind("day") String day,
+                    @Bind("time") String time,
+                    @Bind("location") String location)
 
     // /course/{crn} ---------------------------------------------------------------------------------------------------
 
@@ -81,8 +85,12 @@ public interface CourseDAO extends Closeable {
               SET COURSENAME = :courseName, INSTRUCTOR = :instructor, DAY = :day, TIME = :time, LOCATION = :location
               WHERE CRN = :crn
               """)
-    void putByCrn(@Bind("crn") Integer crn, @Bind("courseName") String courseName, @Bind("instructor") String instructor,
-                  @Bind("day") String day,  @Bind("time") String time, @Bind("location") String location)
+    void putByCrn(@Bind("crn") Integer crn,
+                  @Bind("courseName") String courseName,
+                  @Bind("instructor") String instructor,
+                  @Bind("day") String day,
+                  @Bind("time") String time,
+                  @Bind("location") String location)
 
     /**
      * POSTs a course object.
@@ -98,8 +106,12 @@ public interface CourseDAO extends Closeable {
         INSERT INTO COURSES (CRN, COURSENAME, INSTRUCTOR, DAY, TIME, LOCATION)
         values (:crn, :courseName, :instructor, :day, :time, :location)
               """)
-    void postByCrn(@Bind("crn") Integer crn , @Bind("courseName") String courseName , @Bind("instructor") String instructor,
-                   @Bind("day") String day, @Bind("time") String time, @Bind("location") String location)
+    void postByCrn(@Bind("crn") Integer crn,
+                   @Bind("courseName") String courseName,
+                   @Bind("instructor") String instructor,
+                   @Bind("day") String day,
+                   @Bind("time") String time,
+                   @Bind("location") String location)
 
     /**
      * DELETEs a course object.

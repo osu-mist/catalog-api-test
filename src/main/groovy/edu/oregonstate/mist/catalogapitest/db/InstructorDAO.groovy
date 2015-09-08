@@ -36,7 +36,8 @@ public interface InstructorDAO extends Closeable {
      */
     @SqlUpdate("""INSERT INTO INSTRUCTORS (CID, FIRST_INITIAL, LAST_NAME, NUMBER_OF_COURSES)
                   values (INSTRUCTORS_SEQ.NEXTVAL, :firstInitial, :lastName, :numberOfCourses)""")
-    void postInstructor(@Bind("firstInitial") String firstInitial, @Bind("lastName") String lastName,
+    void postInstructor(@Bind("firstInitial") String firstInitial,
+                        @Bind("lastName") String lastName,
                         @Bind("numberOfCourses") Integer numberOfCourses)
 
     // instructor/{cid} ------------------------------------------------------------------------------------------------
@@ -77,8 +78,10 @@ public interface InstructorDAO extends Closeable {
         SET FIRST_INITIAL = :firstInitial, LAST_NAME = :lastName, NUMBER_OF_COURSES = :numberOfCourses
         WHERE CID = :cid
               """)
-    void putByCid(@Bind("cid") Integer cid, @Bind("firstInitial") String firstInitial,
-                  @Bind("lastName") String lastName, @Bind("numberOfCourses") Integer numberOfCourses)
+    void putByCid(@Bind("cid") Integer cid,
+                  @Bind("firstInitial") String firstInitial,
+                  @Bind("lastName") String lastName,
+                  @Bind("numberOfCourses") Integer numberOfCourses)
 
     /**
      * POSTs an instructor object.
@@ -92,8 +95,10 @@ public interface InstructorDAO extends Closeable {
         INSERT INTO INSTRUCTORS (CID, FIRST_INITIAL, LAST_NAME, NUMBER_OF_COURSES)
         VALUES (:cid, :firstInitial, :lastName, :numberOfCourses)
               """)
-    void postByCid(@Bind("cid") Integer cid, @Bind("firstInitial") String firstInitial,
-                   @Bind("lastName") String lastName, @Bind("numberOfCourses") Integer numberOfCourses)
+    void postByCid(@Bind("cid") Integer cid,
+                   @Bind("firstInitial") String firstInitial,
+                   @Bind("lastName") String lastName,
+                   @Bind("numberOfCourses") Integer numberOfCourses)
 
     /**
      * DELETEs an instructor object.
