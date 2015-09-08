@@ -81,7 +81,7 @@ class CourseResource {
                 returnError = new ErrorPOJO("Unknown Error", Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
             }
 
-            System.out.println(returnError.getErrorMessage())
+            return Response.status(returnError.getErrorCode()).entity(returnError).build()
         }
 
         return returnResponse
