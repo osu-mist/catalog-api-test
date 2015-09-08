@@ -14,8 +14,6 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper
 @RegisterMapper(InstructorMapper)
 public interface InstructorDAO extends Closeable {
 
-    // /instructor -----------------------------------------------------------------------------------------------------
-
     /**
      * GETs all instructor objects.
      *
@@ -39,8 +37,6 @@ public interface InstructorDAO extends Closeable {
     void postInstructor(@Bind("firstInitial") String firstInitial,
                         @Bind("lastName") String lastName,
                         @Bind("numberOfCourses") Integer numberOfCourses)
-
-    // instructor/{cid} ------------------------------------------------------------------------------------------------
 
     /**
      * GETs an instructor by the cid number
@@ -110,8 +106,6 @@ public interface InstructorDAO extends Closeable {
         WHERE CID = :cid
               """)
     void deleteByCid(@Bind("cid") Integer cid)
-
-    // instructor/lastName/{lastName} ----------------------------------------------------------------------------------
 
     /**
      * GETs an instructor object through query with lastName

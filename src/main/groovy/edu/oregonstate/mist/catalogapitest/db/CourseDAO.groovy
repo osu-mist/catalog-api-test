@@ -13,8 +13,6 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper
 @RegisterMapper(CourseMapper)
 public interface CourseDAO extends Closeable {
 
-    // /course ---------------------------------------------------------------------------------------------------------
-
     /**
      * GETs all course objects.
      *
@@ -44,8 +42,6 @@ public interface CourseDAO extends Closeable {
                     @Bind("day") String day,
                     @Bind("time") String time,
                     @Bind("location") String location)
-
-    // /course/{crn} ---------------------------------------------------------------------------------------------------
 
     /**
      * GETs a course by the crn number.
@@ -124,8 +120,6 @@ public interface CourseDAO extends Closeable {
               """)
     void deleteByCrn(@Bind("crn") Integer crn)
 
-    // course/name/{courseName} ----------------------------------------------------------------------------------------
-
     /**
      * GETs a course object through query with name.
      *
@@ -138,8 +132,6 @@ public interface CourseDAO extends Closeable {
             WHERE COURSENAME = :courseName
             """)
     List<Course> getByName(@Bind("courseName") String courseName)
-
-    // course/location/{location} --------------------------------------------------------------------------------------
 
     /**
      * GETs a course object through query with its location.
