@@ -118,5 +118,5 @@ public interface InstructorDAO {
         FROM INSTRUCTORS
         WHERE LAST_NAME = :lastName
             """)
-    List<Instructor> getByLastName(@Bind("lastName") String lastName)
+    Instructor getByLastName(@Bind("lastName") String lastName)
 }

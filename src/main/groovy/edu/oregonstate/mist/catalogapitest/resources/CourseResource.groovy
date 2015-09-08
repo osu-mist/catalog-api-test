@@ -198,14 +198,20 @@ class CourseResource {
     @GET
     @Path('/name/{courseName}')
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Course> getByCourseName(@PathParam('courseName') String courseName) {
-        final List<Course> courses = courseDAO.getByName(courseName)
+    public Response getByCourseName(@PathParam('courseName') String courseName) {
 
-        if (courses.isEmpty()) {
-            throw new WebApplicationException(404)
+        Course courses = courseDAO.getByName(courseName)
+
+        Response returnResponse
+
+        if (courses == null) {
+            ErrorPOJO returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
+            returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
+        } else {
+            returnResponse = Response.ok(courses).build()
         }
 
-        return courses
+        return returnResponse
     }
 
     // Location specific requests --------------------------------------------------------------------------------------
@@ -219,7 +225,7 @@ class CourseResource {
     @GET
     @Path('/location/{location}')
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Course> getCourseByLocation(@PathParam('location') String location) {
+    public Response getCourseByLocation(@PathParam('location') String location) {
         final List<Course> courses = courseDAO.getByLocation(location)
 
         if (courses.isEmpty()) {
@@ -229,4 +235,3 @@ class CourseResource {
         return courses
     }
 }
-

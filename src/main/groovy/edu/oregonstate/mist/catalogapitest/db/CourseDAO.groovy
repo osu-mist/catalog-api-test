@@ -131,7 +131,7 @@ public interface CourseDAO {
             FROM COURSES
             WHERE COURSENAME = :courseName
             """)
-    List<Course> getByName(@Bind("courseName") String courseName)
+    Course getByName(@Bind("courseName") String courseName)
 
     /**
      * GETs a course object through query with its location.

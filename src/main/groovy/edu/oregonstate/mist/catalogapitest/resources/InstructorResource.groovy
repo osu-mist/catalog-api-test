@@ -193,13 +193,18 @@ class InstructorResource {
     @GET
     @Path('/lastName/{lastName}')
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Instructor> getInstructorByLastName(@PathParam('lastName') String lastName) {
-        final List<Instructor> instructors = instructorDAO.getByLastName(lastName)
+    public Response getInstructorByLastName(@PathParam('lastName') String lastName) {
+        Instructor instructors = instructorDAO.getByLastName(lastName)
 
-        if (instructors.isEmpty()) {
-            throw new WebApplicationException(404)
+        Response returnResponse
+
+        if (instructors == null) {
+            ErrorPOJO returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
+            returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
+        } else {
+            returnResponse = Response.ok(instructors).build()
         }
 
-        return instructors
+        return returnResponse
     }
 }
