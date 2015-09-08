@@ -28,7 +28,6 @@ import org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException
 @Produces(MediaType.APPLICATION_JSON)
 class InstructorResource {
 
-    // Instantiate DAO -------------------------------------------------------------------------------------------------
     private final InstructorDAO instructorDAO
 
     @Context
