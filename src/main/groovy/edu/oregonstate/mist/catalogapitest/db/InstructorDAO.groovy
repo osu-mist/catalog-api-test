@@ -56,6 +56,7 @@ public interface InstructorDAO {
      *
      * @return Updated sequence number
      */
+    // FIXME: possible race condition
     @SqlQuery("""
             SELECT INSTRUCTORS_SEQ.CURRVAL FROM DUAL
             """)

@@ -61,6 +61,7 @@ public interface CourseDAO {
      *
      * @return Updated sequence number
      */
+    // FIXME: possible race condition
     @SqlQuery("""
             SELECT COURSES_SEQ.CURRVAL FROM DUAL
             """)
