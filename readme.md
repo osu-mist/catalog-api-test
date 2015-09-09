@@ -45,7 +45,7 @@ java -classpath bin/ojdbc6_g.jar:build/libs/catalog-api-test-all.jar edu.oregons
 
 ```
 
-If you all the required resources installed properly, you should be able to simply run ```gradle run``` to build and run everything.  You can also create and use a bash script to do this for you.
+An alternative option to this, if you all the required resources installed properly, you should be able to simply run ```gradle run``` to build and run everything.  You can also create and use a bash script to do this for you.
 
 ##Mockup
 
