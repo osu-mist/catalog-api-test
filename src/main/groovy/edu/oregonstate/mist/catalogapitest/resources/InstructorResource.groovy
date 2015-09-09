@@ -83,7 +83,7 @@ class InstructorResource {
                 returnError = new ErrorPOJO("Unknown Error", Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
             }
 
-            return Response.status(returnError.getErrorCode()).entity(returnError).build()
+            returnResponse = Response.status(returnError.getErrorCode()).entity(returnError).build()
         }
 
         return returnResponse
