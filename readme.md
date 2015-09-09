@@ -342,11 +342,3 @@ Content-Length: 301
 </body>
 </html>
 ```
-
-###Instructor Resource and Mockup
-
-####*More Examples To Come!
-
-###[Google Docs Version](https://docs.google.com/document/d/1y_Pyub3YOFrFQ0CYiEhIQdvlrPXRHliDVb-jiH84xM0/edit?usp=sharing)
-
-(Currently not as updated)
