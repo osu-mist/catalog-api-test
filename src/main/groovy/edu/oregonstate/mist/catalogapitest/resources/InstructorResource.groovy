@@ -86,7 +86,7 @@ class InstructorResource {
             returnResponse = Response.status(returnError.getErrorCode()).entity(returnError).build()
         }
 
-        return returnResponse
+        returnResponse
     }
 
     /**
@@ -98,7 +98,7 @@ class InstructorResource {
     @Path('/all')
     @Produces(MediaType.APPLICATION_JSON)
     public List<Instructor> getByCid() {
-        return instructorDAO.allInstructors
+        instructorDAO.allInstructors
     }
 
     // CID specific requests -------------------------------------------------------------------------------------------
@@ -124,7 +124,7 @@ class InstructorResource {
             returnResponse = Response.ok(instructors).build()
         }
 
-        return returnResponse
+        returnResponse
     }
 
     /**
@@ -165,7 +165,7 @@ class InstructorResource {
             returnResponse = Response.ok().build()
         }
 
-        return returnResponse
+        returnResponse
     }
 
     /**
@@ -179,7 +179,7 @@ class InstructorResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteByCid(@PathParam('cid') Integer cid) {
         instructorDAO.deleteByCid(cid)
-        return Response.ok().build()
+        Response.ok().build()
     }
 
     // Name specific requests ------------------------------------------------------------------------------------------
@@ -205,6 +205,6 @@ class InstructorResource {
             returnResponse = Response.ok(instructors).build()
         }
 
-        return returnResponse
+        returnResponse
     }
 }

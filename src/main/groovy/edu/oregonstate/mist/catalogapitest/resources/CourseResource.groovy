@@ -84,7 +84,7 @@ class CourseResource {
             returnResponse = Response.status(returnError.getErrorCode()).entity(returnError).build()
         }
 
-        return returnResponse
+        returnResponse
     }
 
     /**
@@ -96,7 +96,7 @@ class CourseResource {
     @Path('/all')
     @Produces(MediaType.APPLICATION_JSON)
     public List<Course> getByCrn() {
-        return courseDAO.allCourses
+        courseDAO.allCourses
     }
 
     // CRN specific requests -------------------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ class CourseResource {
             returnResponse = Response.ok(courses).build()
         }
 
-        return returnResponse
+        returnResponse
     }
 
     /**
@@ -168,8 +168,7 @@ class CourseResource {
             returnResponse = Response.ok().build()
         }
 
-
-        return returnResponse
+        returnResponse
     }
 
     /**
@@ -183,7 +182,7 @@ class CourseResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteByCrn(@PathParam("crn") Integer crn) {
         courseDAO.deleteByCrn(crn)
-        return Response.ok().build()
+        Response.ok().build()
     }
 
 
@@ -211,7 +210,7 @@ class CourseResource {
             returnResponse = Response.ok(courses).build()
         }
 
-        return returnResponse
+        returnResponse
     }
 
     // Location specific requests --------------------------------------------------------------------------------------
@@ -232,6 +231,6 @@ class CourseResource {
             throw new WebApplicationException(404)
         }
 
-        return courses
+        courses
     }
 }
