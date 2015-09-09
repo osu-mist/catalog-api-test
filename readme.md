@@ -45,11 +45,7 @@ java -classpath bin/ojdbc6_g.jar:build/libs/catalog-api-test-all.jar edu.oregons
 
 ```
 
-You can also create and use a bash script to do this for you.  Mine is included and is called ```javaCall.sh```
-
-To run it, type: ```./javaCall.sh```
-
-*Note that my bash script may not work on your machine depending on your setup/project structure.
+If you all the required resources installed properly, you should be able to simply run ```gradle run``` to build and run everything.  You can also create and use a bash script to do this for you.
 
 ##Mockup
 
