@@ -22,7 +22,7 @@ class CatalogAPITestApplication extends Application<CatalogAPITestApplicationCon
      * @param bootstrap
      */
     @Override
-    public void initialize(Bootstrap<Configuration> bootstrap) {}
+    public void initialize(Bootstrap<CatalogAPITestApplicationConfiguration> bootstrap) {}
 
     /**
      * Parses command-line arguments and runs the application.
