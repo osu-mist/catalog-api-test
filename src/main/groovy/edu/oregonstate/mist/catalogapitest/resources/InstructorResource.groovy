@@ -74,13 +74,13 @@ class InstructorResource {
             if (constraintError.contains("INSTRUCTORS_UK_CID")) {
 
                 // CID number is not unique
-                returnError = new ErrorPOJO("CID is not unique", Response.Status.CONFLICT.getStatusCode())
+                returnError = new ErrorPOJO(errorMessage: "CID is not unique", errorCode: Response.Status.CONFLICT.getStatusCode())
 
             } else {
 
                 // Some other error, should be logged
                 System.out.println(e.localizedMessage)
-                returnError = new ErrorPOJO("Unknown Error", Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                returnError = new ErrorPOJO(errorMessage: "Unknown Error", errorCode: Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
             }
 
             returnResponse = Response.status(returnError.getErrorCode()).entity(returnError).build()
@@ -118,7 +118,7 @@ class InstructorResource {
         Response returnResponse
 
         if (instructors == null) {
-            ErrorPOJO returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
+            ErrorPOJO returnError = new ErrorPOJO(errorMessage: "Resource Not Found.", errorCode: Response.Status.NOT_FOUND.getStatusCode())
             returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
         } else {
             returnResponse = Response.ok(instructors).build()
@@ -199,7 +199,7 @@ class InstructorResource {
         Response returnResponse
 
         if (instructors == null) {
-            ErrorPOJO returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
+            ErrorPOJO returnError = new ErrorPOJO(errorMessage: "Resource Not Found.", errorCode: Response.Status.NOT_FOUND.getStatusCode())
             returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
         } else {
             returnResponse = Response.ok(instructors).build()

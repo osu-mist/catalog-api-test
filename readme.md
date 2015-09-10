@@ -163,7 +163,7 @@ $ nc localhost 8008 << HERE
 >
 > HERE
 
-HTTP/1.1 500 Internal Server Error
+HTTP/1.1 404 Not Found
 Date: Wed, 22 Jul 2015 16:41:31 GMT
 Content-Type: text/html; charset=ISO-8859-1
 Cache-Control: must-revalidate,no-cache,no-store

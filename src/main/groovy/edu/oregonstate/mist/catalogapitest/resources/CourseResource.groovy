@@ -73,12 +73,12 @@ class CourseResource {
             if (constraintError.contains("COURSES_UK_CRN")) {
 
                 // CRN number is not unique
-                returnError = new ErrorPOJO("CRN is not unique", Response.Status.CONFLICT.getStatusCode())
+                returnError = new ErrorPOJO(errorMessage: "CRN is not unique", errorCode: Response.Status.CONFLICT.getStatusCode())
             } else {
 
                 // Some other error, should be logged
                 System.out.println(e.localizedMessage)
-                returnError = new ErrorPOJO("Unknown Error", Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                returnError = new ErrorPOJO(errorMessage: "Unknown Error", errorCode: Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
             }
 
             returnResponse = Response.status(returnError.getErrorCode()).entity(returnError).build()
@@ -117,7 +117,7 @@ class CourseResource {
         Response returnResponse
 
         if (courses == null) {
-            ErrorPOJO returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
+            ErrorPOJO returnError = new ErrorPOJO(errorMessage: "Resource Not Found.", errorCode: Response.Status.NOT_FOUND.getStatusCode())
             returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
         } else {
             returnResponse = Response.ok(courses).build()
@@ -204,7 +204,7 @@ class CourseResource {
         Response returnResponse
 
         if (courses == null) {
-            ErrorPOJO returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
+            ErrorPOJO returnError = new ErrorPOJO(errorMessage: "Resource Not Found.", errorCode: Response.Status.NOT_FOUND.getStatusCode())
             returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
         } else {
             returnResponse = Response.ok(courses).build()
