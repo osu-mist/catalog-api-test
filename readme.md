@@ -41,7 +41,7 @@ Next you'll want to run the jar file along with your credentials in your config 
 
 ```
 
-java -classpath bin/ojdbc6_g.jar:build/libs/catalog-api-test-all.jar edu.oregonstate.mist.catalogapitest.CatalogAPITestApplication server configuration.yaml
+java -jar build/libs/catalog-api-test-all.jar server configuration.yaml
 
 ```
 
@@ -71,7 +71,7 @@ Request data from resource.
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/all HTTP/1.0
+> GET /api/v0/course/all HTTP/1.0
 > 
 > HERE
 
@@ -106,7 +106,7 @@ Content-Length: 112
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/11111 HTTP/1.0
+> GET /api/v0/course/11111 HTTP/1.0
 > 
 > HERE
 
@@ -132,7 +132,7 @@ Content-Length: 112
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/name/CS%20121 HTTP/1.0
+> GET /api/v0/course/name/CS%20121 HTTP/1.0
 >
 > HERE
 
@@ -159,11 +159,11 @@ Content-Length: 112
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/name/NotARealName HTTP/1.0
+> GET /api/v0/course/name/NotARealName HTTP/1.0
 >
 > HERE
 
-HTTP/1.1 404 Not Found
+HTTP/1.1 500 Internal Server Error
 Date: Wed, 22 Jul 2015 16:41:31 GMT
 Content-Type: text/html; charset=ISO-8859-1
 Cache-Control: must-revalidate,no-cache,no-store
@@ -189,7 +189,7 @@ Creates or modifies an existing resource.
 ```
 $ nc localhost 8008 << HERE
 >
-> PUT /course/11111 HTTP/1.0
+> PUT /api/v0/course/11111 HTTP/1.0
 > Content-Length: 158
 > Content-Type: application/json
 > 
@@ -214,7 +214,7 @@ Content-Length: 0
 ```
 $ nc localhost 8008 << HERE
 >
-> PUT /course/11111 HTTP/1.0
+> PUT /api/v0/course/11111 HTTP/1.0
 > Content-Length: 158
 > Content-Type: application/json
 >  {
@@ -243,7 +243,7 @@ Create course.
 ```
 $ nc localhost 8008 << HERE
 >
-> POST /course HTTP/1.0
+> POST /api/v0/course HTTP/1.0
 > Content-Length: 158
 > Content-Type: application/json
 >
@@ -270,7 +270,7 @@ Content-Length: 0
 ```
 $ nc localhost 8008 << HERE
 >
-> POST /course/ HTTP/1.0
+> POST /api/v0/course/ HTTP/1.0
 > Content-Length: 158
 > Content-Type: application/json
 >
@@ -301,7 +301,7 @@ Remove course.
 ```
 $ nc localhost 8008 << HERE
 >
-> DELETE /course/11111 HTTP/1.0
+> DELETE /api/v0/course/11111 HTTP/1.0
 >
 > HERE
 
@@ -316,7 +316,7 @@ Content-Length: 112
 ```
 $ nc localhost 8008 << HERE
 >
-> DELETE /course/NotARealCourse HTTP/1.0
+> DELETE /api/v0/course/NotARealCourse HTTP/1.0
 >
 > HERE
 
