@@ -41,15 +41,11 @@ Next you'll want to run the jar file along with your credentials in your config 
 
 ```
 
-java -classpath bin/ojdbc6_g.jar:build/libs/catalog-api-test-all.jar edu.oregonstate.mist.catalogapitest.CatalogAPITestApplication server configuration.yaml
+java -jar build/libs/catalog-api-test-all.jar server configuration.yaml
 
 ```
 
-You can also create and use a bash script to do this for you.  Mine is included and is called ```javaCall.sh```
-
-To run it, type: ```./javaCall.sh```
-
-*Note that my bash script may not work on your machine depending on your setup/project structure.
+An alternative option to this, if you all the required resources installed properly, you should be able to simply run ```gradle run``` to build and run everything.  You can also create and use a bash script to do this for you.
 
 ##Mockup
 
@@ -75,7 +71,7 @@ Request data from resource.
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/all HTTP/1.0
+> GET /api/v0/course/all HTTP/1.0
 > 
 > HERE
 
@@ -110,7 +106,7 @@ Content-Length: 112
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/11111 HTTP/1.0
+> GET /api/v0/course/11111 HTTP/1.0
 > 
 > HERE
 
@@ -136,7 +132,7 @@ Content-Length: 112
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/name/CS%20121 HTTP/1.0
+> GET /api/v0/course/name/CS%20121 HTTP/1.0
 >
 > HERE
 
@@ -163,7 +159,7 @@ Content-Length: 112
 ```
 $ nc localhost 8008 << HERE
 >
-> GET /course/name/NotARealName HTTP/1.0
+> GET /api/v0/course/name/NotARealName HTTP/1.0
 >
 > HERE
 
@@ -193,7 +189,7 @@ Creates or modifies an existing resource.
 ```
 $ nc localhost 8008 << HERE
 >
-> PUT /course/11111 HTTP/1.0
+> PUT /api/v0/course/11111 HTTP/1.0
 > Content-Length: 158
 > Content-Type: application/json
 > 
@@ -218,7 +214,7 @@ Content-Length: 0
 ```
 $ nc localhost 8008 << HERE
 >
-> PUT /course/11111 HTTP/1.0
+> PUT /api/v0/course/11111 HTTP/1.0
 > Content-Length: 158
 > Content-Type: application/json
 >  {
@@ -247,7 +243,7 @@ Create course.
 ```
 $ nc localhost 8008 << HERE
 >
-> POST /course HTTP/1.0
+> POST /api/v0/course HTTP/1.0
 > Content-Length: 158
 > Content-Type: application/json
 >
@@ -274,7 +270,7 @@ Content-Length: 0
 ```
 $ nc localhost 8008 << HERE
 >
-> POST /course/ HTTP/1.0
+> POST /api/v0/course/ HTTP/1.0
 > Content-Length: 158
 > Content-Type: application/json
 >
@@ -305,7 +301,7 @@ Remove course.
 ```
 $ nc localhost 8008 << HERE
 >
-> DELETE /course/11111 HTTP/1.0
+> DELETE /api/v0/course/11111 HTTP/1.0
 >
 > HERE
 
@@ -320,7 +316,7 @@ Content-Length: 112
 ```
 $ nc localhost 8008 << HERE
 >
-> DELETE /course/NotARealCourse HTTP/1.0
+> DELETE /api/v0/course/NotARealCourse HTTP/1.0
 >
 > HERE
 
@@ -342,11 +338,3 @@ Content-Length: 301
 </body>
 </html>
 ```
-
-###Instructor Resource and Mockup
-
-####*More Examples To Come!
-
-###[Google Docs Version](https://docs.google.com/document/d/1y_Pyub3YOFrFQ0CYiEhIQdvlrPXRHliDVb-jiH84xM0/edit?usp=sharing)
-
-(Currently not as updated)
