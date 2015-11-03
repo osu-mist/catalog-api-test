@@ -19,22 +19,37 @@ import javax.ws.rs.core.Context
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 import javax.ws.rs.core.UriInfo
+import org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException
 
+/**
+ * Course resource class.
+ */
 @Path("/course")
 @Produces(MediaType.APPLICATION_JSON)
 class CourseResource {
 
-    // Instantiate DAO -------------------------------------------------------------------------------------------------
     private final CourseDAO courseDAO
 
     @Context
     UriInfo uriInfo
 
+    /**
+     * Constructs the object after receiving and storing courseDAO instance.
+     *
+     * @param courseDAO
+     */
     public CourseResource(CourseDAO courseDAO) {
         this.courseDAO = courseDAO
     }
 
-    // POST to /course ------------------------------------------------------------------------------------------------
+    // /course ---------------------------------------------------------------------------------------------------------
+
+    /**
+     * Responds to POST requests by creating and returning a course.
+     *
+     * @param newCourse
+     * @return response containing the result or error message
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -47,39 +62,51 @@ class CourseResource {
             courseDAO.postCourse(newCourse.getCrn(), newCourse.getCourseName(), newCourse.getInstructor(),
                     newCourse.getDay(), newCourse.getTime(), newCourse.getLocation())
 
-            // TODO add in the URI of newly created resource
             createdURI = URI.create(uriInfo.getPath() + "/" + courseDAO.getLatestCidNumber())
             returnResponse = Response.created(createdURI).build()
 
-        } catch (org.skife.jdbi.v2.exceptions.UnableToExecuteStatementException e) {
+        } catch (UnableToExecuteStatementException e) {
 
-            ErrorPOJO constraintError = e.cause.toString()
+            String constraintError = e.getMessage()
             ErrorPOJO returnError
 
-            if(constraintError.contains("COURSES_UK_CRN")) {
-                //CRN number is not unique
-                returnError = new ErrorPOJO("CRN is not unique", Response.Status.CONFLICT.getStatusCode())
+            if (constraintError.contains("COURSES_UK_CRN")) {
+
+                // CRN number is not unique
+                returnError = new ErrorPOJO(errorMessage: "CRN is not unique", errorCode: Response.Status.CONFLICT.getStatusCode())
             } else {
-                //Some other error, should be logged
+
+                // Some other error, should be logged
                 System.out.println(e.localizedMessage)
-                returnError = new ErrorPOJO("Unknown error.", Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                returnError = new ErrorPOJO(errorMessage: "Unknown Error", errorCode: Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
             }
 
-            System.out.println(returnError.getErrorMessage())
+            returnResponse = Response.status(returnError.getErrorCode()).entity(returnError).build()
         }
 
-        return returnResponse
+        returnResponse
     }
 
-    // List all courses ------------------------------------------------------------------------------------------------
+    /**
+     * Responds to GET requests and retrieves all course objects
+     *
+     * @return list of all courses, otherwise empty
+     */
     @GET
     @Path('/all')
     @Produces(MediaType.APPLICATION_JSON)
     public List<Course> getByCrn() {
-        return courseDAO.allCourses
+        courseDAO.allCourses
     }
 
     // CRN specific requests -------------------------------------------------------------------------------------------
+
+    /**
+     * Responds to GET requests and retrieves course with a specific crn.
+     *
+     * @param crn
+     * @return response containing the result or error message
+     */
     @GET
     @Path('{crn}')
     @Produces(MediaType.APPLICATION_JSON)
@@ -90,17 +117,26 @@ class CourseResource {
         Response returnResponse
 
         if (courses == null) {
-            ErrorPOJO returnError = new ErrorPOJO("Resource Not Found.", Response.Status.NOT_FOUND.getStatusCode())
+            ErrorPOJO returnError = new ErrorPOJO(errorMessage: "Resource Not Found.", errorCode: Response.Status.NOT_FOUND.getStatusCode())
             returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
         } else {
             returnResponse = Response.ok(courses).build()
         }
 
-        return returnResponse
+        returnResponse
     }
 
-    @Path("{crn}")
+    /**
+     * Responds to PUT requests depending on the state of the course object,
+     * either through updating existing object with PUT request or
+     * creating with POST request if not already existing.
+     *
+     * @param crn
+     * @param newCourse
+     * @return response containing the result or error message
+     */
     @PUT
+    @Path("{crn}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response putByCrn(@PathParam("crn") Integer crn , Course newCourse) {
@@ -132,49 +168,69 @@ class CourseResource {
             returnResponse = Response.ok().build()
         }
 
-
-        return returnResponse
+        returnResponse
     }
 
+    /**
+     * Responds to DELETE requests and removes a course object.
+     *
+     * @param crn
+     * @return response containing the result or error message
+     */
     @Path("{crn}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteByCrn(@PathParam("crn") Integer crn){
-
-        //TODO add authentication for this method
+    public Response deleteByCrn(@PathParam("crn") Integer crn) {
         courseDAO.deleteByCrn(crn)
-        Response returnResponse = Response.ok().build()
-
-        return returnResponse
+        Response.ok().build()
     }
 
 
     // Name specific requests ------------------------------------------------------------------------------------------
+
+    /**
+     * Responds to GET requests and retrieves all courses of a specific name.
+     *
+     * @param courseName
+     * @return list of courses of specific name, otherwise empty
+     */
     @GET
     @Path('/name/{courseName}')
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Course> getByCourseName(@PathParam('courseName') String courseName) {
-        final List<Course> courses = courseDAO.getByName(courseName)
+    public Response getByCourseName(@PathParam('courseName') String courseName) {
 
-        if (courses.isEmpty()) {
-            throw new WebApplicationException(404)
+        Course courses = courseDAO.getByName(courseName)
+
+        Response returnResponse
+
+        if (courses == null) {
+            ErrorPOJO returnError = new ErrorPOJO(errorMessage: "Resource Not Found.", errorCode: Response.Status.NOT_FOUND.getStatusCode())
+            returnResponse = Response.status(Response.Status.NOT_FOUND).entity(returnError).build()
+        } else {
+            returnResponse = Response.ok(courses).build()
         }
 
-        return courses
+        returnResponse
     }
 
     // Location specific requests --------------------------------------------------------------------------------------
+
+    /**
+     * Responds to GET requests and retrieves all courses of a specific location.
+     *
+     * @param location
+     * @return list of courses of specific location, otherwise empty
+     */
     @GET
     @Path('/location/{location}')
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Course> getCourseByLocation(@PathParam('location') String location) {
+    public Response getCourseByLocation(@PathParam('location') String location) {
         final List<Course> courses = courseDAO.getByLocation(location)
 
         if (courses.isEmpty()) {
             throw new WebApplicationException(404)
         }
 
-        return courses
+        courses
     }
 }
-
